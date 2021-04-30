@@ -1,0 +1,307 @@
+<ion-view view-title="BAXA Unification">
+<ion-header-bar class="bar-stable">
+<a class="button icon-left ion-chevron-left button-clear button-royal" href="#/app/home"></a>
+        <h1 class="title">Flexi Save</h1>
+</ion-header-bar>
+  <ion-content>
+    <div ng-show="showDbErrors"><span ng-bind="dbErrors"></span></div>
+    <form class="padding mt50" name="userForm">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Life Assurer Name*</span>
+
+              <input type="text"  ng-model="data.laName" ng-pattern="/^[a-zA-Z0-9]/" only-alphabets ng-trim="false" name="LAname" ng-model="data.laName" ng-minlength="1"  ng-maxlength="50" value="" required>
+
+              <span style="color: red;" ng-show="userForm.LAname.$error.pattern">
+              {{validationMessage[0].SpaceAndDot}}</span>
+
+
+              <span style="color: red;" ng-show="userForm.LAname.$error.maxlength">{{validationMessage[1].length}}</span>
+
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Life Assurer Age*</span>
+             <input type="number" ng-model="data.laAge" value="" required>
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Proposer Name*</span>
+             <input type="text"  ng-model="data.proposerName"  ng-pattern="/^[a-zA-Z0-9]/" only-alphabets ng-trim="false" name="name" ng-model="data.laName" ng-minlength="1" value="" required>
+
+             <span style="color: red;" ng-show="userForm.ProposerName.$error.pattern">
+              {{validationMessage[0].SpaceAndDot}}</span>
+
+              <span style="color: red;" ng-show="userForm.ProposerName.$error.maxlength">{{validationMessage[1].length}}</span>
+
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Proposer Age*</span>
+             <input type="number" ng-model="data.proposerAge" value="" required>
+            </label>
+            <label class="item item-input item-select">
+             <div class="input-label">Proposer Gender*</div>
+             <select name="proposerGender" ng-model="data.proposerGender" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+             </select>
+            </label>
+            <label class="item item-input item-select" ng-model="data.LifeAssurerGender" >
+             <div class="input-label"> Life Assurer Gender*</div>
+             <select name="laGender" ng-model="data.laGender" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+             </select>
+            </label>
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">Self</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.isSelf" ></ion-checkbox>
+                 </div>
+              </div>
+
+              <span style="color:red;" ng-show="data.isSelf==true &&( data.laName!=data.proposerName || data.proposerGender!=data.laGender ||data.proposerAge != data.laAge)">{{validation[2].Selfselection}}</span>
+
+
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Sum Assured*</span>
+              <input type="number" ng-model="data.sumAssured" value="0" ng-blur="docalculateBasicPremium(data);" ng-change="data.ADBRider && updateRiderSA();" required></label>
+              <!-- data.ADBRider && updateRiderSA(); -->
+
+                <label class="item item-input">
+             <span class="input-label">Basic Premium*</span>
+              <input type="text"  ng-model="data.basePremium" ng-blur="docalculateSumAssured(data);" value="0"> </label>
+
+            <label class="item item-input item-select">
+             <div class="input-label">Premium Mode*</div>
+             <select name="premiumMode" name="premiumMode" ng-model="data.premiumMode" required="required">
+                <option value="1">Yearly</option>
+                <option value="2">Half Yearly</option>
+                <option value="4" >Quarterly</option>
+                <option value="12">Monthly</option>
+             </select>
+            </label>
+            <label class="item item-input item-select">
+              <span class="input-label">Policy Term*</span>
+              <select name="pt" ng-model="data.pt" ng-options="ptval for ptval in policyTermVals" ng-change="populatePPT(data.pt)" required>
+              </select>
+            </label>
+            <label class="item item-input item-select">
+             <span class="input-label">Premium Payment Term*</span>
+                <input type="text" ng-model="data.ppt"  name="ppt" ng-disabled="true"  value="0" required>
+            </label>
+
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">NSAP For LA</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.NSAPForLA"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">ADB Rider</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.ADBRider"  ng-click="data.ADBRider && updateRiderSA()"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+              <label class="item item-input" ng-show="data.ADBRider">
+              <div class="row">
+              <div class="col-75">
+              <span class="input-label">Rider SumAssured</span>
+              </div>
+              <div class="col-75">
+              <input type="text" ng-model="data.sumAssuredForADBRiders" value="">
+              </div>
+              </div>
+            </label>
+             <label class="item item-input item-select" ng-show="data.ADBRider">
+             <span class="input-label">Rider Term*</span>
+                <input type="text" ng-model="data.ppt"  name="ppt" ng-disabled="true"  value="0" required>
+            </label>
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">HospiCash</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.hospiCash"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+            <label class="item item-input item-select" ng-show="data.hospiCash">
+             <div class="input-label">DHCB</div>
+             <select name="sumAssuredForRiders" ng-model="data.sumAssuredForRiders">
+                <option value="1000" >1000</option>
+                <option value="2000">2000</option>
+                <option value="3000" >3000</option>
+
+             </select>
+            </label>
+            <label class="item item-input item-select" ng-show="data.hospiCash">
+             <div class="input-label">Rider Term</div>
+             <select name="riderPpt" ng-model="data.riderPpt">
+                <option value="5" >5</option>
+                <option value="10">7</option>
+                <option value="10">10</option>
+                <option value="15" >15</option>
+               <option value="15" >20</option>
+             </select>
+            </label>
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">PWR I</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.PWRI"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+               <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">PWR II</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.PWRII"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+             <button class="button button-full button-assertive mt25" ng-disabled="userForm.$invalid" ng-click="dbValidation(data)">Submit</button>
+          </div>
+        </form>
+          <div class="padding">
+          <div class="mt35" ng-show="fsBasePremiumOutput">
+           <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  basePremium">
+                <div class="col-80"><p class="test">{{key}}</p></div>
+                <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+                  <div class="mt30 border"></div>
+
+
+           <div class="mt35">
+                <button class="button button-full button-assertive" ng-click="docalculateAdbPremium(answer.basePremium)">Calculate ADB Rider Premium
+                </button>
+                </div>
+
+          <div class="mt35">
+          <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  adbData">
+                <div class="col-80"><p class="test">{{key}}</p></div>
+                <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+                  <div class="mt35 border"></div>
+
+
+
+                <div class="mt35">
+                <button class="button button-full button-assertive" ng-click="docalculateHospiCashPremium(answer.basePremium)">Calculate HospiCash Rider Premium
+                </button>
+                </div>
+
+          <div class="mt35" >
+          <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  hospiCashData">
+                <div class="col-80"><p class="test">{{key}}</p></div>
+                <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+          <div class="mt35">
+            <div class="mt35">
+          <span class=" "><b>User Input</b></span>
+          <div class="item row" ng-repeat="(key,value) in  pwrInput">
+                <div class="col-80"><p class="test">{{key}}</p></div>
+                <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+
+          <div class="mt35">
+            <button class="button button-full button-assertive" ng-click="docalculatePWRPremium(answer.base,1)">CalculatePWR - option1
+            </button>
+          </div>
+
+          <div class="mt35" ng-show="pwrOutputOption1">
+          <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  pwrData1">
+              <div class="col-80"><p class="test">{{key}}</p></div>
+              <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+          <div class="mt35 border"></div>
+
+          <div class="mt35">
+            <button class="button button-full button-assertive" ng-click="docalculatePWRPremium(answer.base,2)">CalculatePWR - option2
+            </button>
+          </div>
+
+          <div class="mt35" ng-show="pwrOutputOption2">
+          <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  pwrData2">
+              <div class="col-80"><p class="test">{{key}}</p></div>
+              <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+                    <div class="mt35 border"></div>
+
+          <button class="button button-full button-assertive">CalculateBI</button>
+          </div>
+          <div class="mt35" ng-show="flexiSaveBiOutput" style="overflow: auto;">
+          <span class=" "><b>Calculated Output For BI</b></span>
+            <TABLE BORDER="2"   WIDTH="75%"   CELLPADDING="4" CELLSPACING="3">
+              <tr>
+               <th colspan="11"><br><h3 align="center">BI Calculation</h3></th>
+              </tr>
+              <tr>
+               <th>End of policy year</th>
+               <th>Premium paid</th>
+               <th colspan="9">Living benefits</th>
+              </tr>
+              <tr>
+               <th></th>
+               <th></th>
+               <th colspan="3">Guaranteed</th>
+               <th colspan="3" >Non Guaranteed @ 4%</th>
+               <th colspan="3">Non Guaranteed @ 8%</th>
+              </tr>
+              <tr>
+               <th></th>
+               <th></th>
+               <th>Death Benefit</th>
+               <th>Maturity Benefit</th>
+               <th>Surrender Value</th>
+               <th>Death Benefit</th>
+               <th>Maturity Benefit</th>
+               <th>Surrender value</th>
+               <th>Death Benefit</th>
+               <th>Maturity Benefit</th>
+               <th>Surrender value</th>
+              </tr>
+
+              <tr align="center"  ng-repeat="test in flexiSaveBi.policyYear">
+               <TD>{{flexiSaveBi.policyYear[$index]}}</TD>
+               <TD>{{flexiSaveBi.premiumPaid[$index]}}</TD>
+               <TD>{{flexiSaveBi.guaranteedDeathBenefit[$index]}}</TD>
+               <TD>{{flexiSaveBi.guaranteedMaturityBenefit[$index]}}</TD>
+               <TD>{{flexiSaveBi.guaranteedSurrenderValue[$index]}}</TD>
+               <TD>{{flexiSaveBi.nonguaranteedDeathBenefit4Per[$index]}}</TD>
+               <TD>{{flexiSaveBi.nonguaranteedMaturityBenefit4Per[$index]}}</TD>
+               <TD>{{flexiSaveBi.nonguaranteedSurrenderValue4Per[$index]}}</TD>
+               <TD>{{flexiSaveBi.nonguaranteedDeathBenefit8Per[$index]}}</TD>
+               <TD>{{flexiSaveBi.nonguaranteedMaturityBenefit8Per[$index]}}</TD>
+               <TD>{{flexiSaveBi.nonguaranteedSurrenderValue8Per[$index]}}</TD>
+              </tr>
+
+  </ion-content>
+</ion-view>

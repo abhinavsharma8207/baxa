@@ -1,0 +1,215 @@
+<ion-view view-title="{{title}}" hide-back-button="true" class="dsuSummary">
+  <ion-nav-buttons side="right"> <a style="color: white;" class="button button-icon icon ion-refresh" ng-click="refreshProposalNumbers()"></a> </ion-nav-buttons>
+  <div class="tabsBG">
+    <div ng-click="showPopup();proposalNumber='';reEnterProposalNmber='';" class="title add-case">ADD NEW CASE</div>
+  </div>
+  <div class="screenContainer">
+    <div class="tabLoader">
+      <div class="leftPanel fl formBox">
+        <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+          <ul class="tpalert">
+            <li>
+              <label> <span class="pending">&nbsp;</span> Pending </label>
+            </li>
+            <li>
+              <label> <span class="sucess">&nbsp;</span> Success</label>
+            </li>
+          </ul>
+          <ion-tab title="TODAY" on-select="onTabSelectedToday()">
+            <ion-content>
+              <div class="content">
+                <div class="clearfix"></div>
+                <div class="ipadmaRt">
+                  <ion-list show-delete="" class="listproposal" show-reorder="" >
+                    <ion-item ng-repeat="proposalnumber in objectForProposalNumbers"
+                     ng-if="ddMMyyyy===proposalnumber.Date" class="item-remove-animate">
+
+                    <div ng-show="!isTablet">
+                      <div ng-class="(proposalnumber.Status=='Synced'?'grenline':'orgline')" class="whiteboxdiv" ng-click="proposalnumber.Status=='Pending'?loadSelectedProposalDetails(proposalnumber):showCanNotEditThisCase(proposalnumber)">
+                        <div class="row numdiv">
+                          <div class="col col-67">{{proposalnumber.ProposalNo}} <span>Proposal No. </span> </div>
+                          <div class="col">
+                            <div class="brdline">{{proposalnumber.TotalDocs}} <span>Docs.
+                              {{proposalnumber.Status}}</span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div ng-show="isTablet" ng-class="(selectedCaseId==proposalnumber.caseId ?'activated':'')">
+                      <div ng-class="(proposalnumber.Status=='Synced'?'grenline':'orgline')" class="whiteboxdiv" ng-click="proposalnumber.Status=='Pending'?loadSelectedProposalDetails(proposalnumber):showCanNotEditThisCase(proposalnumber)">
+                        <div class="row numdiv">
+                          <div class="col col-67">{{proposalnumber.ProposalNo}} <span>Proposal No. </span> </div>
+                          <div class="col">
+                            <div class="brdline">{{proposalnumber.TotalDocs}} <span>Docs.
+                              {{proposalnumber.Status}}</span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <ion-option-button class="button-assertive"
+                             ng-click="proposalnumber.Status=='Pending'?showDeleteProposalPopup(proposalnumber.caseId):showCanNotEditThisCase(proposalnumber)"> Delete </ion-option-button>
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </div>
+            </ion-content>
+          </ion-tab>
+          <ion-tab title="YESTERDAY" on-select="onTabSelectedYesterday()">
+            <ion-content>
+              <div class="content">
+                <div class="clearfix"></div>
+                <ion-list show-delete="" class="listproposal" show-reorder="" >
+                  <ion-item ng-repeat="proposalnumber in objectForProposalNumbers"
+                         ng-if="previousDay===proposalnumber.Date">
+                    <div>
+
+                      <div ng-show="!isTablet" ng-class="(selectedCaseId==proposalnumber.caseId ?'activated':'')">
+                        <div ng-class="(proposalnumber.Status=='Synced'?'grenline':'orgline')" class="whiteboxdiv" ng-click="proposalnumber.Status=='Pending'?loadSelectedProposalDetails(proposalnumber):showCanNotEditThisCase(proposalnumber)">
+                          <div class="row numdiv">
+                            <div class="col col-67">{{proposalnumber.ProposalNo}} <span>Proposal No. </span> </div>
+                            <div class="col">
+                              <div class="brdline">{{proposalnumber.TotalDocs}} <span>Docs.
+                                {{proposalnumber.Status}}</span> </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div ng-show="isTablet" ng-class="(selectedCaseId==proposalnumber.caseId ?'activated':'')">
+                        <div ng-class="(proposalnumber.Status=='Synced'?'grenline':'orgline')" class="whiteboxdiv" ng-click="proposalnumber.Status=='Pending'?loadSelectedProposalDetails(proposalnumber):showCanNotEditThisCase(proposalnumber)">
+                          <div class="row numdiv">
+                            <div class="col col-67">{{proposalnumber.ProposalNo}} <span>Proposal No. </span> </div>
+                            <div class="col">
+                              <div class="brdline">{{proposalnumber.TotalDocs}} <span>Docs.
+                                {{proposalnumber.Status}}</span> </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+                    </div>
+                    <ion-option-button class="button-assertive"
+                             ng-click="proposalnumber.Status=='Pending'?showDeleteProposalPopup(proposalnumber.caseId):showCanNotEditThisCase(proposalnumber)"> Delete </ion-option-button>
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-content>
+          </ion-tab>
+          <ion-tab title="OLDER" on-select="onTabSelectedOlder()">
+            <ion-content>
+              <div class="content">
+                <div class="oldertab">
+                  <div ng-repeat="ProposalNumber in  objectForProposalNumbers| unique:'Date' |orderBy:'Date':true" ng-if="ddMMyyyy!=ProposalNumber.Date && previousDay!=ProposalNumber.Date && dateLessThanYesterday(ProposalNumber.Date)">
+                    <div class="dtdiv">{{ProposalNumber.Date | dateformat}}</div>
+                    <ion-list show-delete="" class="listproposal" show-reorder="" >
+                      <ion-item ng-class="(selectedCaseId==proposalno.caseId ?'activated':'')" ng-repeat="proposalno in objectForProposalNumbers" ng-if="proposalno.Date == ProposalNumber.Date">
+                        <div ng-class="(selectedCaseId==proposalno.caseId ?'activated':'')">
+                          <div ng-class="(proposalno.Status=='Synced' ?  'grenline' : 'orgline')" class="whiteboxdiv" ng-click="proposalno.Status=='Pending'?loadSelectedProposalDetails(proposalno):showCanNotEditThisCase(proposalno)">
+                            <div class="row numdiv">
+                              <div class="col col-67">{{proposalno.ProposalNo}} <span>Proposal No. </span> </div>
+                              <div class="col">
+                                <div class="brdline">{{proposalno.TotalDocs}} <span>Docs.
+                                  {{proposalno.Status}}</span> </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ion-option-button class="button-assertive"
+                                           ng-click="proposalno.Status=='Pending'?showDeleteProposalPopup(proposalno.caseId):showCanNotEditThisCase(proposalno)"> Delete </ion-option-button>
+                        <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </div>
+              </div>
+            </ion-content>
+          </ion-tab>
+        </ion-tabs>
+      </div>
+
+      <div class="rightPanel fr">
+        <div class="formBox" ng-controller="docScanandUploadController" ng-show="showdocumentpage" ng-include="'js/documents-scanandupload/templates/dsu.scanandupload.html'"></div>
+      </div>
+        <div class="bottomLineIMG"></div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="ftdiv bar bar-footer bar-balanced">
+    <div ng-click="showPopup();proposalNumber='';reEnterProposalNmber='';" class="title" style="text-align:center !important">ADD NEW CASE</div>
+  </div>
+<!-- <div class="bottomLineIMG"></div> -->
+</ion-view>
+
+<div ng-show="flagShowPopup" class="popbg"></div>
+<center>
+  <div ng-show="flagShowPopup">
+    <div class="adic-modal">
+      <ion-modal-view class="adic-popup">
+        <div class="popupdiv">
+          <form name="form">
+            <div style="margin-top:30px" ng-click="closePopup()"> <a class="close"></a> </div>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <input type="text" ng-model="proposalNumber" valid-alphanumeric placeholder="Enter Proposal Number">
+              </label>
+              <p class="errortxt"> <sub ng-bind="proposalNumberErrorMessage"></sub> </p>
+              <label class="item item-input">
+                <input type="text" ng-model="reEnterProposalNmber" valid-alphanumeric lower-than="{{proposalNumber}}" placeholder="Re-enter Proposal Number">
+              </label>
+              <p class="errortxt"> <sub ng-bind="reEnterProposalNmberErrorMessage"></sub> </p>
+            </div>
+            <button ng-click="checkProposalNumber(proposalNumber,reEnterProposalNmber)" class="button button-block button-positive subtn">Submit</button>
+            <span class="error" ng-show="form.min.$error.lowerThan">{{validationMessages.countexceeds}} </span>
+          </form>
+        </div>
+      </ion-modal-view>
+    </div>
+  </div>
+</center>
+<div ng-show="proposerIdPresent" class="popbg"></div>
+<center>
+  <div ng-show="proposerIdPresent">
+    <div class="popupdiv"> <br/>
+      <br/>
+      <p ng-bind="proposerIdPresentMessage"></p>
+      <br/>
+      <button class="button button-block button-positive subtn" ng-click="highlightProposalNumberOnSummeryPage(proposalNumber)">OK</button>
+    </div>
+  </div>
+</center>
+<div ng-show="cannotEditthisCase" class="popbg"></div>
+<center>
+  <div ng-show="cannotEditthisCase">
+    <div class="popupdiv"> <br/>
+      <br/>
+      <p>{{validationMessages.canoteditcase}}</p>
+      <br/>
+      <button class="button button-block button-positive subtn" ng-click="hideCanNotEditThisCase()">OK</button>
+    </div>
+  </div>
+</center>
+<div ng-show="showDeleteProposalNumber" class="popbg"></div>
+<center>
+<div ng-show="showDeleteProposalNumber">
+<div class="popupdiv"> <br/>
+  <br/>
+  <p>{{validationMessages.confirmdeletecase}}</p>
+  <br/>
+  <div class="popup-buttons">
+    <button class="button button-block button-positive subtn" ng-click="deleteProposalNumberOnOk()">OK</button>
+    <button class="button button-block button-positive subtn" ng-click="hideDeleteProposalPopup()">Cancel</button>
+  </div>
+</div>
+</center>

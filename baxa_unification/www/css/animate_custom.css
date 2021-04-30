@@ -1,0 +1,7 @@
+.animationduration25 {
+  -webkit-animation-duration: 2500ms;
+}
+.animationduration18 {
+  -webkit-animation-duration: 1800ms;
+  -webkit-animation-delay: 300ms;
+}

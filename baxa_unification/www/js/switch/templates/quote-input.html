@@ -1,0 +1,441 @@
+<ion-view view-title="{{title}}" class="tripplhealthdiv">
+<form name="userForm" novalidate>
+  <ion-content ng-class="animateClass">
+    <div class="content">
+      <div class="row responsive-sm rowpadnone">
+        <div class="col mb0" ng-if="params.ui_gender">
+          <div class="whiteboxdiv   plr13 gendiv" ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')">
+            <div class="row">
+              <div class="col col-center mb0">
+                <h4 class="pt20">Gender</h4>
+                <ion-list class="gender">
+                  <ion-radio ng-disabled="!params.switch" ng-checked="{{option.name == 'Male'?'checked':''}}" ng-model="inputData.laGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="(!params.switch)?openPopupForChangeDetails():''"
+                      value="{{option.id}}">{{option.name}}</ion-radio>
+                </ion-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col secpadmarbtm" ng-if="params.ui_age">
+          <div class="whiteboxdiv " ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')">
+            <div class="row rowfix">
+              <div class="col col-80">
+                <h4 class="m0 pt7">Current age?</h4>
+              </div>
+
+              <div class="col ">
+                <div class="inpbtncrnyrs">
+                  <input ng-click="(!params.switch)?(openPopupForChangeDetails()):('')" ng-pattern="/^[0-9]*$/"  required="true" type="number" ng-change="inputData.laAge===''?inputData.laAge=0:inputData.annualPremium=inputData.annualPremium;AgeOutofRange=false;" value="{{inputData.laAge}}" ng-model="inputData.laAge" name="currentAgeValue" class="form-control" min="{{data.laMinAge}}" max="{{data.laMaxAge}}" string-to-number required
+                 onkeydown="return ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode ==8 || event.keyCode == 46 ) || ((event.charCode >= 48 && event.charCode <= 57)||event.charCode ==8 || event.charCode == 46 );" />
+                  <span ng-show="!ageSecondSlider">YRS</span>
+                  <span ng-show="ageSecondSlider">DAYS</span>
+                </div>
+              </div>
+            </div>
+
+            <!--If product has two sliders add isAgeDoubleSlider true in inputData-->
+            <div ng-show="params.isAgeDoubleSlider">
+              <a class="minussml fr" ng-show="!ageSecondSlider" ng-click="toggle()"></a>
+            <a  class="addsml fr" ng-show="ageSecondSlider" ng-click="toggle()"></a>  </div>
+            <!--/If product has two sliders-->
+            <div class="progress-pink clr">
+              <div class="progress-box">
+                  <!--If product has two sliders then default slider years-->
+                <div class="progress-bar progress-bar-slider" ng-if="!ageSecondSlider">
+                  <input ng-disabled="params.switch?false:true" type="range" id="currentAge" min="{{data.laMinAge}}" max="{{data.laMaxAge}}" value="inputData.laAge" step="1" ng-model="inputData.laAge" class="progress-slider" ng-change="AgeOutofRange=false;"/>
+                  <div class="inner" ng-style="{width: (inputData.laAge - data.laMinAge) / (data.laMaxAge - data.laMinAge) * 100 <= 100 ? (inputData.laAge - data.laMinAge) / (data.laMaxAge - data.laMinAge) * 100  + '%' : 0 + '%' }">
+                  </div>
+                  <div class="row lastrangsmltxt">
+                    <div class="col">{{data.laMinAge}}
+                      <span>YRS</span>
+                    </div>
+                    <div class="col text-right">{{data.laMaxAge}}
+                      <span>YRS</span>
+                    </div>
+                  </div>
+                </div>
+                  <!--/If product has two sliders then default slider-->
+                <!--If product has two sliders then Required modified slider in case of days-->
+                <div class="progress-bar progress-bar-slider" ng-init="inputData.laAge=91;currentAgeValue=91;" ng-if="ageSecondSlider">
+                  <input ng-disabled="params.switch?false:true" type="range" id="currentAge" min="91" max="364"  step="1" ng-model="inputData.laAge" class="progress-slider" ng-change="AgeOutofRange=false;"/>
+                  <div class="inner" ng-style="{width: (inputData.laAge - data.laMinAge) / (data.laMaxAge - data.laMinAge) * 100 <= 100 ? (inputData.laAge - data.laMinAge) / (data.laMaxAge - data.laMinAge) * 100  + '%' : 0 + '%' }">
+                  </div>
+                  <div class="row lastrangsmltxt">
+                    <div class="col">{{data.laMinAge}}
+                      <span>Days</span>
+                    </div>
+                    <div class="col text-right">{{data.laMaxAge}}
+                      <span>Days</span>
+                    </div>
+                  </div>
+                </div>
+                <!--/If product has two sliders then Required modified slider-->
+              </div>
+            </div>
+            <span style="color: red;" ng-show="AgeOutofRange || userForm.currentAgeValue.$error.min || userForm.currentAgeValue.$error.max">Age should be in between {{data.laMinAge}} to {{data.laMaxAge}}  <span ng-show="!ageSecondSlider">Years</span>  <span ng-show="ageSecondSlider">Days</span></span>
+            <span style="color: red;" ng-repeat="error in dbErrors" ng-if="error.Name == 'ENTAGE' && !(AgeOutofRange || userForm.currentAgeValue.$error.min || userForm.currentAgeValue.$error.max)">{{error.ErrorMessage}}</span>
+            <span style="color: red;" ng-show="userForm.currentAgeValue.$error.pattern && !(AgeOutofRange || userForm.currentAgeValue.$error.min || userForm.currentAgeValue.$error.max)">{{validationMessage.data.NumericValue}}</span>
+            <span style="color: red;" ng-show="userForm.currentAgeValue.$error.required && !(AgeOutofRange || userForm.currentAgeValue.$error.min || userForm.currentAgeValue.$error.max)">{{validationMessage.data.Required}}</span>
+            <span style="color: red;" ng-show="userForm.currentAgeValue.$error.number && !(AgeOutofRange || userForm.currentAgeValue.$error.min || userForm.currentAgeValue.$error.max)">{{validationMessage.data.Number}}</span>
+          </div>
+        </div>
+        <div class="col" ng-if="params.ui_smoke">
+          <div class="whiteboxdiv   gendiv martpnone" ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')">
+            <div class="row">
+              <div class="col">
+                <h4 class="marRt20">Smoking habits</h4>
+                <ion-list class="smokehabits gender">
+                  <ion-radio name="somke" ng-model="inputData.smoke" class="smoke" ng-checked="inputData.smoke=='smoke'" ng-value="'smoke'">Choose A</ion-radio>
+                  <ion-radio name="somke" ng-model="inputData.smoke" class="nonsmoke"  ng-checked="inputData.smoke=='nonsmoke'" ng-value="'nonsmoke'">Choose B</ion-radio>
+                </ion-list>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row responsive-sm rowpadnone">
+        <div class="col m0">
+          <div class="whiteboxdiv   plr13 gendiv" ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')" ng-if="params.ui_payType">
+            <div class="row">
+              <div class="col col-center mb0">
+                <h4>Pay Type</h4>
+              </div>
+              <div class="tbar">
+                <div class="button-bar wd200"  style="margin-top:0" ng-if="formData.PAYTYPE.length == 2">
+                  <a ng-disabled="params.ui_payTypeDisable" class="button button-item1" ng-model="inputData.payType" ng-class="{'active':inputData.payType=='LIMITED'}" ng-click="getSelectPayType('LIMITED')">LIMITED</a>
+                  <a ng-disabled="params.ui_payTypeDisable" class="button button-item2" ng-model="inputData.payType" ng-class="{'active':inputData.payType=='REGULAR'}" ng-click="getSelectPayType('REGULAR')">REGULAR</a>
+                </div>
+                <div class="button-bar wd200" style="margin-top:0" ng-if="formData.BENEFITTYPE.length == 2">
+                  <a ng-disabled="params.ui_payTypeDisable" class="button button-item1" ng-model="inputData.benfitType" ng-class="(inputData.benfitType=='LIMITED'? 'active':'')" ng-click="inputData.benfitType='LIMITED'">LIMITED</a>
+                  <a ng-disabled="params.ui_payTypeDisable" class="button button-item2" ng-model="inputData.benfitType" ng-class="(inputData.benfitType=='REGULAR'? 'active' :'')" ng-click="inputData.benfitType='REGULAR'">REGULAR</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="whiteboxdiv" ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')" ng-if="params.ui_benefitType">
+            <div class="row">
+              <div class="col col-center mb0">
+                <h4>Benefit Type</h4>
+              </div>
+              <div class="tbar">
+                <div class="button-bar wd200" style="margin-top:0" ng-if="formData.MATURITYOPTION.length == 2">
+                  <a class="button button-item2" ng-model="inputData.maturityOption" ng-class="(inputData.maturityOption == formData.MATURITYOPTION[1].name ? 'active':'')" ng-click="inputData.maturityOption=formData.MATURITYOPTION[1].name">{{formData.MATURITYOPTION[1].name}}</a>
+                  <a class="button button-item1" ng-model="inputData.maturityOption" ng-class="(inputData.maturityOption == formData.MATURITYOPTION[0].name ? 'active':'')" ng-click="inputData.maturityOption=formData.MATURITYOPTION[0].name">{{formData.MATURITYOPTION[0].name}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="whiteboxdiv " ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')">
+            <div ng-if="formData.PT && !formData.PPT">
+              <div ng-if="formData.PT.length > 6">
+                <div class="row">
+                  <div class="col">
+                    <h4>Policy Term <span>(Yrs.)</span></h4>
+                  </div>
+                  <div class="col">
+                    <div class="corner-group fr">
+                      <input type="number" value="{{inputData.pt}}" ng-model="inputData.pt" name="currentPTValue" class="form-control" min="{{formData.PTMin}}" max="{{formData.PTMax}}" string-to-number required/>
+                      <span>YRS</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-pink row">
+                  <div class="progress-box">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" id="currentPT" min="{{formData.PTMin}}" max="{{formData.PTMax}}" value="{{inputData.pt}}" step="1" ng-model="inputData.pt" class="progress-slider" />
+                      <div class="inner" ng-style="{width: (inputData.pt - formData.PTMin) / (formData.PTMax - formData.PTMin) * 100 <= 100 ? (inputData.pt - formData.PTMin) / (formData.PTMax - formData.PTMin) * 100  + '%' : 0 + '%' }">
+                      </div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">{{formData.PTMin}}
+                          <span>YRS</span>
+                        </div>
+                        <div class="col text-right">{{formData.PTMax}}
+                          <span>YRS</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div ng-if="formData.PT.length <= 6">
+                <h4 class="marRt20">Policy Term <span>(Yrs.)</span></h4>
+                <div class="clearfix"></div>
+                <div class="list agelist">
+                  <ul>
+                    <li ng-repeat="option in formData.PT">
+                      <label class="item item-radio">
+                        <input type="radio" name="agelist" ng-model="inputData.pt" value="{{option.name}}">
+                        <div class="radio-content">
+                          <div class="item-content">{{option.name}}</div>
+                          <i class="radio-icon ion-checkmark"></i>
+                        </div>
+                      </label>
+                    </li>
+                    <li ng-if="formData.UPTOAGE.length == 1" ng-repeat="ptupto in formData.UPTOAGE" class="">
+                      <div class="brdlast">
+                        <label class="last75 item item-radio" name="agelist" ng-click="populatePPT(inputData,inputData.ptupto)">
+                          <input type="radio" name="agelist" value="{{ptupto.name}}" ng-bind="inputData.ptupto" ng-model="inputData.ptupto" class="ng-pristine ng-untouched ng-valid">
+                          <div class="radio-content">
+                            <div class="item-content disable-pointer-events" ng-transclude="">
+                              <span class="smlsz2">Up to<br> Age</span>
+                              <span class="ng-binding"> {{ptupto.name}}</span>
+                            </div>
+                            <i class="radio-icon disable-pointer-events icon ion-checkmark"></i>
+                          </div>
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && (error.Name == 'PT' || error.Name == 'PPT')">{{error.ErrorMessage}}</div>
+            </div>
+            <div ng-if="formData.PPT && !formData.PT">
+              <h4 class="marRt20">Premium Payment Term <span>(Yrs.)</span></h4>
+              <div class="clearfix"></div>
+              <div class="list agelist">
+                <ul>
+                  <li ng-if="params.ui_payType" ng-repeat="option in formData.PPT" pptval="{{option.name}}" terms="{{formDataCalc.PREPAYOPN}}" e-app-pay-type="inputData.payType">
+                    <label class="item item-radio">
+                      <input type="radio" ng-model="inputData.ppt" name="ppt" value="{{option.name}}" required>
+                      <div class="radio-content">
+                        <div class="item-content">{{option.name}}</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                      </div>
+                    </label>
+                  </li>
+                  <li ng-if="!params.ui_payType" ng-repeat="option in formData.PPT">
+                    <label class="item item-radio">
+                      <input type="radio" ng-model="inputData.ppt" name="ppt" value="{{option.name}}" required>
+                      <div class="radio-content">
+                        <div class="item-content">{{option.name}}</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+              <span style="color: red;" ng-show="userForm.ppt.$error.required">{{validationMessage.data.Required}}</span>
+              <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && error.Name == 'PT'">{{error.ErrorMessage}}</span>
+            </div>
+            <div ng-if="formData.PT.length == 1 && formData.PPT.length == 1">
+              <h4 class="marRt20">Policy Term <span>(Yrs.)</span></h4>
+              <div class="clearfix"></div>
+              <div class="list agelist">
+                <ul>
+                  <li ng-repeat="option in formData.PT">
+                    <label class="item item-radio">
+                      <input type="radio" ng-checked="inputData.pt=option.name" ng-bind="inputData.pt=option.name" ng-model="inputData.pt" value="{{option.name}}">
+                      <div class="radio-content">
+                        <div class="item-content">{{option.name}}</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+              <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && error.Name == 'PT'">{{error.ErrorMessage}}</span>
+              <div class="mt10">
+                <div class="cornergrybg fr"><span ng-model="inputData.ppt" ng-bind="inputData.ppt=formData.PPT[0].name">{{inputData.ppt}}</span> <span>YRS</span></div>
+                <h4 class="marRt20 mt10 pt7">Premium Payment Term</h4>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="mt10" ng-if="formData.PT && !formData.PPT">
+              <div ng-if="formData.PT.length > 6">
+                <div class="cornergrybg fr" ng-if="formData.PAYTYPE.length == 2"><span pay-type-ppt="inputData.pt" ptypewatch="inputData.payType" ptype="{{inputData.payType}}" termsr={{formDataCalc.PPTRP}} termsl={{formDataCalc.PPTLP}} ng-model="inputData.ppt" ng-bind="inputData.ppt">{{inputData.ppt}}</span> <span>YRS</span></div>
+                <div class="cornergrybg fr" ng-if="formData.BENEFITTYPE.length == 2"><span pay-type-ppt="inputData.pt" ptypewatch="inputData.benfitType" ptype="{{inputData.benfitType}}" termsr={{formDataCalc.PPTRP}} termsl={{formDataCalc.PPTLP}} ng-model="inputData.ppt" ng-bind="inputData.ppt">{{inputData.ppt}}</span> <span>YRS</span></div>
+                <h4 class="marRt20 mt10">Premium Payment Term</h4>
+                <div class="clearfix"></div>
+              </div>
+              <div ng-if="formData.PT.length <= 6">
+                <div class="cornergrybg fr"><span e-app-terms="inputData.pt" target="inputData.ppt" terms="{{formDataCalc.PPT}}" ng-model="inputData.ppt" ng-bind="inputData.ppt">{{inputData.ppt}}</span> <span>YRS</span></div>
+                <h4 class="marRt20 mt10">Premium Payment Term</h4>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+
+            <div class="mt10" ng-if="formData.PPT && !formData.PT">
+              <div class="cornergrybg fr" ng-if="!params.ui_termExtra"><span e-app-terms="inputData.ppt" target="inputData.pt" terms="{{formDataCalc.PT}}" ng-model="inputData.pt" ng-bind="inputData.pt">{{inputData.pt}}</span> <span>YRS</span></div>
+              <div class="cornergrybg fr" ng-if="params.ui_termExtra"><span e-app-terms="inputData.ppt" target="inputData.pt" terms="{{formDataCalc.PT}}" period="{{params.ui_termExtra.terms}}"   ng-model="inputData.pt" ng-bind="inputData.pt">{{inputData.pt}}</span> <span>YRS</span></div>
+              <h4 class="marRt20 mt10 pt7">Policy Term</h4>
+              <div class="clearfix"></div>
+            </div>
+            <div class="mt10" ng-if="params.ui_termExtra">
+              <div class="cornergrybg fr"> <span ng-bind="inputData.benefitPeriod">{{params.ui_termExtra.default}} </span><span>  YRS</span></div>
+               <h4 class="marRt20 mt10">{{params.ui_termExtra.label}}</h4>
+              <div class="clearfix"></div>
+            </div>
+            <div ng-if="formData.MPF.length > 1">
+              <h4>Maturity Payout Frequency</h4>
+              <div class="list agelist row">
+                <ul>
+                  <li ng-repeat="option in formData.MPF">
+                    <label class="item item-radio">
+                      <input ng-click="populatePT(inputData.ppt)" type="radio" ng-model="inputData.maturityPremiumMode" ng-value="option.id" ng-checked="{{option.id}}=='1'">
+                      <div class="radio-content">
+                        <div class="item-content"> {{$index+1}} </div>
+                        <i class="radio-icon ion-checkmark"></i> </div>
+                    </label>
+                    <span>{{option.name}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && (error.Name == 'PT' || error.Name == 'PPT')">{{error.ErrorMessage}}</span>
+          </div>
+        </div>
+        <div class="col m0">
+          <div class="whiteboxdiv  " ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')">
+            <div ng-if="params.ui_sumAssured">
+            <div class="row rowfix">
+              <div class="col-50"><h4 class="pt7">Sum Assured</h4></div>
+              <div class="col">
+                <div class="rupinpbtn">
+                  <i class="WebRupee">Rs.</i>
+                  <input type="number" ng-trim="false" ng-pattern="/^[0-9]*$/" ng-change="inputData.sumAssured===''?inputData.sumAssured=1:inputData.sumAssured" ng-required="true" value="" name="sumAssured" ng-model="inputData.sumAssured"  ng-minlength="1" ng-maxlength="10"class="form-control" />
+              </div>
+              </div>
+            </div>
+
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.pattern">{{validationMessage.data.NumericValue}}</span>
+                <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && error.Name == 'SA'">{{error.ErrorMessage}}</span>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.required">{{validationMessage.data.Required}}</span>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.number">{{validationMessage.data.Number}}</span>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.maxlength">{{validationMessage.data.SumAssuredMaxLength}}</span>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.minlength">{{validationMessage.data.SumAssuredMaxLength}}</span>
+              <div class="clearfix"></div>
+            </div>
+            <div ng-if="params.ui_anualPreminum">
+            <div class="row rowfix m0">
+              <div class="col col-50 m0"> <h4 class="m0 pt7">Annual Premium</h4></div>
+              <div class="col m0">
+                <div class="rupinpbtn rupbtn">
+                  <div class="premiumno">
+                    <i class="WebRupee fl">Rs.</i>
+
+                    <input type="number" id="annualPremium" allow-only-numbers ng-trim="false" ng-maxlength="10" ng-pattern="/^[0-9]*$/" ng-change="inputData.annualPremium===''?inputData.annualPremium=0:inputData.annualPremium=inputData.annualPremium" required="true" value="{{inputData.annualPremium | number}}" name="annualPremium" ng-model="inputData.annualPremium" class="form-control"/>
+
+                    <label for="annualPremium">{{inputData.annualPremium | number}}</label>
+                  </div>
+                </div>
+                <!-- <div class="rupinpbtn">
+                  <i class="WebRupee">Rs.</i>
+                  <input type="number" ng-trim="false" ng-pattern="/^[0-9]*$/" ng-change="inputData.annualPremium===''?inputData.annualPremium=0:inputData.annualPremium=inputData.annualPremium" required="true" value="" name="annualPremium" ng-model="inputData.annualPremium"
+                      class="form-control" />
+                </div> -->
+              </div>
+            </div>
+          <span style="color: red;" ng-show="!!userForm.$error.maxlength">Max field length is 10 digits</span>
+              <span style="color: red;" ng-show="userForm.annualPremium.$error.pattern">{{validationMessage.data.NumericValue}}</span>
+              <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && error.Name == 'ANNPRE'">{{error.ErrorMessage}}</span>
+              <span style="color: red;" ng-show="userForm.annualPremium.$error.required">{{validationMessage.data.Required}}</span>
+              <span style="color: red;" ng-show="userForm.annualPremium.$error.number">{{validationMessage.data.Number}}</span>
+              
+              <div class="clearfix"></div>
+            </div>
+            <div>
+              <h4>Mode</h4>
+              <div class="list agelist row">
+                <ul ng-if="params.ui_pmode.length > 0">
+                  <div ng-repeat="select in params.ui_pmode">
+                  <li ng-repeat="option in formData.PMODE" ng-if="select == option.id">
+                    <label class="item item-radio">
+                      <input type="radio" ng-model="inputData.premiumMode" value="{{option.id}}">
+                      <div class="radio-content">
+                        <div class="item-content"> {{option.id}} </div>
+                        <i class="radio-icon ion-checkmark"></i> </div>
+                    </label>
+                    <span>{{option.name}}</span>
+                  </li>
+                  </div>
+                </ul>
+                <ul ng-if="!params.ui_pmode">
+                  <li ng-repeat="option in formData.PMODE">
+                    <label class="item item-radio">
+                      <input type="radio" ng-model="inputData.premiumMode" value="{{option.id}}" ng-checked="option.id==inputData.premiumMode">
+                      <div class="radio-content">
+                        <div class="item-content"> {{option.id}} </div>
+                        <i class="radio-icon ion-checkmark"></i> </div>
+                    </label>
+                    <span>{{option.name}}</span>
+                  </li>
+                </ul>
+              </div>
+              <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && error.Name == 'PMODE'">{{error.ErrorMessage}}</span>
+            </div>
+            <div ng-if="(params.ui_sumAssured && params.ui_modelPreminum) || (params.ui_anualPreminum && params.ui_modelPreminum)">
+              <div class="row rowfix m0">
+                <div class="col col-50 m0"><h4 class="m0 pt7">Modal Premium</h4></div>
+                <div class="col m0">
+                    <div class="rupinpbtn" ng-if="params.ui_anualPreminum && params.ui_modelPreminum">
+                      <i class="WebRupee">Rs.</i>
+                      <input model-premium="inputData.premiumMode" ng-mode="{{inputData.premiumMode}}" ng-premimum="{{inputData.annualPremium}}" terms="{{formDataCalc.MPFACTOR}}" disabled type="number" ng-required="true" value="" ng-bind="inputData.modalPremium" ng-model="inputData.modalPremium" class="form-control" />
+                    </div>
+                    <div class="rupinpbtn" ng-if="params.ui_sumAssured && params.ui_modelPreminum">
+                      <i class="WebRupee">Rs.</i>
+                      <input model-premium="inputData.premiumMode" ng-mode="{{inputData.premiumMode}}" ng-premimum="{{inputData.sumAssured}}" terms="{{formDataCalc.MPFACTOR}}" disabled type="number" ng-required="true" value="" ng-bind="inputData.modalPremium" ng-model="inputData.modalPremium" class="form-control" />
+                    </div>
+                </div>
+              </div>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.pattern">{{validationMessage.data.NumericValue}}</span>
+              <span style="color: red;" ng-repeat="error in dbErrors" ng-if="showDbErrors && error.Name == 'SA'">{{error.ErrorMessage}}</span>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.required">{{validationMessage.data.Required}}</span>
+              <span style="color: red;" ng-show="userForm.sumAssured.$error.number">{{validationMessage.data.Number}}</span>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row responsive-sm rowpadnone m0">
+        <div class="col m0">
+          <div class="row whiteboxdiv  m0" ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')" ng-if="params.ui_nsap">
+            <div class="col nsaplist m0">NSAP</div>
+            <div class="col selcheck">
+              <input type="checkbox" ng-model="inputData.NSAPForLA" value="1">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="col m0"></div>
+      </div>
+      <div class="tbar" ng-if="params.ui_presence">
+            <div class="button-bar" >
+                <a class="button button-item1 ng-pristine ng-untouched ng-valid" ng-model="inputData.inYour" ng-class="{'active':inputData.inYour=='PRESENCE'}" ng-click="inputData.inYour='PRESENCE'">IN YOUR PRESENCE</a>
+                <a class="button button-item2 ng-pristine ng-untouched ng-valid" ng-model="inputData.inYour" ng-class="{'active':inputData.inYour=='ABSENCE'}" ng-click="inputData.inYour='ABSENCE'" style="">IN YOUR ABSENCE</a>
+            </div>
+        </div>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+    <div ng-show="showPopupToGoForLAAndProposerDetails" class="popbg"></div>
+    <center>
+      <div ng-show="showPopupToGoForLAAndProposerDetails">
+        <div class="popupdiv">
+          <br/>
+          <br/>
+          <p>Are you sure you want to change the Life Insured Details?</p>
+          <br/>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="goToLAAndProposer()">OK</button>
+            <button class="button button-block button-positive subtn" ng-click="closePopupForChangeDetails()">Cancel</button>
+          </div>
+        </div>
+    </center>
+  </ion-content>
+  <div class="bar bar-footer">
+    <button class="button button-clear button-positive button-full" ng-disabled="userForm.$invalid" ng-click="calculate(inputData)"> <span class="subtn-arw">Calculate</span> </button>
+  </div>
+  </form>
+
+
+</ion-view>

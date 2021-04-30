@@ -1,0 +1,291 @@
+<ion-view view-title="Secure Income Plan" class="secureIncomePlan">
+  <div class="topProgressBar" ng-include="'js/switch/templates/switchTaps.html'"></div>
+
+  <ion-content class="formBox">
+    <div class="content" style="min-height:auto !important; height:auto">
+
+        <!-- SIP_SWITCH_Tab_02 start -->
+         <div class="twopanel" ng-show="sIQuoteData.inYour == 'PRESENCE'">
+           <div class="row">
+             <div class="col elitcolor">
+               <a ng-click="showAssumtion()" class="assmlink">&nbsp;</a>
+               <p>Product Illustrations</p>
+             </div>
+           </div>
+            <div class="bbgumbk">
+            <div class="row brdbtm">
+              <div class="col">
+                <p class="mhght80">Sum of Guaranteed Annual Income (a)</p>
+                <p class="lartxt"><i class="WebRupee">Rs.</i>  <span ng-bind="sumGAI | commaSeperated"></span></p>
+              </div>
+              <div class="col zindex">
+                <p class="mhght80">Guaranteed Additions at Maturity (b)</p>
+                <p class="lartxt"><i class="WebRupee">Rs.</i>  <span ng-bind="guaranteedAdditionsMaturity | commaSeperated"></span></p>
+              </div>
+              <div class="col zindex">
+                <p class="mhght80">Sum Assured paid at Maturity (c)</p>
+                <p class="lartxt"><i class="WebRupee">Rs.</i>  <span ng-bind="sumAssuredpaidMaturity | commaSeperated"></span></p>
+              </div>
+            </div>
+            <div class="text-center">
+              <p class="pt10">Sum of Benefits (a+b+c) <span class="lartxt"><i class="WebRupee">Rs.</i> <span ng-bind="sumofBenefits | commaSeperated"></span></span></p>
+            </div>
+          </div>
+          <div class="whtbk">
+            <div class="listwid">
+              <br>
+              <div class="listround oldage">
+                <div class="imgdiv"><img src="img/{{userFutureImg}}{{Gender}}.png"><span class="icn-cash"></span></div>
+                <div class="green-bar-top">
+                    <div class="grey-circle-top"></div>
+                </div>
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt yrtxt"><span ng-bind="lifeAssuredAge"></span><br> YEARS</div>
+                    <div class="rt">At Maturity, Sum Assured + additional Guaranteed Addition are paid</div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+               <div class="green-bar" ng-click="onClickGreenBar()">
+                 <div class="blurbar-height">
+                    <div class="annualpage" ng-show="coinsShowGreen">
+                      <div class="ltrupees" ng-show="sIQuoteData.ppt <= 10">
+                        <p ng-repeat="coins in greencoinsCount track by $index"><span class="cashbx"><img src="img/cash.png"/>&nbsp;</span></p>
+                      </div>
+                      <div class="ltrupeesdesc deschgt martp20">
+                          <p>Guaranteed Annual Income of <i class="WebRupee">Rs.</i>  <b><span ng-bind="GuaranteedMonthlyIncome | commaSeperated"></span></b> is paid out on a monthly basis for <b><span ng-bind="(sIQuoteData.pt)-(sIQuoteData.ppt)"></span>  years</b></p>
+                      </div>
+                      <div class="clearfix"></div>
+                   </div>
+                   </div>
+              </div>
+
+              <div class="blue-bar pt7" ng-click="onClickBlueBar()">
+                  <div class="listnrmpos">
+                       <div class="grey-circle-center"></div>
+                     <div class="listnrm mar oldage">
+                    <div class="imgdiv">
+
+                    </div>
+                    <div class="desc">
+                      <div class="row">
+                        <div class="lt yrtxt"><span ng-bind="ageOfInsuredInAbsence"></span><br> YEARS</div>
+                        <div class="rt">End of Premium <br>Payment Term</div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="annualpage mb0" ng-show="coinsShowBlue">
+                    <div class="ltrupees martpneg20" ng-show="sIQuoteData.ppt <= 10">
+                      <p ng-repeat="coins in coinsCount track by $index"><span class="icn-rupees"><img src="img/rupee-circle.png"/>&nbsp;</span></p>
+                    </div>
+                    <div class="ltrupeesdesc deschgt130 mt120">
+                        <p>You pay <span ng-bind="premiumMode"></span> Premium of <i class="WebRupee">Rs.</i>  <b><span ng-bind="totalModalPremium | commaSeperated"></span></b> for <b><span ng-bind="sIQuoteData.ppt"></span>  years</b></p>
+                    </div>
+                    <div class="clearfix"></div>
+                       </div>
+                  </div>
+
+             </div>
+              <div class="listround listround lowYear">
+                <div class="imgdiv"><img src="img/{{userCurrentImg}}{{Gender}}.png"></div>
+
+                <div class="blue-bar-bottom">
+                  <div class="grey-circle-bottom"></div>
+                </div>
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt yrtxt"><span ng-bind="sIQuoteData.laAge"></span><br> YEARS</div>
+                    <div class="rt">Start of the Plan</div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+        <!-- SIP_SWITCH_Tab_05 start -->
+        <div class="twopanel" ng-show="sIQuoteData.inYour == 'ABSENCE'">
+          <div class="row">
+            <div class="col elitcolor">
+              <a ng-click="showAssumtion()" class="assmlink">&nbsp;</a>
+              <p>Product Illustrations</p>
+            </div>
+          </div>
+            <div class="bbgumbk">
+            <div class="row">
+              <div class="col">
+                <p>Sum of Guaranteed Annual Income</p>
+                <p class="lartxt"><i class="WebRupee ">Rs.</i>   <span ng-bind="sumGAI | commaSeperated"></span></p>
+              </div>
+              <div class="col zindex">
+                <p>Death Benefit</p>
+                <p class="lartxt"><i class="WebRupee ">Rs.</i>   <span ng-bind="deathBenefit | commaSeperated"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="whtbk">
+            <div class="listwid">
+              <br>
+              <div class="listround oldage">
+                <div class="imgdiv"><img src="img/{{userFutureImg}}{{Gender}}F.png"><span class="icn-cash"></span></div>
+                <div class="green-bar-top">
+                    <div class="grey-circle-top"></div>
+                </div>
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt yrtxt"><span ng-bind="ageOfInsured"></span><br> YEARS</div>
+                    <div class="rt">In case of <span class="gpclrtxt">sudden loss of life</span> (Eg. at <span ng-bind="ageOfInsured"></span> yrs), the Death Benefit is immediately paid out to the family and the Policy is terminated</div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+               <div class="green-bar" ng-click="onClickGreenBar()">
+                <div class="blurbar-height">
+                  <div class="annualpage mb0" ng-show="coinsShowGreen">
+                    <div class="ltrupees">
+                      <p><span class="cashbx">&nbsp;</span></p>
+                      <p><span class="cashbx">&nbsp;</span></p>
+                    </div>
+                    <div class="ltrupeesdesc deschgtnone">
+                      <p>Guaranteed Annual Income of <i class="WebRupee ">Rs.</i>  <b><span ng-bind="GuaranteedMonthlyIncome | commaSeperated"></span></b> is paid out on a monthly basis for <b>2 year s</b></p>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+            </div>
+            <div class="blue-bar p0" ng-click="onClickBlueBar()">
+                <div class="listnrmpos">
+                     <div class="grey-circle-center"></div>
+                   <div class="listnrm mar oldage">
+                  <div class="imgdiv">
+
+                  </div>
+                  <div class="desc">
+                    <div class="row">
+                      <div class="lt yrtxt"><span ng-bind="ageOfInsuredInAbsence"></span><br> YEARS</div>
+                      <div class="rt">End of Premium <br>Payment Term</div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="annualpage" ng-show="coinsShowBlue">
+                  <div class="ltrupees martpneg20" ng-show="sIQuoteData.ppt <= 10">
+                    <p ng-repeat="coins in coinsCount track by $index"><span class="icn-rupees"><img src="img/rupee-circle.png"/>&nbsp;</span></p>
+                  </div>
+                  <div class="ltrupeesdesc deschgt130 ">
+                      <p>You pay <span ng-bind="premiumMode"></span>  Premium of <i class="WebRupee ">Rs.</i>  <b><span ng-bind="totalModalPremium | commaSeperated"></span></b> for <b><span ng-bind="sIQuoteData.ppt"></span> years</b></p>
+                  </div>
+
+                     </div>
+                </div><div class="clearfix"></div>
+           </div>
+              <div class="listround listround lowYear">
+                <div class="imgdiv"><img src="img/{{userCurrentImg}}{{Gender}}.png"></div>
+                <div class="blue-bar-bottom">
+                  <div class="grey-circle-bottom"></div>
+                </div>
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt yrtxt"><span ng-bind="sIQuoteData.laAge"></span><br> YEARS</div>
+                    <div class="rt">Start of the Plan</div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+        <a href="#/app/switchSecureIncomeQuote/{{custId}}" ng-click="setNowAnimate()">
+        <div class="whiteboxdiv inpbtmdiv">
+          <div class="row">
+            <div class="col">Inputs</div>
+            <div class="col text-right">
+              <span class="icn-fullwid"></span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+</ion-content>
+<ion-fixed class="fixed-div btm75px">
+  <button fab fab-right fab-bottom dark>
+    <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+  </button>
+</ion-fixed>
+<ion-footer-bar class="btnlastbkbg">
+  <button class="button button-clear button-positive col-50" ng-click="backToProduct()">View Another Product</button>
+  <button class="button button-clear button-positive col-50" ng-click="goToEapp()">PROCEED TO FORM FILLING</button>
+</ion-footer-bar>
+
+    <div class="adic-modal">
+        <ion-modal-view class="adic-popup" ng-show="showAssumtionPopup">
+          <div class="proassdiv">
+          <a ng-click="hideAssumtionPopup()" class="close">&nbsp;</a>
+           <h5>assumptions</h5>
+           <p>1. Guaranteed Annual Income is 8% of Sum Assured & is paid on a monthly basis.</p>
+           <p>2. Guaranteed Additions :</p>
+           <ul class="list">
+             <li>For a 5 yr PPT, 7% of the Sum Assured gets added to the Policy each year</li>
+             <li>For a 7 yr PPT, 8.5% of Sum Assured gets added to the Policy each year</li>
+             <li>For a 10 yr PPT, 10% of Sum Assured gets added to the Policy each year </li>
+
+           </ul>
+           </div>
+        </ion-modal-view>
+    </div>
+    <div class="adic-modal">
+      <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+        <div class="wealth-popup">
+          <ul class="popuplist">
+            <li ng-show="saveResult"><a class="brochure" href="#" ng-click="brochure()">Brochure <span>&nbsp;</span></a></li>
+            <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+            <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+            <li ng-show="saveResult"><a class="email" href="#" ng-click="email()">Email <span>&nbsp;</span></a></li>
+            <!-- <li><a class="save" href="#">Save <span>&nbsp;</span></a></li>                    -->
+          </ul>
+          <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+        </div>
+      </ion-modal-view>
+    </div>
+    <div class="adic-modal">
+      <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+        <div>
+          <div class="popupdiv">
+            <form name="myForm" novalidate="">
+
+              <div ng-click="hidesendEmailPopup()" class="close"></div>
+              <h3>E-mail</h3>
+              <div class="row">
+                <div class="col">
+                  <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+                  <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+                  <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+                  <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+                </div>
+              </div>
+
+              <ul class="emailchoice">
+                <li class="item item-checkbox">
+                  <label class="checkbox checkbox-assertive">
+                      <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+                  </label>
+                  Illustrations
+                </li>
+                <li class="item item-checkbox">
+                  <label class="checkbox checkbox-balanced">
+                    <input type="checkbox" ng-model="isBrochureSelected">
+                  </label> Brochure
+                </li>
+              </ul>
+              <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+            </form>
+          </div>
+        </div>
+      </ion-modal-view>
+    </div>
+</ion-view>

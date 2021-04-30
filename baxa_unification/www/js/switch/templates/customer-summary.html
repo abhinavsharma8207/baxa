@@ -1,0 +1,161 @@
+<ion-view view-title="Customer Summary" class="scroll-content">
+  <ion-content>
+    <div class="content">
+      <div class="whiteboxdiv">
+        <h2>{{custDetails.FirstName}} {{custDetails.LastName}}</h2>
+        <div class="viewlist">
+          <div class="row">
+            <div class="col col-33">
+              <label class="icon-contact"></label>
+              <a class="icn-contactA" href="tel:(+91){{custDetails.MobileNo}}">{{custDetails.MobileNo}}</a>
+            </div>
+            <div class="col col-50">
+              <label class="icon-email">{{custDetails.Email}}</label>
+            </div>
+            <div class="col col-20">
+              <label class="icon-year">{{custDetails.Age}} Yrs</label>
+            </div>
+          </div>
+        </div>
+        <div class="viewlist1">
+          <div class="row widcol50">
+            <div class="col">
+              <label>Customer ID.</label> {{custDetails.Cust_ID}}</div>
+            <div class="col">
+              <label>VYMO Lead ID.</label><a ng-click="showYmoPopUp()">Click Here</a> </div>
+            <div class="col">
+              <label>Date of Creation</label>{{custDetails.CreatedDate | date : "dd/MM/yy, h:mma"}}</div>
+            <div class="col">
+              <label>last Met On</label>{{custDetails.ModifiedDate | date : "dd/MM/yy, h:mma"}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="whiteboxdiv nedpristion">
+        <a class="icon-resize" href="#" ng-click="needPrioritisationPage()">&nbsp;</a>
+        <h3>Needs Prioritisation</h3>
+        <div class="row">
+          <div class="col" ng-repeat="a in custDetailsLife">
+            <div class="circle-priority"><span>Priority</span> {{$index+1}}</div>{{a.name}}</div>
+
+        </div>
+      </div>
+      <div class="whiteboxdiv calculdiv">
+        <h3>Calculators</h3>
+        <div class="row">
+          <div class="col" ng-repeat="b in custDetailsLife">
+            <div ng-disabled="true" class="{{b.class}}" ng-click="onClickCalculators(b.id,b.count)"><em>&nbsp;</em><a class="icon-white-resize" href="#">&nbsp;</a>
+              <div class="name">{{b.name}}</div><span class="num">{{b.count}}</span></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="whiteboxdiv productsec">
+        <h3>Product Illustrations</h3>
+      </div>
+      <!--  ng-show="prod.count > 0" -->
+        <div class="piladv" ng-class="(show? '':'whitdiv');" ng-repeat="prod in custPiSummary" ng-show="prod.count > 0">
+          <h4 class="productclick plus" ng-class="(show? 'neg':'plus');" ng-click="show = !show" >{{prod.Name}}<span>({{prod.count}})</span></h4>
+          <div class="row rowpadltrtnone2 divflexall" ng-show="show">
+            <div class="col col-50" ng-repeat="pi in prod.pi" on-hold="deleteSummary(pi.FKCust_ID,pi.PKSwitchPI)" >
+              <div class="whiteboxdiv listcreation pilist">
+              <div class="row">
+                <div>
+                    <a ng-click="goToProdPi(pi,pi.PKSwitchPI,pi.FKCust_ID)" class="icon-resize">&nbsp;
+                    </a>
+                </div>
+                <div class="col col-25">
+                    <div class="circle-number">{{$index+1}}</div>
+                </div>
+                <div class="col ng-binding">
+                    <label class="dt">Date of Creation</label>{{pi.createdDate | date : "dd/MM/yy"}}
+                </div>
+              </div>
+              <div class="row product-mar0">
+                 <div class="col col-25">
+                    <div class="circle-number" style="background:none"></div>
+                </div>
+                <div class="col ng-binding">
+                    <label class="dt">Annual Premium</label><i class="WebRupee">Rs.</i> <span ng-bind="pi.AnnualPremium | commaSeperated"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+
+    </div>
+    <!-- <div ng-show="YmoPopUp"  class="popbg"></div>
+      <center>
+      <div ng-show="YmoPopUp">
+        <div class="popupdiv">
+          <br/>
+          <p ng-init="proposerIdPresentMessage='Cannot edit this case. System has already begun transmitting the case.'" ng-bind="proposerIdPresentMessage"></p>
+          <br/>
+          <button class="button button-block button-positive subtn" ng-click="hideYmoPopUp()">OK</button>
+        </div>
+      </div>
+    </center> -->
+    <div ng-show="YmoPopUp" class="popbg"></div>
+    <center>
+      <div ng-show="YmoPopUp">
+        <div class="adic-modal">
+          <ion-modal-view class="adic-popup">
+            <div class="popupdiv">
+              <form name="form">
+                <div ng-click="hideYmoPopUp()"> <a class="close"></a> </div>
+                <div class="list list-inset">
+                  <label class="item item-input">
+                    <input type="number" ng-model="proposalNumber" name="proposalNumber"   class="form-control" placeholder="Enter VYMO Lead ID"  string-to-number/>
+                  </label>
+
+                  <div class="errortxt">
+                  <span ng-show="form.proposalNumber.$error.number">The value is not a valid number</span>
+                  <span ng-show="form.proposalNumber.$error.min || form.proposalNumber.$error.max">The minimum length of number is  10</span>
+                </div>
+
+                  <!-- <p class="errortxt"> <sub ng-bind="proposalNumberErrorMessage"></sub> </p> -->
+                </div>
+                <button ng-click="hideYmoPopUp()"   class="button button-block button-positive subtn">Submit</button>
+              </form>
+            </div>
+          </ion-modal-view>
+        </div>
+      </div>
+    </center>
+    <div ng-show="popupopn" class="popbg"></div>
+    <center>
+      <div ng-show="popupopn">
+        <div class="adic-modal">
+          <ion-modal-view class="adic-popup">
+            <div class="popupdiv">
+              <form name="form">
+                <div ng-click="hidepopupopn()"> <a class="close"></a> </div>
+                <div class="list list-inset">
+                  <label class="item item-input text-center">No Recordes Found</label>
+                </div>
+                <button ng-click="hidepopupopn()"   class="button button-block button-positive subtn">Close</button>
+              </form>
+            </div>
+          </ion-modal-view>
+        </div>
+      </div>
+    </center>
+  </ion-content>
+  <div class="adic-modal">
+    <ion-modal-view class="adic-popup" ng-show="showDeleteSummaryPopup">
+      <div>
+        <div class="popupdiv">
+          <div ng-click="deleteSummary(setCustId,setRecId)" class="close"></div>
+          <br/>
+          <br/>
+          <p class="text-center" style="color:red;">Are you sure you want to delete?</p>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="confirmDelete(setCustId,setRecId)">OK</button>
+            <button class="button button-block button-positive subtn" ng-click="deleteSummary(setCustId,setRecId)">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </ion-modal-view>
+  </div>
+</ion-view>

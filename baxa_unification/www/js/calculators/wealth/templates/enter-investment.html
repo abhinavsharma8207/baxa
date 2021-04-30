@@ -1,0 +1,341 @@
+<ion-view view-title="Wealth Calculator" class="welathCalc">
+    <ion-content class="scroll-content">
+    <form name="invstFrm">
+      <!-- Wealth Calculator 3 Start -->
+      <div class="content">
+        <a href="#/app/wealth" ng-click="setNowAnimate()">
+          <div class="whiteboxdiv inputdiv">
+            <div class="row">
+              <div class="col">Input</div>
+              <div class="col text-right">
+                <span class="icn-fullwid"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="whiteboxdiv">
+          <div class="row responsive-sm marbtm rowblockdiv">
+            <div class="col col-100">
+              <div class="row rowfix marbtm mihgt32">
+                <div class="col col-75">
+                  <h4>Net Funds required
+                    <span>(Rs.)</span>
+                  </h4>
+                </div>
+                <div class="col text-right grytxtcolor">
+                  <strong>{{ wData.wealthGoal | amtunit}}</strong>
+                </div>
+              </div>
+              <div class="row marbtm">
+                <div class="col">
+                  <div class="gryfulback">
+                    <div class="smlbx2" ng-repeat="i in genBars(netCorposBar.lumSumInvst) track by $index">&nbsp;</div>
+                    <div class="smlbx4" ng-repeat="i in genBars(netCorposBar.mthlyInvst) track by $index">&nbsp;</div>
+                  </div>
+                  <div class="row investdiv">
+                    <div class="col">
+                      <span class="pkbx">&nbsp;</span>
+                      <label>Lumpsum Investment<br>
+                        <strong>{{totalWealth.lumSumInvst | amtconvert:'L'}}
+                        </strong>
+                      </label>
+                    </div>
+                    <div class="col">
+                      <span class="bluebx">&nbsp;</span>
+                      <label>Monthly Investment<br>
+                        <strong>{{netCorposBar.totalMthlyInvst | amtconvert:'L'}}</strong>
+                      </label>
+                    </div>
+                    <div class="col">
+                      <span class="gybx">&nbsp;</span>
+                      <label>Corpus Gap<br>
+                        <strong>{{corposGap | amtconvert:'L'}}</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col col-100">
+              <div class="row rowfix marbtm mihgt32">
+                <div class="col col-75">
+                  <h4>Monthly Investments required
+                    <span>(Rs.)</span>
+                  </h4>
+                </div>
+                <div class="col text-right grytxtcolor">
+                  <strong>{{wData.investmentReqPerMnth | number:0}}</strong>
+                </div>
+              </div>
+              <div class="row marbtm">
+                <div class="col">
+                  <div class="gryfulback">
+                    <div class="smlbx5" ng-repeat="i in genMnthlyBars(investmentData.currentMnthInv) track by $index">&nbsp;</div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="row investdiv">
+                    <div class="col">
+                      <span class="bluebx">&nbsp;</span>
+                      <label>Current Investments p.m.<br>
+                        <strong>
+                          <span ng-bind="investmentData.currentMnthInv"></span>
+                          K</strong>
+                      </label>
+                    </div>
+                    <div class="col">
+                      <span class="gybx">&nbsp;</span>
+                      <label>Monthly Investment Gap<br>
+                        <strong>{{netCorposBar.mthlyInvstGap | amtconvert:'K'}}</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row responsive-sm rowpadltrtnone4">
+          <div class="col col-100 mbtm5">
+            <div class="whiteboxdiv">
+              <div class="row rowfix marbtm">
+                <div class="col col-75">
+                  <h4 class="pt7">Current Lumpsum Investments
+                    <span>(Rs.)</span>
+                  </h4>
+                </div>
+                <div class="col">
+                  <div class="inpbtncrnrupees">
+                    <input
+                      type="number"
+                      value="{{investmentData.currentLumInvst}}"
+                      ng-model="investmentData.currentLumInvst"
+                      size="2"
+                      ng-maxlength="8"
+                      class="wd30"
+                      name="currentLumInvst"
+                      ng-change="lumSumAstCreated(investmentData);showExtraAddExtInvst();"
+                      onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57)"
+                      string-to-number>
+                  </div>
+                </div>
+              </div>
+              <div class="errortxt">
+              <span style="color:red" ng-if="invstFrm.currentLumInvst.$error.maxlength">*Please enter valid input.</span>
+              </div>
+              <div class="clearfix"></div>
+              <div class="colLtRtdiv pt10">
+                <a href="#" ng-show="extraInstAdd" ng-click="addExtInvstRange()" class="addsml"></a>
+                <a href="#" ng-show="extraInstMin" ng-click="addExtInvstRange()" class="negsml fr"></a>
+                <div class="lakhtxt">
+                  <div class="progress-box" ng-show="minInvstRange">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" min="0" step="100000" max="5000000" value="investmentData.currentLumInvst" ng-model="investmentData.currentLumInvst" ng-change="lumSumAstCreated(investmentData)" numericsaving class="progress-slider"/>
+                      <div class="inner" ng-style="{ width: (investmentData.currentLumInvst - ((investmentData.currentLumInvst > 5000000?(investmentData.currentLumInvst - 5000000) : 0))) / 5000000 * 100 + '%' || '0%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0
+                          <span>L</span>
+                        </div>
+                        <div class="col text-right">50
+                          <span>L</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-box" ng-show="extraInvstRange">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" step="100000" min="5100000" max="50000000" value="investmentData.currentLumInvst" ng-model="investmentData.currentLumInvst" ng-change="lumSumAstCreated(investmentData);" class="progress-slider" numericsaving/>
+                      <div class="inner" ng-style="{ width: (investmentData.currentLumInvst - 5100000) / 44900000 * 100  + '%' || '0%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0.51<span>Cr</span>
+                        </div>
+                        <div class="col text-right">5
+                          <span>Cr</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row marbtm">
+                <div class="col col-80">
+                  <div class="ratetxt padding-vertical">Rate of Return</div>
+                </div>
+                <div class="col">
+                  <div class="inpbtncrnyrs">
+                    <input type="number" name="lumSumInvstRoR"
+                      ng-model="investmentData.lumSumInvstRoR"
+                      value="{{investmentData.lumSumInvstRoR}}"
+                      min="0"
+                      max="99"
+                      ng-maxlength="2"
+                      ng-change="lumSumAstCreated(investmentData)"
+                      onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57)"
+                      string-to-number>
+                    <span>%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="errortxt">
+              <span style="color:red" ng-if="invstFrm.lumSumInvstRoR.$error.min || invstFrm.lumSumInvstRoR.$error.max">*Rate of Return should be between 0 to 99.</span>
+              </div>
+              <div class="notetxt" ng-click="toggleNotes('LumSum')">
+                <span>Note</span>
+              </div>
+              <div class="noteContent" ng-show="showNoteLumSum">
+                Note Text....</div>
+            </div>
+          </div>
+          <div class="col col-100 mbtm5">
+            <div class="whiteboxdiv">
+              <div class="row rowfix marbtm">
+                <div class="col col-75">
+                  <h4 class="pt7">Current Monthly Investments
+                    <span>(Rs.)</span>
+                  </h4>
+                </div>
+                <div class="col">
+                  <div class="inpbtncrnrupees">
+                    <input
+                      type="number"
+                      value="{{investmentData.currentMnthInv}}"
+                      ng-model="investmentData.currentMnthInv"
+                      ng-maxlength="6"
+                      class="wd30"
+                      name="currentMnthInv"
+                      ng-change="lumSumAstCreated(investmentData);showExtraAddExtrMonthRange();"
+                      onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57)" string-to-number></div>
+                </div>
+              </div>
+              <div class="errortxt">
+                  <span ng-if="invstFrm.currentMnthInv.$error.maxlength">*Please enter valid input.</span>
+              </div>
+              <div class="colLtRtdiv pt10">
+                <a href="#" ng-show="extraMonthAdd" ng-click="addExtrMonthRange()" class="addsml"></a>
+                <a href="#" ng-show="extraMonthMin" ng-click="addExtrMonthRange()" class="negsml fr"></a>
+                <div class="thondtxt">
+                  <div class="progress-box blbx" ng-show="minMonthRange">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" min="0" step="1000" max="50000" value="investmentData.currentMnthInv" ng-model="investmentData.currentMnthInv" class="progress-slider" ng-change="lumSumAstCreated(investmentData);" numericsaving/>
+                      <div class="inner" ng-style="{ width: (investmentData.currentMnthInv - ((investmentData.currentMnthInv > 50000?(investmentData.currentMnthInv - 50000) : 0))) / 50000 * 100 + '%' || '0%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0
+                          <span>K</span>
+                        </div>
+                        <div class="col text-right">50
+                          <span>K</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-box blbx" ng-show="extraMonthRange">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" step="1000" min="51000" max="500000" value="investmentData.currentMnthInv" ng-model="investmentData.currentMnthInv" ng-change="lumSumAstCreated(investmentData)" class="progress-slider" numericsaving/>
+                      <div class="inner" ng-style="{ width: (investmentData.currentMnthInv - 51000) / 449000 * 100  + '%' || '0%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0.51<span>L</span>
+                        </div>
+                        <div class="col text-right">5
+                          <span>L</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row marbtm">
+                  <div class="col col-80">
+                    <div class="ratetxt padding-vertical">Rate of Return</div>
+                  </div>
+                  <div class="col">
+                    <div class="inpbtncrnyrs">
+                      <input type="number" name="currentMnthRoR" ng-model="investmentData.currentMnthRoR" value="{{investmentData.currentMnthRoR}}" min="0" max="99" ng-maxlength="2" ng-change="lumSumAstCreated(investmentData)" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57)" string-to-number>
+                      <span>%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="errortxt">
+                  <span ng-if="invstFrm.currentMnthRoR.$error.max || invstFrm.currentMnthRoR.$error.min">*Rate of returns should be between 0 to 99.</span>
+              </div>
+              <div class="notetxt" ng-click="toggleNotes('CurrentMnth')">
+                <span>Note</span>
+              </div>
+              <div class="noteContent" ng-show="showNoteCurrentMnth">
+                Include all monthly Household expenses(Eg. Groceries, Conveyance,Medical, Rent etc...),Recerational expenses,Home or Personel Loan EMI's, Investments(Eg. SIP's,FD's etc...)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Wealth Calculator 3 End  -->
+      </form>
+    </ion-content>
+    <ion-fixed class="fixed-div">
+      <button fab fab-right fab-bottom dark>
+        <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+      </button>
+    </ion-fixed>
+    <ion-footer-bar class="btnlastbkbg" ng-show="saveResult" ng-hide="fromSwitchSummary">
+      <button class="button button-clear button-positive col-50" ng-click="viewAnotherCal();">View Another Calculator</button>
+      <button class="button button-clear button-positive col-50" ng-click="proceedToProd();">Proceed to View Products</button>
+    </ion-footer-bar>
+    <ion-footer-bar class="btnlastbkbg" ng-show="fromSwitchSummary">
+      <button class="button button-clear button-positive col-50" ng-click="backToSummary();">Back to Summary Screen</button>
+      <button class="button button-clear button-positive col-50" ng-click="proceedToProd();">Proceed to View Products</button>
+    </ion-footer-bar>
+    <div class="adic-modal">
+       <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+          <div class="wealth-popup">
+               <ul class="popuplist">
+                   <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+                   <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+                   <li><a class="email" href="#" ng-click="email()">Email <span>&nbsp;</span></a></li>
+               </ul>
+               <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+          </div>
+       </ion-modal-view>
+   </div>
+   <div class="adic-modal">
+     <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+       <div>
+         <div class="popupdiv">
+           <form name="myForm" novalidate="">
+
+             <div ng-click="hidesendEmailPopup()" class="close"></div>
+             <h3>E-mail</h3>
+             <div class="row">
+               <div class="col">
+                 <!--<div style="color:red" ng-messages="myForm.emailTo.$error">
+                   <span ng-message="emailValidator">Please enter the correct email details</span>
+                 </div>-->
+                 <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+                 <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+                 <!--<div style="color:red" ng-messages="myForm.emailCc.$error">
+                   <span ng-message="emailValidator">Please enter the correct email details</span>
+                 </div>-->
+                 <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+                 <input type="text" name="emailCc" style="width:100%" placeholder="CC"   ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+               </div>
+             </div>
+
+             <ul class="emailchoice">
+               <li class="item item-checkbox">
+                 <label class="checkbox checkbox-assertive">
+                     <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+                 </label>
+                 Illustrations
+               </li>
+               <li class="item item-checkbox">
+                 <label class="checkbox checkbox-balanced">
+                   <input type="checkbox" ng-model="isBrochureSelected">
+                 </label> Brochure
+               </li>
+             </ul>
+             <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+           </form>
+         </div>
+       </div>
+     </ion-modal-view>
+   </div>
+
+
+  </ion-view>

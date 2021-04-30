@@ -1,0 +1,185 @@
+<ion-view view-title="Retirement Calculator" class="retirementCalcul">
+  <form name="retirementForm" ng-submit="retirementForm.$valid && calculateInvestments()">
+    <ion-content scroll="true" ng-class="animateClass">
+      <!-- Retirement 1 start -->
+      <div class="content formBox">
+        <div class="row responsive-sm colmarbtm curcolthree fullPage padnone makeBlock">
+          <div class="col listItems">
+            <div class="whiteboxdiv yelwline">
+              <div class="row rowfix marpadnone">
+                <div class="col col-75">
+                  <h4>Current age?</h4>
+                </div>
+                <div class="col">
+                  <div class="inpbtncrnyrs">
+                    <input type="text" value=retirementObj.currentAgeValue ng-model="retirementObj.currentAgeValue" fcsa-number="{ max: AgeRange.max, min: AgeRange.min }" name="currentAgeValue" required lower-than="{{retirementObj.retirementAgeValue}}" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);">
+                    <span>YRS</span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-help">
+                <div class="errortxt text-right">
+                  <span ng-if=" (retirementForm.currentAgeValue.$viewValue < AgeRange.min || retirementForm.currentAgeValue.$viewValue > AgeRange.max) || (retirementForm.currentAgeValue.$viewValue > retirementForm.retirementAgeValue.$viewValue) ">Invalid age selected.
+                                                </span>
+                  <!-- <span class="error" ng-show="retirementForm.currentAgeValue.$viewValue > retirementForm.retirementAgeValue.$viewValue && !(retirementForm.currentAgeValue.$viewValue < AgeRange.min || retirementForm.currentAgeValue.$viewValue > AgeRange.max)">
+                                                Current age cannot exceed retirement age.
+                                                   </span> -->
+                </div>
+              </div>
+              <div class="progress-pink">
+                <div class="progress-box">
+                  <div class="progress-bar progress-bar-slider">
+                    <input type="range" min="25" max="60" value="{{retirementObj.currentAgeValue}}" step="1" ng-model="retirementObj.currentAgeValue" class="progress-slider" />
+                    <div class="inner" ng-style="{width: (retirementObj.currentAgeValue - AgeRange.min) / ageDiffHighLow * 100 <= 100 ? (retirementObj.currentAgeValue - AgeRange.min) / ageDiffHighLow * 100  + '%' : 0 + '%' }">
+                    </div>
+                    <div class="row lastrangsmltxt">
+                      <div class="col">25
+                        <span>YRS</span>
+                      </div>
+                      <div class="col text-right">60
+                        <span>YRS</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col listItems">
+            <div class="whiteboxdiv yelwline">
+              <div class="row rowfix marpadnone">
+                <div class="col col-75">
+                  <h4>Retirement age?</h4>
+                </div>
+                <div class="col">
+                  <div class="inpbtncrnyrs">
+                    <input type="text" value="{{retirementObj.retirementAgeValue}}" ng-model="retirementObj.retirementAgeValue" name="retirementAgeValue" fcsa-number="{ max: 70, min: 30 }" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);">
+                    <span>YRS</span>
+                  </div>
+                </div>
+              </div>
+              <div class="errortxt text-right">
+                <span ng-if="retirementForm.retirementAgeValue.$invalid || !retirementForm.retirementAgeValue.$viewValue || retirementObj.retirementAgeValue > RetAgeRange.max "> Invalid Retirement age selected</span>
+              </div>
+              <div class="progress-pink">
+                <div class="progress-box">
+                  <div class="progress-bar progress-bar-slider">
+                    <input type="range" min="30" max="70" value="{{retirementObj.retirementAgeValue}}" step="1" ng-model="retirementObj.retirementAgeValue" class="progress-slider">
+                    <div class="inner" ng-style="{width: (retirementObj.retirementAgeValue - RetAgeRange.min) / retageDiffHighLow * 100 < 100 ? (retirementObj.retirementAgeValue - RetAgeRange.min) / retageDiffHighLow * 100  + '%' : 100 + '%' }">
+                    </div>
+                    <div class="row lastrangsmltxt">
+                      <div class="col">{{RetAgeRange.min}}
+                        <span>YRS</span>
+                      </div>
+                      <div class="col text-right">{{RetAgeRange.max}}
+                        <span>YRS</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col listItems">
+            <div class="whiteboxdiv yelwline">
+              <div class="row rowfix marpadnone">
+                <div class="col col-67">
+                  <h4>Current Monthly Expenses (Rs.)</h4>
+                </div>
+                <div class="col">
+                  <div class="inpbtncrnrupees">
+                    <input type="text" ng-model="retirementObj.monthlyExpensesValue" name="monthlyExpensesValue" fcsa-number="{ max:monthlyExpenseRange.max, min: monthlyExpenseRange.min }" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);">
+                  </div>
+                </div>
+              </div>
+              <div class="errortxt text-right">
+                <span ng-if="retirementObj.monthlyExpensesValue < 1000 || retirementObj.monthlyExpensesValue > 100000">*Monthly Expenses should be between {{numDifferentiation(monthlyExpenseRange.min)}} to {{numDifferentiation(monthlyExpenseRange.max)}}</span>
+              </div>
+              <div class="progress-pink thondtxt">
+                <div class="colLtRtdiv">
+                  <a href="#" class="minussml fr" ng-model="uncollapsed" ng-show="uncollapsed" ng-click="toggle()"></a>
+                  <a href="#" class="addsml fr" ng-model="collapsed" ng-show="collapsed" ng-click="toggle()"></a>
+                  <div class="progress-box" ng-show="minMnthlExp">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" step="1000" min="0" max="50000" value="{{retirementObj.monthlyExpensesValue}}" ng-model="retirementObj.monthlyExpensesValue" class="progress-slider">
+                      <div class="inner" ng-style="{ width: (retirementObj.monthlyExpensesValue - ((retirementObj.monthlyExpensesValue > currentMonthlyExpensesFirstRangeMax?(retirementObj.monthlyExpensesValue - currentMonthlyExpensesFirstRangeMax) : 0))) / currentMonthlyExpensesFirstRangeMax * 100 + '%' || '0%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0
+                          <span>K</span>
+                        </div>
+                        <div class="col text-right">50
+                          <span>K</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-box" ng-show="uncollapsed">
+                    <div class="progress-bar progress-bar-slider" ng-show="uncollapsed">
+                      <input type="range" min="50000" max="100000" ng-show="uncollapsed" value="{{retirementObj.monthlyExpensesValue}}" step="1" ng-model="retirementObj.monthlyExpensesValue" class="progress-slider">
+                      <div class="inner" ng-style="{ width: ((retirementObj.monthlyExpensesValue - currentMonthlyExpensesFirstRangeMax) / currentMonthlyExpensesFirstRangeMax * 100) < 100 ? ((retirementObj.monthlyExpensesValue - currentMonthlyExpensesFirstRangeMax) / currentMonthlyExpensesFirstRangeMax * 100) + '%'  : 100 + '%' }">
+                      </div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0.51
+                          <span>L</span>
+                        </div>
+                        <div class="col text-right">1
+                          <span>L</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="notetxt" ng-click="toggleNotes('CurrentMnth')">
+                  <span>Note</span>
+                </div>
+                <div ng-show="showNoteCurrentMnth" class="noteContent"> Includes all monthly expenses(Eg Groceries,Conveyance,Medical,Rent etc..), Recreational Expenses Home or Personal Loan EMI's, Investments(Eg SIP's FD's etc...)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row responsive-sm">
+          <div class="col col-50 listItems pad15">
+              <h4 class="commonHeading marBtm10">Assumptions:</h4>
+              <div class="row pad0">
+              <div class="customWidth col pad0">              
+              <span class="fs13">Inflation</span>
+              </div>
+            <div class="corner-group fr">
+              <input type="text" ng-model="retirementObj.inflation" name="inflation" fcsa-number="{ max: 50, min: 0 }" required onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);">
+              <span>%</span>
+            </div>
+          </div>
+            
+            <div class="errortxt fl text-right">
+
+              <span class="marBtm10" ng-if=" retirementForm.inflation.$invalid ">*Please Enter Valid Input.</span>
+              
+
+              <span ng-if="(retirementForm.inflation.$invalid  || !retirementForm.inflation.$viewValue) && !retirementForm.inflation.$invalid">*Inflation Rate should be between {{inflationRange.min}} to {{inflationRange.max}} </span>
+            </div>            
+          </div>
+          <div class="col col-50 listItems pad15">
+            <div class="row">
+              <div class="col-67 fs13">Monthly Expenses at Retirement, as a % of Current Monthly Expenses</div>
+              <div class="col-30 fr listItems">
+                <div class="corner-group fr">
+                  <input type="text" ng-model="retirementObj.oldAgeExpensePercent" readonly>
+                  <span>%</span>
+                </div>
+                <div class="errortxt text-right">
+                  <span ng-show="oldAgeExpenseVError">Please enter values from 0 to 99</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+    <ion-footer-bar ng-if="!tabInclude">
+      <button ng-disabled="retirementForm.$invalid" ng-if="!tabInclude" class="button button-clear button-positive button-full">
+        <span class="subtn-arw">Calculate</span>
+      </button>
+    </ion-footer-bar>
+  </form>
+</ion-view>

@@ -1,0 +1,158 @@
+<ion-view class="eliteadv">
+  <ion-content ng-class="animateClass">
+		<div class="content formBox">
+			<form name="userForm">
+            <div class="row responsive-sm rowpadnone">
+                <div class="col mb0">
+                  <div class="whiteboxdiv lilacline plr13 gendiv">
+                    <div class="row">
+                      <div class="col col-center mb0">
+                        <h4>Gender1</h4>
+                        <ion-list class="gender">
+                          <ion-radio ng-disabled="true" ng-checked="{{option.name == 'Male'?'checked':''}}" ng-model="data.laGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+                        </ion-list>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="whiteboxdiv lilacline">
+                    <div class="row">
+                      <div class="col">
+                        <h4>Current age?</h4>
+                      </div>
+                      <div class="col">
+                        <div class="corner-group fr">
+													<input ng-click="openPopupForChangeDetails()" type="number" value="{{data.laAge}}" ng-model="data.laAge" name="currentAgeValue"  class="form-control"  min="18" max="65" string-to-number required readonly/>
+				                   <span>YRS</span>
+												</div>
+                      </div>
+                    </div>
+                    <div class="progress-pink">
+											<div class="progress-box" ng-click="openPopupForChangeDetails()">
+				                  <div class="progress-bar progress-bar-slider">
+				                      <input disabled type="range" id="currentAge" min="data.laMinAge" max="{{data.laMaxAge}}" value="data.laAge" step="1" ng-model="data.laAge" class="progress-slider"  />
+				                      <div class="inner" ng-style="{width: (data.laAge - 18) / 47 * 100 <= 100 ? (data.laAge - 18) / 47 * 100  + '%' : 0 + '%' }">
+				                      </div>
+				                      <div class="row lastrangsmltxt">
+				                          <div class="col">{{data.laMinAge}}
+				                              <span>YRS</span>
+				                          </div>
+				                          <div class="col text-right">{{data.laMaxAge}}
+				                              <span>YRS</span>
+				                          </div>
+				                      </div>
+				                  </div>
+				              </div>
+											<span style="color: red;" ng-show="showDbErrors">{{dbErrors.ENTAGE}}</span>
+                    </div>
+										<br>
+                  </div>
+                </div>
+          </div>
+          <div class="row responsive-sm rowpadnone">
+              <div class="col">
+                  <div class="whiteboxdiv lilacline">
+                    <div class="row">
+                      <div class="col">
+                        <h4>Premium Payment Term <span> (Yrs.)</span></h4>
+                        <ul class="agelist">
+													<li ng-repeat="option in formData.PPT">
+					                  <label class="item item-radio">
+					                    <input type="radio" ng-init="data.ppt=10" ng-click="populatePolicyTerm({{option.name}})" ng-model="data.ppt" value="{{option.name}}" ng-checked="{{option.name}}=='10'">
+					                    <div class="radio-content">
+					                      <div class="item-content"> {{option.name}} </div>
+					                      <i class="radio-icon ion-checkmark"></i> </div>
+					                  </label>
+					                </li>
+                        </ul>
+                        <div class="row mt10 marbtm">
+                          <div class="col"><h4 class="mt10">Policy Term</h4></div>
+                          <div class="col"><div class="cornergrybg fr">{{data.pt}} <span>YRS</span></div></div>
+                        </div>
+                         <div class="row mt10 marbtm">
+                          <div class="col"><h4 class="mt10">Guaranteed Income Period</h4></div>
+                          <div class="col"><div class="cornergrybg fr" ng-bind="data.guaranteedIncome=10">10 <span>YRS</span></div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="whiteboxdiv lilacline">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Annual Premium <sup style="color:red;">*</sup></h4>
+                        </div>
+                        <div class="col">
+                            <div class="corner-group fr">
+                                <!--<input ng-init="data.basePremium=50000" ng-click="calculateModelPremium(data)" ng-model="data.basePremium" name="basePremium" type="number" placeholder="Base Premium" class="form-control" value="" min="0" max="100000">-->
+																<input type="number" ng-trim="false" ng-pattern="/^[0-9]*$/" ng-change="data.annualPremium===''?data.annualPremium=0:data.annualPremium" ng-blur="populateModalPremium(data.premiumMode,data.annualPremium)" ng-required="true" value="" name="annualPremium" ng-model="data.annualPremium" class="form-control" ng-minlength="5" ng-maxlength="10"/>
+																<span>YRS</span>
+                            </div>
+														<div>
+															<span style="color: red;" ng-show="userForm.annualPremium.$error.pattern">{{validationMessage.data.NumericValue}}</span>
+									            <span style="color: red;" ng-show="showDbErrors">{{dbErrors.ANNPRE}}</span>
+
+									            <span style="color: red;" ng-show="userForm.annualPremium.$error.required">{{validationMessage.data.Required}}</span>
+									            <span style="color: red;" ng-show="userForm.annualPremium.$error.number">{{validationMessage.data.Number}}</span>
+															<span style="color: red;" ng-show="userForm.annualPremium.$error.maxlength">{{validationMessage.data.annualPremiumLength}}</span>
+							                <span style="color: red;" ng-show="userForm.annualPremium.$error.minlength">{{validationMessage.data.annualPremiumLength}}</span>
+														  <span ng-show="userForm.basePremium.$error.min || userForm.basePremium.$error.max">The value must be in range 1 to 100000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Mode</h4>
+                    <ul class="agelist mb20" ng-init="data.premiumMode=1">
+											<li ng-repeat="option in formData.PMODE">
+			                  <label class="item item-radio">
+			                    <input type="radio" ng-click="populateModalPremium({{option.id}},data.annualPremium)" ng-init="data.premiumMode=1" ng-model="data.premiumMode" value="{{option.id}}" ng-checked="{{option.id}}=='1'">
+			                    <div class="radio-content">
+			                      <div class="item-content"> {{option.id}} </div>
+			                      <i class="radio-icon ion-checkmark"></i> </div>
+			                  </label>
+			                  <span>{{option.name}}</span>
+			                </li>
+                    </ul>
+                    <div class="row mt10 marbtm">
+                        <div class="col">
+                            <h4>Modal Premium</h4>
+                        </div>
+                        <div class="col">
+                            <div class="cornergrybg fr wt90" ng-bind="data.modelPremium=data.modalPremium">{{data.modalPremium}}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+          </div>
+          <div class="ltcolipad lastdiv">
+						<div class="row whiteboxdiv bronline m0">
+							<div class="col nsaplist" ng-init="data.NSAPForLA != undefined ? data.NSAPForLA = data.NSAPForLA : data.NSAPForLA=false">NSAP <sup style="color:red;">*</sup></div>
+							<div class="col selcheck">
+								<input type="checkbox" class="activated" ng-model="data.NSAPForLA" ng-bind="data.NSAPForLA">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+          </div>
+       <div class="clearfix"></div>
+      </div>
+			<div ng-show="showPopupToGoForLAAndProposerDetails" class="popbg"></div>
+	    <center>
+	    <div ng-show="showPopupToGoForLAAndProposerDetails">
+	    <div class="popupdiv"> <br/>
+	      <br/>
+	      <p>Are you sure you want to change the Life Insured Details?</p>
+	      <br/>
+	      <div class="popup-buttons">
+	        <button class="button button-block button-positive subtn" ng-click="goToLAAndProposer()">OK</button>
+	        <button class="button button-block button-positive subtn" ng-click="closePopupForChangeDetails()">Cancel</button>
+	      </div>
+	    </div>
+	    </center>
+			<input type="hidden" name="sumAssured" ng-model="data.sumAssured" class="form-control"/>
+    </ion-content>
+		<div class="bar bar-footer">
+			<button class="button button-clear button-positive button-full" ng-click="popSumAssured(data,data.annualPremium,data.ppt,data.laAge)"> <span class="subtn-arw">Calculate</span> </button>
+		</div>
+	</form>
+</ion-view>

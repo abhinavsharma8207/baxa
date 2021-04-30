@@ -1,0 +1,253 @@
+<ion-view class="customerProfile" view-title="{{title}}">
+<ion-header-bar>
+	<!--<h1>Ajeevan Sampatti+ Page 1</h1> -->
+</ion-header-bar>
+  <ion-content>
+    <div class="content formBox">
+            <div class="ltcolipad">
+                <div class="whiteboxdiv wedline plr13 gendiv">
+                    <div class="row">
+                        <div class="col col-center mb0">
+                            <h4>Gender <sup style="color:red;">*</sup></h4>
+                            <ion-list class="gender">
+                              <ion-radio name="laGender" checked="{{inputData.laGender == option.id}}" ng-class="{{inputData.laGender == option.name ?'checked':''}}" ng-model="inputData.laGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+                            </ion-list>
+                        </div>
+                    </div>
+                </div>
+
+								<div class="whiteboxdiv wedline">
+                    <div class="corner-group fr">
+                        <input ng-click="openPopupForChangeDetails()" ng-model="inputData.laAge" name="currentAgeValue" type="number" placeholder="Age" class="form-control" value="{{inputData.laAge}}" min="25" max="60">
+                        <span>YRS</span>
+                        <span ng-show="userForm.currentAgeValue.$error.number">The value is not a valid number</span>
+                        <span ng-show="userForm.currentAgeValue.$error.min || userForm.currentAgeValue.$error.max">The value must be in range 91 days to 61 years</span>
+                    </div>
+                    <h4>Current age? <sup style="color:red;">*</sup></h4>
+                    <div class="clearfix"></div>
+                    <div class="progress-pink" style="min-height:56px" ng-enable="false">
+                        <div class="progress-box">
+                            <div class="progress-bar progress-bar-slider" ng-click="openPopupForChangeDetails()">
+                                <input type="range" min="0" max="61" value="{{data.currentAgeValue}}" step="1" ng-model="data.currentAgeValue" class="progress-slider" />
+                                <div class="inner" style="width:20px">
+                                </div>
+                                <div class="row lastrangsmltxt">
+                                    <div class="col">91
+                                        <span>DAYS</span>
+                                    </div>
+                                    <div class="col text-right">61
+                                        <span>YRS</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whiteboxdiv wedline plr13 gendiv">
+                    <div class="row">
+                        <div class="col col-center mb0">
+                            <h4>Benefit upto age <sup style="color:red;">*</sup> <span>( Yrs. )</span></h4>
+                            <div class="list agelist"  ng-init="data.policyAge = 100">
+                              <ul>
+                                <li>
+                                  <label class="item item-radio">
+                                  <input type="radio" name="group" ng-model = "data.policyAge" value="85" ng-click="data.policyAge = 85">
+                                  <div class="radio-content">
+                                    <div class="item-content"> 85 </div>
+                                    <i class="radio-icon ion-checkmark"></i> </div>
+                                  </label>
+                                </li>
+                                <li>
+                                  <label class="item item-radio">
+                                  <input type="radio" name="group" value="100" ng-click="data.policyAge = 100" ng-model = "data.policyAge" >
+                                  <div class="radio-content">
+                                    <div class="item-content"> 100 </div>
+                                    <i class="radio-icon ion-checkmark"></i> </div>
+                                  </label>
+                                </li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="whiteboxdiv wedline plr13 gendiv">
+                    <div class="row">
+                        <div class="col col-center mb0">
+                            <h4>Premium Payment Term <sup style="color:red;">*</sup> <span>( Yrs. )</span></h4>
+                            <div class="list agelist" ng-init="data.policyTerm=10">
+                              <ul>
+                                <li>
+                                  <label class="item item-radio">
+                                  <input type="radio" name="pgroup" value="10" ng-click="data.policyTerm = 10" ng-model="data.policyTerm">
+                                  <div class="radio-content">
+                                    <div class="item-content" > 10 </div>
+                                    <i class="radio-icon ion-checkmark"></i> </div>
+                                  </label>
+                                </li>
+                                <li>
+                                  <label class="item item-radio">
+                                  <input type="radio" name="pgroup" ng-model="data.policyTerm" value="15" ng-click="data.policyTerm = 15" >
+                                  <div class="radio-content">
+                                    <div class="item-content"> 15 </div>
+                                    <i class="radio-icon ion-checkmark"></i> </div>
+                                  </label>
+                                </li>
+                              </ul>
+                            </div>
+                            <div>
+                              <div class="cornergrybg fr">{{data.policyAge - data.laAge}} <span>Yrs</span></div>
+                              <h4 class="marRt20 mt10">Policy Term</h4>
+                              <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rtcolipad">
+								<div class="whiteboxdiv wedline">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Annual Premium <sup style="color:red;">*</sup></h4>
+                        </div>
+                        <div class="col">
+                            <div class="corner-group fr">
+                                <input ng-init="data.basePremium=50000" ng-click="calculateModelPremium(data)" ng-model="data.basePremium" name="basePremium" type="number" placeholder="Base Premium" class="form-control" value="" min="0" max="100000">
+                                <span>YRS</span>
+                            </div>
+                            <div>
+                                <span ng-show="userForm.basePremium.$error.number">The value is not a valid number</span>
+                                <span ng-show="userForm.basePremium.$error.min || userForm.basePremium.$error.max">The value must be in range 1 to 100000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Mode</h4>
+                    <ul class="agelist mb20" ng-init="data.premiumMode=1">
+                        <li>
+                            <ion-radio name="annprem" value="1" ng-model="data.premiumMode" ng-click="data.premiumMode=1" class="">1</ion-radio>
+                            <span class="smlsz">Annual</span>
+                        </li>
+                        <li>
+                            <ion-radio name="annprem" value="2" ng-model="data.premiumMode" ng-click="data.premiumMode=2" class="">2</ion-radio>
+                            <span class="smlsz">Half Yearly</span>
+                        </li>
+                        <li>
+                            <ion-radio name="annprem" value="3" ng-model="data.premiumMode" ng-click="data.premiumMode=3" class="">4</ion-radio>
+                            <span class="smlsz">Quarterly</span>
+                        </li>
+                        <li>
+                            <ion-radio name="annprem" value="4" ng-model="data.premiumMode" ng-click="data.premiumMode=4" class="">12</ion-radio>
+                            <span class="smlsz">Monthly</span>
+                        </li>
+                        <li>
+                            <ion-radio name="annprem" value="5" ng-model="data.premiumMode" ng-click="data.premiumMode=5" class="">S</ion-radio>
+                            <span class="smlsz">Single</span>
+                        </li>
+                    </ul>
+                    <div class="row mt10 marbtm">
+                      <div class="col"><h4 class="mt10">Premium Payment Term</h4></div>
+                      <div class="col"><div class="cornergrybg fr">20 <span>YRS</span></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ltcolipad lastdiv">
+                <div class="whiteboxdiv wedline m0" ng-init="data.NSAPForLA=false">
+                    <ang-accordion class="parentaccordian" one-at-a-time="true" ng-click="data.NSAPForLA=!data.NSAPForLA" close-icon-class="fa fa-check-circle greyColor" open-icon-class="fa fa-check-circle greenColor">
+                        NSAP<sup style="color:red;">*</sup>
+                        <collapsible-item>
+                            <div class="row">
+                                <div class="col">
+                                    <label>Hello here</label>
+                                </div>
+                            </div>
+                        </collapsible-item>
+                    </ang-accordion>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+
+	<!-- <h4>Gender</h4>
+
+	<div class="row">
+        <label><span>MALE</span><input id="gender" name="gender" type="radio" value="" checked="checked"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>FEMALE</span><input id="gender" name="gender" type="radio" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Current Age?</span><input id="currentAge" name="currentAge" type="text"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Current Age</span><input id="currentAgeSlider" name="currentAgeSlider" type="range" min="0"�max="100"></label><br>
+    </div>
+
+	<h4>Benefit Upto Age (Yrs.)</h4>
+
+	<div class="row">
+        <label><span>UPTO AGE 85</span><input id="uptoAge" name="uptoAge" type="radio" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>UPTO AGE 100</span><input id="uptoAge" name="uptoAge" type="radio" value=""></label><br>
+    </div>
+
+	<h4>Premium Payment Term (Yrs.)</h4>
+
+	<div class="row">
+        <label><span>10</span><input id="premiumPaymentTerm" name="premiumPaymentTerm" type="radio" value="" checked="checked"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>15</span><input id="premiumPaymentTerm" name="premiumPaymentTerm" type="radio" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Policy Term</span><input id="policyTerm" name="policyTerm" type="text"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Annual Premium</span><input id="annualPremium" name="annualPremium" type="text"></label><br>
+    </div>
+
+	<h4>Mode</h4>
+
+	<div class="row">
+        <label><span>Annual</span><input id="mode" name="mode" type="radio" value="" checked="checked"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Half Yearly</span><input id="mode" name="mode" type="radio" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Quarterly</span><input id="mode" name="mode" type="radio" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Monthly</span><input id="mode" name="mode" type="radio" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>Modal Premium</span><input id="modalPremium" name="modalPremium" type="text"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>NSAP</span><input id="isNsap" name="isNsap" type="checkbox" value=""></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>IN YOUR PRESENCE</span><input id="inYourPresenceAbsence" name="inYourPresenceAbsence" type="radio" value="" checked="checked"></label><br>
+    </div>
+
+	<div class="row">
+        <label><span>IN YOUR ABSENCE</span><input id="inYourPresenceAbsence" name="inYourPresenceAbsence" type="radio" value=""></label><br>
+    </div>	 -->
+
+  </ion-content>
+</ion-view>

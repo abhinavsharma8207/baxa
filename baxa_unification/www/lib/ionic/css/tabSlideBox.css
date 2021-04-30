@@ -1,0 +1,120 @@
+.tabbed-slidebox .slider {
+    height: 100%;
+}
+.tabbed-slidebox.btm .slider {
+    margin-bottom: -50px;
+}
+.tabbed-slidebox .slider-slides {
+    width: 100%;
+}
+
+.tabbed-slidebox .slider-slide {
+    padding-top: 0px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    font-weight: 300;
+   /* background-color: #0398dc;*/
+}
+
+.tabbed-slidebox .tsb-icons {
+    text-align: center;
+    position: relative;
+	background-color:#fff;
+}
+
+.tabbed-slidebox .tsb-ic-wrp {
+    display: flex;
+    position: relative;
+	-webkit-transition: -webkit-transform 0.3s; /* For Safari 3.1 to 6.0 */
+	-webkit-transform:translate3d(0,0,0); z-index:5
+}
+
+.tabbed-slidebox .tsb-icons a {
+    display: inline-block;
+    width: 54px;
+    color: rgba(0, 0, 0, 0.3);
+	-webkit-transform:translate3d(0,8px,0);
+}
+
+.tabbed-slidebox .tsb-icons a.active {
+    color: rgba(0, 0, 0, 1);
+
+}
+
+.tabbed-slidebox .tabbed-slidebox {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.tabbed-slidebox .tsb-icons:after {
+    /*width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 1.4em 1.4em 1.4em;
+    border-color: transparent transparent #0398dc transparent;
+    position: absolute;
+    content: "";
+    display: block;
+    bottom: -12px;
+    left: 50%;
+    margin-left: -14px;*/
+}
+.tsb-hscroll.scroll-view{ background:#343434;
+  	white-space: nowrap;
+	margin:0 auto; height:86px;
+}
+/* Top Menu Icon */
+.ap span {background:url(../../../img/sprite.png) 0 0 no-repeat; width:33px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.ap.active span {background-position:0 -33px}
+.aps span {background:url(../../../img/sprite.png) -33px 0 no-repeat; width:30px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.aps.active span {background-position:-33px -33px}
+.idp span {background:url(../../../img/sprite.png) -63px 0 no-repeat; width:37px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.idp.active span {background-position:-63px -33px}
+.ip span {background:url(../../../img/sprite.png) -100px 0 no-repeat; width:32px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.ip.active span {background-position:-100px -33px}
+.apns span {background:url(../../../img/sprite.png) -132px 0 no-repeat; width:31px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.apns.active span {background-position:-132px -33px}
+.nsc span {background:url(../../../img/sprite.png) -163px 0 no-repeat; width:25px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.nsc.active span {background-position:-163px -33px}
+.tpd span {background:url(../../../img/sprite.png) -188px 0 no-repeat; width:27px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.tpd.active span {background-position:-188px -33px}
+.cdf span {background:url(../../../img/sprite.png) -215px 0 no-repeat; width:32px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.cdf.active span {background-position:-215px -33px}
+.pg span {background:url(../../../img/sprite.png) -247px 0 no-repeat; width:31px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.pg.active span {background-position:-247px -33px}
+.af span {background:url(../../../img/sprite.png) -278px 0 no-repeat; width:33px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.af.active span {background-position:-278px -33px}
+.bi span {background:url(../../../img/sprite.png) -311px 0 no-repeat; width:36px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.bi.active span {background-position:-311px -33px}
+.cal span {background:url(../../../img/sprite.png) -346px 0 no-repeat; width:32px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.cal.active {background-position:-346px -33px}
+.fo span {background:url(../../../img/sprite.png) -378px 0 no-repeat; width:35px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.fo.active span {background-position:-378px -33px}
+.eddf span {background:url(../../../img/sprite.png) -413px 0 no-repeat; width:28px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.eddf.active span {background-position:-413px -33px}
+.irf span {background:url(../../../img/sprite.png) -441px 0 no-repeat; width:32px; height:33px; margin:0 auto; display:flex; position:relative; font-weight:normal}
+.irf.active span {background-position:-441px -33px}
+
+
+
+.tsb-hscroll.scroll-view .scroll-bar{
+	visibility:hidden;
+}
+.tsb-hscroll.scroll-view .scroll.onscroll{
+	-webkit-transition: -webkit-transform 0.3s; /* For Safari 3.1 to 6.0 */
+}
+
+.tabbed-slidebox .tsb-icons .scroll a{
+	width:auto;
+	font-size: 1em;
+	line-height: 2.5em;
+	text-decoration: none;
+	margin:3px 15px 0; color:#fff; padding:5px 0 0;
+	/*border-bottom: 3px solid transparent;*/
+}
+.tabbed-slidebox .tsb-icons .scroll a.active {
+
+
+}

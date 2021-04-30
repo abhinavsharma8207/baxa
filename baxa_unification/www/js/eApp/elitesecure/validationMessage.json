@@ -1,0 +1,17 @@
+
+      {
+	    	  "SpaceAndDot":"No space , dot and special charaters allowed.",
+          "length":"Life Assurer Name length between 1 to 30.",
+          "Selfselection":"For self selection LA name = to Proposer so gender , age and name shoould be same.",
+          "LifeAssurrerName":"Life Assurer Name length is 10.",
+          "AgeValidation":"Age must be between 18 to 99",
+          "SumAssuredMaxLength":"max length is 10",
+          "ProposerAgeISNotValid":"Proposer age is not valid.",
+          "LifeAssuredAgeISNotValid":"Life Assured age is not valid.",
+          "ADBRiderNSAPMessage":"If nsap is selected then we can not select adb rider.",
+          "RiderSaSholdBeLessThanBaseSA":"ADB rider sum assured should not be greater then base sum assured.",
+          "ThityPrecentofBasePremium":"sum of all rider premiums should not exceed 30% base plan premium",
+          "NSAPforLifeAssured":"NSAP for life assured is selected. Then ADB rider not selected.",
+          "annualPremiumLength":"Life Cover length should be between 7 to 10",
+          "Required":"Field is required"
+      }

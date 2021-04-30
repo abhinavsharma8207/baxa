@@ -1,0 +1,136 @@
+<ion-view view-title="BAXA Unification" class="elitesecureForm">
+  <ion-header-bar class="bar-stable">
+    <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/home"></a>
+    <h1 class="title">Elite Secure</h1>
+  </ion-header-bar>
+  <form name="eliteQuoteFrm">
+  <ion-content>
+    <div class="content formBox">
+      <div class="row responsive-sm rowpadltrtnone2">
+        <div class="col mb0">
+          <div class="whiteboxdiv trblueline plr13 gendiv">
+            <div class="row">
+              <div class="col col-center mb0">
+                <h4>Gender</h4>
+               <ion-list class="gender" >
+                <ion-radio ng-model="data.gender" name="gender" ng-click="selectGender('male')"  class="male"  value="0">Choose A</ion-radio>
+                <ion-radio ng-model="data.gender" name="gender" ng-click="selectGender('female')" class="female" value="1">Choose B</ion-radio>
+                </ion-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col mb0">
+          <div class="whiteboxdiv trblueline">
+            <div class="row">
+              <div class="col">
+                <h4>Current age?</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">
+                      <input type="number"   value="{{data.currentAge}}" ng-model="data.currentAge" name="currentAgeValue"  class="form-control"  min="18" max="65" string-to-number required/>
+                        <span>YRS</span>
+                        <!-- <span ng-bind="currentAge"> -->
+                </div>
+              </div>
+            </div>
+            <div class="progress-pink">
+              <!-- <input type="text" id="samriddhi_currentAge" name="example_name" value="" /> -->
+              <div class="progress-box">
+                  <div class="progress-bar progress-bar-slider">
+                      <input type="range" id="currentAge"   min="{{data.minAge}}" max="{{data.maxAge}}"  value="data.currentAge" step="1" ng-model="data.currentAge" class="progress-slider"  />
+                      <div class="inner" ng-style="{width: (data.currentAge - data.minAge) / data.ageDiffHighLow * 100 <= 100 ? (data.currentAge - data.minAge) / data.ageDiffHighLow * 100  + '%' : 0 + '%' }">
+                      </div>
+                      <div class="row lastrangsmltxt">
+                          <div class="col">18
+                              <span>YRS</span>
+                          </div>
+                          <div class="col text-right">65
+                              <span>YRS</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="errortxt">
+              <span ng-show="eliteQuoteFrm.currentAgeValue.$error.number">The value is not a valid number</span>
+              <span ng-show="eliteQuoteFrm.currentAgeValue.$error.required">Current Age is required.</span>
+              <span ng-show="eliteQuoteFrm.currentAgeValue.$error.min || eliteQuoteFrm.currentAgeValue.$error.max">The value must be in range 18 to 65</span>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col mb0">
+          <div class="whiteboxdiv trblueline gendiv martpnone">
+            <div class="row">
+              <div class="col col-center mb0">
+                <h4>Smoking habits</h4>
+                <div class="fr">
+                  <ion-list class="smokehabits">
+                    <ion-radio name="smoke" ng-model="data.smoke" class="smoke" value="smoke">Choose A</ion-radio>
+                    <ion-radio name="smoke" ng-model="data.smoke" class="nonsmoke" value="nonsmoke">Choose B</ion-radio>
+                  </ion-list>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row responsive-sm rowpadltrtnone2">
+        <div class="col mb0 mt10">
+          <div class="whiteboxdiv trblueline">
+            <div class="row">
+              <div class="col">
+                <h4>Policy Term<span> (Yrs.)</span></h4>
+                <ul class="agelist">
+                  <li  ng-repeat="pt in pts">
+                    <ion-radio  name="agelist" class=""  value={{pt.name}} ng-model="data.pt" ng-click="populatePPT(data,data.pt)">{{pt.name}}</ion-radio>
+                  </li>
+                  <li ng-repeat="ptupto in uptoage">
+                    <div class="brdlast">
+                    <ion-radio name="agelist"  class="last75" value={{ptupto.name}} ng-model="data.ptupto" ng-click="populatePPT(data,data.ptupto)"><span class="smlsz2">Up to<br /> Age</span> {{ptupto.name}}</ion-radio>
+                  </div>
+                </li>
+                </ul>
+                  <div class="errortxt">
+                  <div ng-show="showDbErrors"><span ng-bind="dbErrors" ></span></div>
+                </div>
+                <div class="row mt10 marbtm">
+                  <div class="col"><h4 class="mt10">Premium Payment Term</h4></div>
+                  <div class="col"><div class="cornergrybg fr"><span>{{data.ppt}}YRS</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="whiteboxdiv trblueline">
+            <div class="row">
+              <div class="col">
+                <h4>Life Cover</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">
+                  <input type="number" value="data.lifeCover" ng-model="data.lifeCover" name="lifeCoverValue" class="form-control"   min="2500000" max="" string-to-number required/>
+                </div>
+                 <div class="errortxt">
+                <span ng-show="eliteQuoteFrm.lifeCoverValue.$error.number">The value is not a valid number</span>
+                <span ng-show="eliteQuoteFrm.lifeCoverValue.$error.min || eliteQuoteFrm.lifeCoverValue.$error.max">The value must be in range greater than 2500000RS</span>
+                </div>
+              </div>
+
+            </div>
+            <ul class="agelist">
+              <li><ion-radio ng-model="data.mode" name="smlsz" class="" value="1">1</ion-radio> <span class="smlsz">Annual</span></li>
+              <li><ion-radio ng-model="data.mode" name="smlsz" value="2">2</ion-radio> <span class="smlsz">Half Yearly</span></li>
+              <li><ion-radio  ng-model="data.mode" name="smlsz" class="" value="12">12</ion-radio> <span class="smlsz">Monthly</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer">
+    <button class="button button-clear button-positive button-full" ng-click="calculate(data)"> <span class="subtn-arw">Calculate</span> </button>
+  </div>
+</form>
+</ion-view>

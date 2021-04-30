@@ -1,0 +1,111 @@
+<ion-view class="customerProfile" view-title="{{title}}">
+    <form name="userForm">
+  <ion-header-bar></ion-header-bar>
+    <ion-content>
+      <div class="content formBox" style="margin:0 10px">
+          <div class="whiteboxdiv pkline samlist prodwid50">
+            <h4>This product is being bought for? </h4>
+            <div class="row">
+              <div class="col">
+              <label>
+                <select id="buyingFor" name="buyingFor" type="option" ng-init="lAAndProposerDetails.BuyingFor!=undefined ? data.BuyingFor = lAAndProposerDetails.BuyingFor :  data.BuyingFor='Self'"  ng-model="data.BuyingFor" required>
+                  <option ng-selected="option.name == 'Self'?true:false" ng-repeat="option in formData.BUYPOLFOR" value="{{option.name}}">{{option.name}}</option>
+                </select>
+                <!-- ng-init="{{lAAndProposerDetails!=null ? data.BuyingFor=lAAndProposerDetails.BuyingFor :data.BuyingFor='Self'}}" -->
+              </label>
+              </div>
+              <br>
+            </div>
+            <h4>Life Insured Details {{lAAndProposerDetails.liFirstName}}</h4>
+            <div class="row">
+              <div class="col">
+              <label><!-- <span>First Name</span> -->
+                <input id="firstname" ng-init="lAAndProposerDetails != undefined ? data.liFirstName=lAAndProposerDetails.liFirstName :data.liFirstName=''" name="liFirstName" ng-trim="false" ng-pattern="/^[a-zA-Z]*$/" ng-model="data.liFirstName" type="text" value="data.liFirstName" placeholder="First Name" ng-minlength="1" ng-maxlength="30" required>
+                <span style="color: red;" ng-show="userForm.liFirstName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</span>
+                <span style="color: red;" ng-show="userForm.liFirstName.$error.maxlength">{{validationMessage.data.length}}</span>
+                <span style="color: red;" ng-show="userForm.liFirstName.$error.minlength">{{validationMessage.data.length}}</span>
+              </label>
+              </div>
+              <br>
+            </div>
+            <div class="row">
+              <div class="col">
+              <label><!-- <span>Last Name</span> -->
+
+                <input id="lastName"  ng-init="lAAndProposerDetails != undefined ? data.liLastName=lAAndProposerDetails.liLastName :data.liLastName=''" name="liLastName" ng-trim="false" ng-pattern="/^[a-zA-Z]*$/" ng-model="data.liLastName" type="text" value="data.liLastName" placeholder="Last Name" ng-minlength="1" ng-maxlength="30" required>
+                <span style="color: red;" ng-show="userForm.liLastName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</span>
+                <span style="color: red;" ng-show="userForm.liLastName.$error.maxlength">{{validationMessage.data.length}}</span>
+                <span style="color: red;" ng-show="userForm.liLastName.$error.minlength">{{validationMessage.data.length}}</span>
+              </label>
+              </div>
+              <br>
+            </div>
+
+            <div class="row">
+              <div class="col"><h4>Gender </h4></div>
+              <div class="col col-67">
+                <ion-list class="gender" ng-init="lAAndProposerDetails!= undefined ?data.laGender=lAAndProposerDetails.laGender : data.laGender=0">
+                  <ion-radio name="laGender" ng-class="{{data.laGender == option.name ?'checked':''}}" ng-model="data.laGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+                </ion-list>
+
+            </div>
+            </div>
+            <div class="row">
+              <div class="col">
+              <label><!-- <span>Date of Birth</span> -->
+                <input type="date" min="{{data.laMinAgeYear}}" max="{{data.laMaxAgeYear}}" ng-model="data.laAgeTest" id="proposerBirthDate" name="proposerBirthDate" format="dd/MM/yyyy" size="20" required/>
+                <!--  min="{{data.laMinAgeYear}}" max="{{data.laMaxAgeYear}}" <input id="dob" ng-model="data.laAge" type="date" data-date-format="DD MMMM YYYY" required> -->
+              </label>
+              </div>
+              <br>
+            </div>
+            <h4 ng-if="data.BuyingFor!='Self'">Proposer Details</h4>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col">
+              <label><!-- <span>First Name</span> -->
+                <input id="firstname" name="propFirstName" ng-trim="false" ng-pattern="/^[a-zA-Z]*$/" ng-model="data.propFirstName" ng-init="lAAndProposerDetails != undefined ? data.propFirstName=lAAndProposerDetails.propFirstName :data.propFirstName=''" type="text" value="" placeholder="First Name" ng-minlength="1" ng-maxlength="30" required>
+                <span style="color: red;" ng-show="userForm.propFirstName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</span>
+                <span style="color: red;" ng-show="userForm.propFirstName.$error.maxlength">{{validationMessage.data.length}}</span>
+                <span style="color: red;" ng-show="userForm.propFirstName.$error.minlength">{{validationMessage.data.length}}</span>
+              </label>
+              </div>
+              <br>
+            </div>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col">
+              <label><!-- <span>Last Name</span> -->
+                <input id="lastName" name="propLastName" ng-trim="false" ng-pattern="/^[a-zA-Z]*$/" ng-model="data.propLastName" ng-init="lAAndProposerDetails != undefined ? data.propLastName=lAAndProposerDetails.propLastName :data.propLastName=''" type="text" value="" placeholder="Last Name" ng-minlength="1" ng-maxlength="30" required>
+                <span style="color: red;" ng-show="userForm.propLastName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</span>
+                <span style="color: red;" ng-show="userForm.propLastName.$error.maxlength">{{validationMessage.data.length}}</span>
+                <span style="color: red;" ng-show="userForm.propLastName.$error.minlength">{{validationMessage.data.length}}</span>
+              </label>
+              </div>
+              <br>
+            </div>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col"><h4>Gender</h4></div>
+              <div class="col col-67">
+              <ion-list class="gender" ng-init="lAAndProposerDetails.proposerGender!=undefined ? data.proposerGender = lAAndProposerDetails.proposerGender :  data.proposerGender=0">
+                <ion-radio name="PrposerGender" ng-model="data.proposerGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}} {{option.name == 'Male'?'active':''}}" value="{{option.id}}">{{option.name}}</ion-radio>
+              </ion-list>
+
+            </div>
+            </div>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col">
+              <label><!-- <span>Date of Birth</span> min="{{data.propMinAgeYear}}" max="{{data.propMaxAgeYear}}" -->
+                <input  ng-model="data.proposerAge"  min="{{data.propMinAgeYear}}" max="{{data.propMaxAgeYear}}"  format="dd/MM/yyyy" type="date"  required>
+              </label>
+              <span style="color:red;" ng-show="showErrorForProposerAge"> {{validationMessage.data.ProposerAgeISNotValid}} </span>
+              </div>
+              <br>
+            </div>
+          </div>
+          </form>
+        </div>
+        <button class="button button-clear button-positive button-full" ng-disabled="userForm.$invalid" ng-click="ProceedForLAAndProposerDetails(data)">
+          <span class="subtn-arw">Proceed</span>
+        </button>
+    </ion-content>
+</form>
+</ion-view>

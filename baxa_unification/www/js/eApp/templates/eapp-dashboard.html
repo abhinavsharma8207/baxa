@@ -1,0 +1,39 @@
+<ion-view view-title="eApp Dashboard" class="summaryPage">
+  <ion-content class="pageBG">
+    <div class="screenContainer">
+      <div class="leftPanel fl">
+        <div class="content switchListing">
+          <div class="list list-inset srchdiv">
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" ng-model="searchBox" placeholder="Search by Name, Mobile No. or Customer ID">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="rightPanel fr custsumdiv">
+        <div ng-show="screenschng" ng-include="'js/switch/templates/customer-summary.html'"></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </ion-content>
+  <div class="ftdiv bar bar-footer bar-balanced wid40 text-center btnDivIpad" ng-click="productsListing()">
+    <div class="title">ADD NEW QUOTE</div>
+  </div>
+  <div ng-show="flagShowPopup" class="popbg"></div>
+  <center>
+    <div ng-show="flagShowPopup">
+      <div class="popupdiv">
+        <form name="form">
+          <div class="list list-inset">
+            <p>Does the customer exist in SWITCH?</p>
+          </div>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="onClickYes()" class="close">Yes</button>
+            <button class="button button-block button-positive subtn" ng-click="onClickNo()">No</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </center>
+</ion-view>

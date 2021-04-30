@@ -1,0 +1,8 @@
+{
+  "proposalnomatcherr": "Please enter valid proposal no.",
+  "proposalnolength": "Proposal Number length must be between 7 to 10",
+  "proposalnoinvalid": "Please enter valid proposal no.",
+  "canoteditcase": "Cannot edit this case. System has already begun transmitting the case.",
+  "confirmdeletecase" : "Are you sure you want to delete proposal number.",
+  "countexceeds" : "Min cannot exceed max."
+}

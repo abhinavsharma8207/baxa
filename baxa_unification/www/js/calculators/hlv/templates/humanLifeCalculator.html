@@ -1,0 +1,99 @@
+<ion-view view-title="BAXA ">
+ <ion-content>
+<div class="content">
+      <div class="row responsive-sm colmarbtm">
+        <div class="col">
+          <div class="whiteboxdiv" style="min-height:137px">
+            <div class="row">
+              <div class="col">
+                <h4>Gender</h4>
+                <ion-list class="gender">
+                  <ion-radio ng-model="choice" class="male" ng-value="'male'">Choose A</ion-radio>
+                  <ion-radio ng-model="choice" class="female" ng-value="'female'">Choose B</ion-radio>
+                </ion-list>
+              </div>
+              <div class="col">
+                <h4>Smoking habits</h4>
+                <ion-list class="smokehabits">
+                  <ion-radio ng-model="choice" class="smoke" ng-value="'smoke'">Choose A</ion-radio>
+                  <ion-radio ng-model="choice" class="nonsmoke" ng-value="'nonsmoke'">Choose B</ion-radio>
+                </ion-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="whiteboxdiv grenline">
+            <div class="row marpadnone">
+              <div class="col">
+                <h4 class="padding-top">Current age?</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">35 <span>YRS</span></div>
+              </div>
+            </div>
+            <div class="progress-pink">
+              <input type="text" id="currentAge" name="example_name" value="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row responsive-sm colmarbtm curcolthree">
+        <div class="col">
+          <div class="whiteboxdiv grenline">
+            <div class="row marpadnone">
+              <div class="col">
+                <h4>Plan to work till the age of?</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">60 <span>YRS</span></div>
+              </div>
+            </div>
+            <div class="progress-pink">
+              <input type="text" id="planAge" name="example_name" value="" />
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="whiteboxdiv grenline">
+            <div class="row marpadnone">
+              <div class="col col-67">
+                <h4>Current Annual Income?</h4>
+              </div>
+              <div class="col col-33">
+                <div class="corner-group fr">15 <span>L</span></div>
+              </div>
+            </div>
+            <div class="colLtRtdiv">
+            	<a href="#" class="addsml"></a>
+                <div class="progress-pink lakhtxt">
+                  <input type="text" id="curAnnIncome" name="example_name" value="" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="whiteboxdiv grenline">
+            <div class="row marpadnone">
+              <div class="col">
+                <h4>Current Liabilities?</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">25 <span>L</span></div>
+              </div>
+            </div>
+            <div class="colLtRtdiv">
+                <a href="#" class="addsml"></a>
+                <div class="progress-pink lakhtxt">
+                  <input type="text" id="curLiab" name="example_name" value="" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+	  <button class="button button-clear button-positive button-full" ng-click="calculate()"> <span class="subtn-arw">Calculate</span> </button>
+    </div>
+    </ion-content>
+  </ion-view>

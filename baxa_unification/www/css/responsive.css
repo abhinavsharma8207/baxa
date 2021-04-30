@@ -1,0 +1,285 @@
+/*  Mobile Phones Starts */
+
+@media only screen  and (max-width:768px) {
+.detailsContainer {display: none}
+.rwd.whiteboxdiv h4 {float: left; margin-right: 20px}
+.retirementCalcul .colLtRtdiv .progress-box {width:90%; float: left; clear: none}
+
+}
+@media only screen  and (max-width:567px) {
+    .twopanel .annualpage {min-width:190px}
+.childAdvantage .twopanel .mar-top {margin-top: -25px}
+.rowpadltrtnone3 {margin-bottom:10px}
+.rowpadltrtnone3 .col {padding-left:0; padding-right:0; padding-bottom:0}
+.adic-modal .proassdiv {width:70%; padding:15px}
+.adic-modal .modanntble {left:2%; width:96%}
+.scroll-content {height:auto}
+.wid40 {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%}
+.padnone .col {padding:5px 0}
+.progress-pink {min-height:auto}
+.wt445 {width:100%}
+.childfuturediv .childageheight, .childfuturediv .whiteboxdiv {min-height:auto}
+.childfuturediv .row.padnone .col {padding:0; margin-bottom:0}
+.notetxt {text-align:left}
+.add-box {bottom:-10%; right:0}
+.whiteback-mobile {background:none; box-shadow:none; margin-top:10px}
+.whiteback-mobile .button.button-positive {float:none; width:100%; margin-left:0}
+.colLtRtdiv .progress-pink, .colLtRtdiv .progress-grape, .colLtRtdiv .progress-yellow, .colLtRtdiv .progress-blue, .colLtRtdiv .progress-box {float:none; width:100%; clear:both}
+.colLtRtdiv .addsml, .colLtRtdiv .negsml {float:right; margin-top:0px; margin-bottom:15px}
+.plr13{padding: 0 13px !important;}
+.p0 {padding:0;}
+.m0 {margin:0 !important;}
+.pt10 {padding-top: 10px !important;}
+.mb0 {margin-bottom: 0 !important;}
+
+.gendiv h4 {float: left; margin-top:15px; padding-top:0 !important; margin-right: 20px}
+/*.gendiv .gender, .gendiv .smokehabits {float: right}*/
+.gendiv .tbar{float: right; margin-top: 10px}
+.wd200{width: 180px !important;}
+
+.pinkbox{width: auto; font-size:1em; margin: 0; padding: 10px;}
+label{font-size: 11px; }
+.estimatediv h4{float: none;}
+.widthsamridhi{max-width: auto; }
+.childadvantage{max-width: auto;}
+.tbar .button-bar .button{font-size:0.9em;}
+.disclosure p:after {bottom:-25%}
+.wealthCreAss h4 span {display:block; margin-top:5px}
+.wealthCreAss .corner-group {margin-top:20px}
+.delback {width:80%}
+.tbar .button-bar.wt520 {width:100%}
+.rowpadnone .col {padding:5px 0}
+.wt505 {width:100%}
+
+.profwid, .prioritsationsec {width:100%; overflow:hidden;}
+.chartbrd .ratetxt {left:37%}
+.chartbrd .levelHeight1 {left:6%;}
+.chartbrd .levelHeight2 {right:0%;}
+.row.padltrt, .row.padltrt .col {padding:5px 0}
+.prioritsationsec .prioritybx {margin:22% 0 40% 5px}
+.otherCaldiv .row {padding:0}
+.otherCaldiv .row .col {padding:5px 0;}
+.otherCaldiv .row .col:first-child {padding-bottom:0}
+.ftdiv.bar.bar-balanced {display:block;}
+.tab-nav {width:320px}
+.ipadiv {width:100%; background:none; border-radius:0; -webkit-box-shadow:none; -moz-box-shadow:none; box-shadow:none; padding-bottom:0}
+.checklist {margin:0 0 15px}
+.imgreview {margin:0 15px 0; width:auto; max-width:auto;}
+.ipadmaRt {margin-right:auto}
+.freupldoc {margin:0 15px;}
+.ipadmaRt .whiteboxdiv {border-radius:5px}
+.list1 .activated .whiteboxdiv.orgline:after {background-image:none;}
+.allwidauto {width:100%}
+.tabbed-slidebox {top:45px; left:0; width:100%}
+.ftsum {left:0; width:100%}
+.ipdft {display:none;}
+.mobft {display:block;}
+.arrow.next {top: calc(50% - 10px)}
+.arrow.prev {top: calc(50% - 10px)}
+.popupimgdiv .popupPrevdiv {width:95%; max-width:95%; border-radius:0; margin:0 10px}
+.ftdiv.btnDivIpad {width:100%!important}
+.divmarauto {width:100%}
+.screenContainer .tabLoader {width:100%}
+.screenContainer .leftPanel {padding-top:0}
+.padding-vertical.blbgline {padding:15px; background:none}
+.btntwomarauto {width:100%; max-width:100%}
+.screenContainer .tabLoader .leftPanel .tabs-top.tabs-striped {width:100%}
+.screenContainer .tabLoader .leftPanel .listproposal .list {margin-top:110px}
+.oldertab {margin-top:125px; margin-bottom:50px}
+.screenContainer .tabLoader .leftPanel .oldertab .listproposal .list {margin-top:10px}
+.prodwid50 {width:100%; max-width:100%}
+.prodGalname {width:100%; margin:10px auto 0; text-align:center;}
+.prodGalname .prdbx {margin:0 5px 0 0}
+.twopanel .brwbk {font-size:0.90em}
+.twopanel .lartxt {font-size:1.25em}
+.twopanel .row {width:95%}
+.twopanel .sgbk .row {width:100%}
+.twopanel .listwid {width:90%}
+.twopanel .listround .icn-cash {left:30px}
+.twopanel .listround .imgdiv {width:25%}
+.childAdvantage .twopanel .listround .imgdiv {width:30%}
+.twopanel .listround.lowYear .imgdiv {width:22%}
+.twopanel .listround .imgdiv-top {width:29%}
+.twopanel .listround .imgdiv-top img{width:88%;height:97px;}
+.twopanel .listround .desc .lt, .twopanel .listround .desc .rt {font-size:0.80em; padding-left:10px}
+.twopanel .listnrm::before {left:35%}
+.twopanel .mhght {min-height:60px}
+.twopanel .mhght80 {min-height:80px}
+
+/*.twopanel .row .col p:first-child {min-height:102px}*/
+
+.ltcolipad {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100%; float:none}
+.rtcolipad {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100%; float:none; margin-left:0; margin-top:15px}
+.lastdiv {margin-top:15px}
+.tpestimatdiv h4 {text-align:center;}
+.tpestimatdiv .tbar .button-bar {float:none; margin:0 auto; width:50%}
+.withreturndiv .button-bar {width:100%}
+.samlist {padding:10px 30px 20px}
+
+.prioritsationsec h4 {font-size:0.8em}
+
+.eliteminHeightone .whiteboxdiv {min-height:auto}
+.eliteminHeighttwo .whiteboxdiv {min-height:auto}
+
+.customerProfile .scroll-content {background:transparent;}
+.widcol50 {-webkit-flex-wrap: wrap;flex-wrap: wrap;}
+.widcol50 .col {-webkit-box-flex: 0; -webkit-flex: 0 0 50%; -moz-box-flex: 0; -moz-flex: 0 0 50%; -ms-flex: 0 0 50%; flex: 0 0 50%; max-width:50%; width:50%}
+
+.padTop50 {padding-top:0px}
+.investdiv label {min-height:34px; display:block;}
+.investdiv span {margin-bottom:30px}
+.icn-inp, .icn-oput,.leftPanel .secure-bar {display:block}
+
+.wealthCreAss .row {display:block;}
+.wealthCreAss .rtoren {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100%}
+.wealthCreAss .rtoren .fs13 {width:80%; margin-left:0}
+.rowpadltrtnone4 .col {padding-right:0}
+.tbar .button-bar.wid400 {width:100%}
+.minHght130 {min-height:auto}
+.scrnCont .sncltPanel {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100%; float:none}
+.scrnCont .sncrtPanel {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100%; float:none}
+.scrnCont .sncltPanel .row {margin-bottom:0}
+.ptrowfix {display:inline-block;}
+.ptrowfix .col {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100%; float:none}
+.ptrowfix .col .ordiv2 {position:relative; top:0; left:0; margin:0 0 20px; padding-left:110px}
+.ptrowfix .col .ordiv2:before {content:''; border:1px solid #bababa; width:100px; position:absolute; left:0; top:10px}
+.ptrowfix .col .ordiv2:after {content:''; border:1px solid #bababa; width:100px; position:absolute; left:140px; top:10px}
+.tmcvdiv h4 {font-size:1em}
+.tmcvdiv .aridinpbtnyrs, .tmcvdiv .ardrpinpbtn .form-control {font-size:1.30em}
+.tmcvdiv .ardrpinpbtn .WebRupee {margin-top:5px}
+.tmcvdiv .aridinpbtnyrs, .tmcvdiv .ardrpinpbtn .form-control {height:30px; line-height:2.50em}
+.tmcvdiv .ardrpinpbtn .form-control {width:80%}
+/*.leftPanel .row {display: block}*/
+.rowfix.flxdisblM {display:inline-block;}
+.rowfix.flxdisblM .col-67 {flex:0 0 100%; max-width:100%}
+.inputdiv.inpdivM {display:block;}
+}
+
+@media only screen  and (max-width:350px) {
+.prioritsationsec h4 {font-size:0.6em}
+
+}
+
+@media only screen  and (min-width:567px)  and (max-width:1024px) {
+    .freupldoc {margin:0 15px;}
+   /* .blue-bar-top{top:40px}*/
+
+}
+
+
+@media only screen  and (min-width:320px)  and (max-width:767px) {
+.freupldoc {
+ height: -moz-calc(100% - 235px); /* Firefox */
+ height: -webkit-calc(100% - 235px); /* Chrome, Safari */
+ height: calc(100% - 235px); /* IE9+ and future browsers */ ;; overflow-y: auto
+}
+/*.overflow-scroll {bottom:40%}
+.pane {background-position: 100% 65%!important}*/
+.padTop50 {padding-top: 50px}
+.listproposal .list {margin-top: 110px}
+.tabsBG, .rightPanel {display: none}
+.screenContainer .leftPanel, .tab-nav {width:100%; max-width:100%}
+
+.secureIncomeSec .screenContainer .leftPanel, .eliteAdvantageDiv .screenContainer .leftPanel {-webkit-box-flex: 0; -webkit-flex: 0 0 100%; -moz-box-flex: 0; -moz-flex: 0 0 100%; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width:100%; width:100% !important; padding-top:0 !important}
+
+}
+
+@media only screen  and (max-width:340px) {
+.prodbx {width:142px}
+.prodGallery p {font-size:1em}
+.otherCaldiv a {font-size:1.2em !important}
+.srchdiv input[type="text"] {font-size:75%}
+.whiteboxdiv.calculdiv .name, .whiteboxdiv.calculdiv .num {font-size:1em}
+.viewlist .icon-year {font-size:65%; padding:2px 0 2px 20px}
+.viewlist .icon-contact {font-size:70%}
+.listcreation.pilist:first-child {margin:0}
+.whiteboxdiv.nedpristion .circle-priority {width:55px; height:55px; padding:7px 5px}
+.whiteboxdiv.nedpristion .col, .viewlist1 .col {font-size:0.85em}
+}
+/*  Mobile Phones End */
+
+/*  Tablets and ipad Start */
+@media only screen  and (min-width:768px)  and (max-width:1024px) {
+.tripplhealthdiv .scroll, .eliteSecure .scroll, .retirementCalcul .scroll {height: -moz-calc(100% - 5px);
+    height: -webkit-calc(100% - 5px);
+    height: calc(100% - 5px);
+    overflow: auto;
+}
+.corner-group input[type="number"], .corner-group input[type="text"] {width:55px}
+.freupldoc {
+ height: -moz-calc(100% - 175px); /**** FF */
+ height: -webkit-calc(100% - 175px); /**** Chrome n Safari */
+ height: calc(100% - 175px); /***** IE9+ Browsers */
+ overflow: auto
+}
+ .rightPanel .freupldoc {
+ height: -moz-calc(100% - 9px); /**** FF */
+ height: -webkit-calc(100% - 95px); /**** Chrome n Safari */
+ height: calc(100% - 95px); /***** IE9+ Browsers */
+ overflow: auto
+}
+.popbg {height: 120%}
+.rightPanel .bottomLineIMG {display:none}
+.rightPanel .tabbed-slidebox {left:0; width:100%; top:0}
+.rightPanel .ftsum {bottom:-50px}
+.leftPanel .padTop50 {padding-top: 0!important}
+.has-header {top:45px; padding: 0}
+.leftPanel .pane {background: none!important}
+
+.leftPanel .listItems .row {display: flex}
+.leftPanel .listItems {width:100%!important}
+.leftPanel .row.responsive-sm {display: block}
+.padTop50 {padding-top: 50px}
+.popupdiv {width: 50%; left:30%}
+.tabsBG {background-color:#00529c;    margin-top:36px;    padding: 10px;    position: relative;    z-index:1;    width:60%;    float:right;    min-height: 33px;    line-height: 33px; text-align: right}    /*.bar-footer {display: none}*/    .screenContainer .scroll-content {position: static; height:auto !important}
+.inputTop .col {width:50%; float: left}
+body .inputTop, .inputdiv {min-height:inherit!; width: 100%; overflow: hidden}
+.padTop10 { padding-top: 10px!important}
+.tabStructure, .listItems {width:100%; display: block; max-width: 100%}
+.leftPanel {position:relative}
+.btnDiv {position:fixed; bottom:0; left: 0; display: block!important; width:45%}
+.tab-nav {width: 100%}
+.tabLoader {min-height:100%; height:100%}
+.mobileCont {width:40%; float: left}
+.detailsContainer {background: #fff; display: block; float: right; width:54%; min-height: 400px; margin:100px 15px 60px; min-height:560px }
+.smallTitle {font-size: 19px!important}
+}
+/*  Tablets and ipad End */
+
+/*  Nexus and ipad Starts */
+@media only screen  and (min-width:300px)  and (max-width:768px) {
+.makeBlock {display: block}
+}
+@media only screen  and (min-width:600px)  and (max-width:960px) {
+.responsive-sm .rwdClass .row {display: block}
+.childAdvantage .twopanel .listround .imgdiv-tp {top: 20px; max-height:70px; height: 80px}
+.rightPanel .freupldoc {
+ height: -moz-calc(100% - 145px); /* Firefox */
+ height: -webkit-calc(100% - 145px); /* Chrome, Safari */
+ height: calc(100% - 145px); /* IE9+ and future browsers */ ;; overflow-y: auto
+}
+.freupldoc {
+ height: -moz-calc(100% - 235px); /* Firefox */
+ height: -webkit-calc(100% - 235px); /* Chrome, Safari */
+ height: calc(100% - 235px); /* IE9+ and future browsers */ ;; overflow-y: auto
+}
+    .tab{
+        width:50%;
+        margin: 0 auto;
+    }
+}
+@media only screen  and (min-width:600px)  and (max-width:610px) {
+
+    .blue-bar-top{top:37px}
+    .twopanel .listwid {
+        width:78%;
+    }
+}
+
+.pad15{
+    padding:0px 15px 0px 15px;
+}
+/*  Nexus and ipad End */
+
+
+/*iPhone 5*/

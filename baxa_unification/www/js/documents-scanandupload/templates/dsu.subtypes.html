@@ -1,0 +1,42 @@
+<ion-view>
+  <ion-content style="top:0">
+    <div class="freupldoc">
+      <div class="whiteboxdiv">
+        <h4>Frequently Uploaded Documents</h4>
+        <div class="row divflex">
+          <div class="col col-33" ng-click="blockChooseDocument ==false ?onClickChooseDocument(otherDocuments):showCanNotEditThisCase()" ng-repeat="otherDocuments in otherFrequentlyUploadedDocuments | limitTo:6">
+            <a href="#">
+              <span class="greybox">
+                <span ng-show="{{otherDocuments |syncSubtypes}}" class="icn-circlegren">&nbsp;</span>
+                <span ng-show="{{(otherDocuments |thumbnails)?false:true}}" class="upbox">&nbsp;</span>
+                <img ng-hide="{{(otherDocuments |thumbnails)?false:true}}" ng-src="{{otherDocuments |thumbnails}}" class="image">
+              </span>{{otherDocuments.Name}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="whiteboxdiv" ng-if="otherFrequentlyUploadedDocuments.length >6">
+        <h4>More Documents</h4>
+        <div class="row">
+          <div class="col col-33" ng-click="otherOptions()" ng-show="!showOtherDocuments">
+            <a href="#">
+              <span class="greybox">
+                <span class="upbox">&nbsp;</span>
+              </span>
+              Upload</a>
+          </div>
+        </div>
+        <div class="row divflex" ng-show="showOtherDocuments">
+          <div class="col col-33" ng-click="blockChooseDocument ==false ?onClickChooseDocument(otherDocuments):showCanNotEditThisCase()" ng-repeat="otherDocuments in otherFrequentlyUploadedDocuments" ng-if="$index>5">
+            <a href="#">
+              <span class="greybox">
+                <span ng-show="{{otherDocuments |syncSubtypes}}" class="icn-circlegren">&nbsp;</span>
+                <span ng-show="{{(otherDocuments |thumbnails)?false:true}}" class="upbox">&nbsp;</span>
+                <img ng-hide="{{(otherDocuments |thumbnails)?false:true}}" ng-src="{{otherDocuments |thumbnails}}" class="image"></span>{{otherDocuments.Name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+
+</ion-view>

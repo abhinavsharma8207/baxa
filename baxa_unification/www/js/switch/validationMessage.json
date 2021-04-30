@@ -1,0 +1,17 @@
+{
+      "SpaceAndDot":"Space and Dot at starting position is not allowed in Life Assurer Name.",
+      "length":"Life Assurer Name length between 1 to 50.",
+      "Selfselection":"For self selection LA name = to Proposer so gender , age and name shoould be same.",
+      "LifeAssurrerName":"Life Assurer Name length is 10.",
+      "SumAssuredMaxLength":"max length is 10",
+      "NumericValue":"Please enter only numeric value without 'Dot'",
+      "PolicyTerms":"Please select Policy Terms",
+      "PremiumMode":"Please select Premium Mode",
+      "Required":"Field is required",
+      "Number":"Number allowed only",
+      "zeroToFiftyfive":"Age should be in between 0 to 55",
+      "zeroToSixtyfive":"Age should be in between 0 to 65",
+      "eighteenToSixtyfive":"Age should be in between 18 to 65",
+      "sixToSixtyfive":"Age should be in between 6 to 65",
+      "oneToSixtyfive":"Age should be in between 1 to 65"
+}

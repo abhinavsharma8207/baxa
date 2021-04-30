@@ -1,0 +1,17 @@
+<div class="whiteboxdiv" ng-controller="switchTabsController" ng-init="showData()">
+  <ul class="stepbox">
+    <li  ng-repeat="datalist in datalists"
+      ng-click="select(datalist);selectedtab(datalist.id,custId)" ng-class="(selected == datalist.id) ? 'active':(stepsCompleted>=datalist.id) ? 'tab-item-complete':'disabled'">
+    <a>{{ datalist.name }}</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<!-- ng-class="(selected == datalist.id) ? 'active':(stepsCompleted>=datalist.id) ? 'tab-item-complete':'disabled'"> -->
+<!-- disabled -->
+<!-- <li class="is-complete" data-step="1">Life <br>Stage</li> ng-class="{active: selected == datalist.id}"
+<li class="is-active" data-step="2">Needs <br>Prioritisation</li>
+<li data-step="3" class="progress__last">Products <br>Recommendation</li>
+<li data-step="4" class="progress__last">Customised <br>Illustration</li> -->

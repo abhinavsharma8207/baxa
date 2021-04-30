@@ -1,0 +1,267 @@
+<ion-view view-title="{{title}}">
+    <ion-content>
+        <div class="content">
+            <div class="prodwid50">
+
+                <div class="whiteboxdiv inputdiv">
+                    <div class="row" ng-click="goToHomePage()">
+                        <div class="col">Input</div>
+                        <div class="col text-right">
+                            <a href="#" class="icn-fullwid"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="widthsamridhi">
+                    <div class="row rowpadltrtnone">
+                        <div class="col">
+                            <div class="pinkbox">
+                                <div class="row zindex">
+                                    <div class="col">
+                                        <p>Annual Premium</p>
+                                        <p>₹ {{data.basePremium | number}}</p>
+                                    </div>
+                                    <div class="col zindex">
+                                        <p>Life Cover</p>
+                                        <p>₹{{data.sumAssured | number}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="text-center">
+                                <h4  ng-click="addRiders=!addRiders"  class="riderclick" ng-class="addRiders==true?'neg':''">ADD RIDERS</h4>
+                            </div>
+
+                            <ang-accordion ng-show="addRiders==true"  class="parentaccordian "  one-at-a-time="true" icon-position="center" open-icon-class="fa fa-check-circle">
+                              <div class="cell">
+                                  <div ng-class="adbRider==true?'acArrowOn':'acArrowOff'" ng-click="toggleAdb()"></div>
+                                <collapsible-item  collapse="collOptions" item-title="Accidental Death Benefit Rider" class="{{adbRider==true?'icon-riderone icnrid':'icon-riderone'}}"  ng-click="calculateAdbRider()"  >
+
+                                  <div class="row rowfix tmcvdiv">
+                          <div class="col col-50">
+                            <div class="row rowfix">
+                              <div class="col col-50"><h4>Term</h4></div>
+                              <div class="col"><div ng-init="data.ppt" class="aridinpbtnyrs">{{data.ppt}} <span>YRS</span></div></div>
+                            </div>
+                          </div>
+
+                          <div class="col col-50">
+                              <div class="row rowfix hgtdiv40">
+                                <div class="col col-50">
+                                  <h4>Cover</h4>
+                                </div>
+                                <div class="col">
+                                    <div class="ardrpinpbtn">
+                                      <i class="WebRupee">Rs.</i>
+                                      <input ng-init="data.sumAssuredForADBRiders=data.sumAssured" ng-model="data.sumAssuredForADBRiders" name="data.sumAssuredForADBRiders" type="text" placeholder="SumAssured For ADB Rider" fcsa-number="{}" class="form-control" ng-change="calculateAdbRider()" ng-blur="validateadb()">
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                                    <div>
+
+                                      <p style="color:red;" ng-show="data.sumAssuredForADBRiders > data.sumAssured">{{validationMessage.data.RiderSaSholdBeLessThanBaseSA}}</p>
+                                    </div>
+                                    <div>
+                                      <p style="color:red;" ng-repeat="error in errormessagesForADBRider" ng-show="adbRider == false && $index==0" >{{error}}</p>
+                                    </div>
+
+                                    <div>
+                                      <p style="color:red;" ng-if="showAdbError">{{AdbError}}</p>
+                                    </div>
+                                </collapsible-item>
+                                </div>
+                                  </ang-accordion>
+                                <ang-accordion ng-show="addRiders==true"  class="parentaccordian "  one-at-a-time="true" icon-position="center" open-icon-class="fa fa-check-circle">
+                                <div class="cell">
+                                  <div ng-class="hospiCashRider==true?'acArrowOn':'acArrowOff'" ng-click="togglehospiCash(data)"></div>
+                                <collapsible-item collapse="collOptions2"  class="{{hospiCashRider==true?'icon-ridertwo icnrid':'icon-ridertwo'}}" item-title="Hospi Cash Benefit Rider" >
+                                      <div class="row">
+                                          <div class="col">
+                                              <h4>Term<span>(Yrs.)</span></h4>
+                                              <ion-list class="agenumber">
+                                                  <ion-radio name ="rterm"  ng-repeat="term in HospicashformData.RTERM" ng-if="getHCRTerm(data.ppt,term.name)" ng-click="data.term==term.name;calculateHospiCashRider(data)" ng-model="data.term.name" class="" ng-value="term.name">{{term.name}}</ion-radio>
+                                              </ion-list>
+                                          </div>
+
+                                      </div>
+                                      <div class="row">
+                                          <div class="col">
+                                              <h4>DHCB<span>(Rs.)</span></h4>
+                                              <ion-list class="Amountnumber">
+                                                  <ion-radio name="dhcb"   ng-repeat="dhcb in HospicashformData.DHCB" ng-click="data.Dhcb==dhcb.name;calculateHospiCashRider(data)" ng-model="data.Dhcb.name" class="" ng-value="dhcb.name">{{dhcb.name}}</ion-radio>
+                                              </ion-list>
+                                          </div>
+
+                                      </div>
+
+                                      <div>
+                                        <p style="color:red;" ng-if="showHospicashError">{{hospiCashError}}</p>
+                                      </div>
+                                  </collapsible-item>
+                                </div>
+                            </ang-accordion>
+                        </div>
+                    </div>
+                    <div class="whiteboxdiv trblueline">
+                        <div class="row greyborder">
+                            <div class="col text-center">
+                                <label>BASE POLICY</label>
+                                <p>₹ {{data.modalPremium  | number}}</p>
+                            </div>
+                            <div class="col text-center">
+                                <label>ADB RIDER</label>
+                                <p ng-show="adbRider">₹ {{data.modalAdbRiderPremium  | number}}</p>
+                                  <p ng-show="!adbRider">-</p>
+                            </div>
+                            <div class="col text-center">
+                                <label>DHCB RIDER</label>
+                                <p ng-show="hospiCashRider">₹ {{data.modalHospiCashPremium  | number}}</p>
+                                <p ng-show="!hospiCashRider">-</p>
+                            </div>
+                            <div class="col text-center">
+                                <label>PW RIDER</label>
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="text-center pt10" ng-show="adbRider== false && hospiCashRider == false ">PREMIUM PAYABLE <span class="fweight700">₹ {{ data.modalPremium  | number}}</span>
+                        </div>
+                        <div class="text-center pt10" ng-show="adbRider== true && hospiCashRider == true ">PREMIUM PAYABLE<span class="fweight700">₹ {{data.modalPremium + data.modalAdbRiderPremium + data.modalHospiCashPremium   | number}}</span>
+                        </div>
+                        <div class="text-center pt10" ng-show="adbRider== true && hospiCashRider == false ">PREMIUM PAYABLE<span class="fweight700">₹ {{data.modalPremium + data.modalAdbRiderPremium   | number}}</span>
+                        </div>
+                        <div class="text-center pt10" ng-show="adbRider== false && hospiCashRider == true ">PREMIUM PAYABLE <span class="fweight700">₹ {{data.modalPremium + data.modalHospiCashPremium  | number}}</span>
+                        </div>
+                    </div>
+                      <div ng-click="showPopupPremiumWithTaxes()" class="text-center martpbtm"><a class="lasttaxlink">Premium with Taxes</a></div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer">
+
+    </div>
+</ion-view>
+<div class="adic-modal" ng-show="premiumWithTaxes">
+  <ion-modal-view class="adic-popup">
+    <div class="modanntble">
+    <a href="#" ng-click="closePopupPremiumWithTaxes()" class="close">&nbsp;</a>
+     <table width="100%">
+      <thead>
+       <tr>
+         <th>&nbsp;</th>
+         <th align="center">Modal Premium</th>
+         <th align="center">Annual Premium</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>Base Policy Premium (&#8377;)</td>
+         <td align="right">{{data.modalPremium  | number}}</td>
+         <td align="right">{{data.basePremium  | number}}</td>
+       </tr>
+       <tr>
+         <td>Rider Premium (&#8377;)</td>
+         <td align="right" ng-if="adbRider== true && hospiCashRider == true">{{data.modalAdbRiderPremium + data.modalHospiCashPremium  | number}}</td>
+         <td align="right" ng-if="adbRider== true && hospiCashRider == false">{{data.modalAdbRiderPremium  | number }}</td>
+         <td align="right" ng-if="adbRider== false && hospiCashRider == true">{{data.modalHospiCashPremium  | number }}</td>
+         <td align="right" ng-if="adbRider== true && hospiCashRider == true">{{data.annualAdbRiderPremium + data.annualHospiCashPremium  | number }}</td>
+           <td align="right" ng-if="adbRider== false && hospiCashRider == false">-</td>
+          <td align="right" ng-if="adbRider== true && hospiCashRider == false">{{data.annualAdbRiderPremium  | number }}</td>
+            <td align="right" ng-if="adbRider== false && hospiCashRider == true">{{data.annualHospiCashPremium  | number }}</td>
+          <td align="right" ng-if="adbRider== false && hospiCashRider == false">-</td>
+       </tr>
+       <tr>
+         <td>Total Taxes (&#8377;)</td>
+         <td align="right" ng-if="adbRider== true && hospiCashRider == true">{{data.hospicashServiceTaxForModalFirstYear + data.adbServiceTaxForModalFirstYear + data.serviceTax  | number}}</td>
+          <td align="right" ng-if="adbRider== true && hospiCashRider == false">{{data.adbServiceTaxForModalFirstYear + data.serviceTax  | number}}</td>
+            <td align="right" ng-if="adbRider== false && hospiCashRider == true">{{data.hospicashServiceTaxForModalFirstYear + data.serviceTax  | number}}</td>
+            <td align="right" ng-if="adbRider== false && hospiCashRider == false">{{data.serviceTax  | number}}</td>
+            <td align="right" ng-if="adbRider== true && hospiCashRider == true">{{data.adbserviceTaxForAnnualFirstYear + data.hospicashserviceTaxForAnnualFirstYear + data.serviceForAnnualFirstYearTax  | number}}</td>
+             <td align="right" ng-if="adbRider== true && hospiCashRider == false">{{data.adbserviceTaxForAnnualFirstYear + data.serviceForAnnualFirstYearTax  | number}}</td>
+               <td align="right" ng-if="adbRider== false && hospiCashRider == true">{{data.hospicashserviceTaxForAnnualFirstYear + data.serviceForAnnualFirstYearTax  | number}}</td>
+               <td align="right" ng-if="adbRider== false && hospiCashRider == false">{{data.serviceForAnnualFirstYearTax  | number}}</td>
+       </tr>
+       </tbody>
+       <tfoot>
+        <tr>
+         <td>TOTAL PREMIUM PAYABLE (&#8377;)</td>
+
+         <td align="right" ng-if="adbRider== true && hospiCashRider == true">{{data.modalPremium + data.modalAdbRiderPremium + data.serviceTax + data.adbServiceTaxForModalFirstYear + data.modalHospiCashPremium + data.hospicashServiceTaxForModalFirstYear  | number}}</td>
+        <td align="right" ng-if="adbRider== true && hospiCashRider == false">{{data.modalPremium  + data.serviceTax + data.modalAdbRiderPremium + data.adbServiceTaxForModalFirstYear  | number }}</td>
+        <td align="right" ng-if="adbRider== false && hospiCashRider == true">{{data.modalPremium + data.serviceTax + data.modalHospiCashPremium + data.hospicashServiceTaxForModalFirstYear  | number }}</td>
+          <td align="right" ng-if="adbRider== false && hospiCashRider == false">{{data.modalPremium + data.serviceTax  | number }}</td>
+         <td align="right" ng-if="adbRider== true && hospiCashRider == true">{{data.basePremium + data.serviceForAnnualFirstYearTax +  data.annualAdbRiderPremium + data.adbserviceTaxForAnnualFirstYear + data.annualHospiCashPremium + data.hospicashserviceTaxForAnnualFirstYear  | number }}</td>
+          <td align="right" ng-if="adbRider== true && hospiCashRider == false">{{data.basePremium + data.serviceForAnnualFirstYearTax + data.annualAdbRiderPremium + data.adbserviceTaxForAnnualFirstYear  | number  }}</td>
+           <td align="right" ng-if="adbRider== false && hospiCashRider == true">{{data.basePremium + data.serviceForAnnualFirstYearTax + data.annualHospiCashPremium + data.hospicashserviceTaxForAnnualFirstYear  | number }}</td>
+            <td align="right" ng-if="adbRider== false && hospiCashRider == false">{{data.basePremium  + data.serviceForAnnualFirstYearTax  | number }}</td>
+       </tr>
+      </tfoot>
+     </table>
+     </div>
+  </ion-modal-view>
+</div>
+
+<ion-fixed class="fixed-div">
+  <button fab fab-right fab-bottom dark>
+    <ion-icon class="addbox" name="add" ng-click="showPlusPopup=true"></ion-icon>
+  </button>
+</ion-fixed>
+<ion-footer-bar class="btnlastbkbg">
+  <button class="button button-clear button-positive col-50" ng-click="saveQuote()">Save</button>
+  <button class="button button-clear button-positive col-50" ng-click="proceedToFormFilling()">AGREE & PROCEED TO FORM FILLING</button>
+</ion-footer-bar>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li><a class="email" href="#" ng-click="email()">Email BI Quote<span>&nbsp;</span></a></li>
+      </ul>
+      <a class="popupclose" ng-click="showPlusPopup=false">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate>
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+
+              <span style="color:red" ng-if="myForm.emailTo.$error.pattern">*Please enter correct Email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"  ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="myForm.emailCc.$error.pattern">*Please enter correct Email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC"  ng-model="email_Cc"  ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>

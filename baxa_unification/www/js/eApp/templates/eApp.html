@@ -1,0 +1,17 @@
+<ion-view view-title="Product Gallery">
+  <ion-header-bar class="bar-stable">
+    <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/home"></a>
+    <h1 class="title">Samriddhi</h1>
+  </ion-header-bar>
+  <ion-content>
+<div class="prodGalname">
+  <div ng-click="checkSelectedProduct(product)" class="prdbx" ng-repeat="product in products">
+    <div ng-class="(product.iconClass)">
+      <span>{{product.Name}}</span>
+    </div>
+  </div>
+</div>
+<p ng-init="productsListData()" ng-repeat="p in productsListData">{{p}}</p>
+
+</ion-content>
+</ion-view>

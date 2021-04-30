@@ -1,0 +1,105 @@
+<ion-view view-title="Wealth Calculator" class="calcWealth">
+
+  <ion-content>
+    <!-- Wealth Calculator 2 Start -->
+  <div class="screenContainer padTop10 flipLeftRight">
+  <div class="rightPanel fr" id="chartDiv">
+    <div class="content">
+      <a href="#/app/wealth" ng-click="setNowAnimate()">
+        <div class="whiteboxdiv inputdiv inpdivM">
+          <div class="row">
+            <div class="col">Input</div>
+            <div class="col text-right">
+              <span class="icn-fullwid"></span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="whiteboxdiv">
+        <div class="disclosure">
+          To achieve the goal of
+          <span class="large-txt">₹
+            {{ wData.wealthGoal | amtunit}}</span>
+          in
+          <span class="large-txt">{{wData.wealthInYears}}
+            years</span>,
+          <br>
+          you need to invest
+          <span class="large-txt">₹
+            {{wData.investmentReqPerMnth | amtunit}}
+            p.m.</span>, starting now!!
+        </div>
+        <div class="">
+          <div class="chartbrd chart2Container">
+          <div class="rotatetxt">Monthly Expenses</div>
+          <div class="rstxt">Rs.</div>
+          <div class="ratetxt">Rate of Return
+            <div class="circlebox">{{wData.wealthRoR}}%</div>
+          </div>
+          <div class="levelHeight1">{{wData.investmentReqPerMnth | amtunit}} p.m.
+            <div class="levelwid">
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+            </div>
+          </div>
+          <div class="levelHeight2">
+            Funds required
+            <br>
+            {{ wData.wealthGoal | amtunit}}
+            <div class="levelwid">
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+              <div class="smlbxlevel"></div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="row chartAge">
+          <div class="col text-center">{{wData.currentAge}}
+            yrs</div>
+          <div class="col text-center">Age</div>
+          <div class="col text-center">{{wData.fundReqAge}}
+            yrs</div>
+        </div>
+      </div>
+    </div>
+    <!-- Wealth Calculator 2 End -->
+      </div>
+      <div class="leftPanel fl" id="inputDiv" >
+          <div  ng-if ="tabInclude" ng-include="'js/calculators/wealth/templates/wealth-home.html'"></div>
+      </div>
+      </div>
+  </ion-content>
+  <ion-fixed class="fixed-div" ng-show="saveResult">
+    <button fab fab-right fab-bottom dark>
+      <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+    </button>
+  </ion-fixed>
+  <ion-footer-bar>
+    <button class="button button-clear button-positive button-full" ng-click="doCalculateInvestment()">
+      <span class="subtn-arw">Enter Investments</span>
+    </button>
+  </ion-footer-bar>
+  <div class="adic-modal">
+     <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+        <div class="wealth-popup">
+             <ul class="popuplist">
+                 <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+                 <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+             </ul>
+             <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+        </div>
+     </ion-modal-view>
+ </div>
+</ion-view>

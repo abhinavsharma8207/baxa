@@ -1,0 +1,52 @@
+<ion-view view-title="Customer Profile" class="customerProfile">
+  <ion-content>
+    <div class="content padding-vertical formBox" style="margin:0 10px">
+      <div class="whiteboxdiv pkline wt445  ">
+        <div class="frmdiv">
+          <form name="myForm" novalidate ng-submit="myForm.submit(myForm)">
+            <span class="input-label">Gender <span class="requerd-filed">*</span></span>
+            <ion-list class="gender">
+              <ion-radio ng-model="user.Gender" name="choice" class="male" ng-value="'0'" required="required">Choose A</ion-radio>
+              <ion-radio ng-model="user.Gender" name="choice" class="female" ng-value="'1'" required="required">Choose B</ion-radio>
+            </ion-list>
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">First Name <span class="requerd-filed">*</span></span>
+                <br />
+                <span style="color:red" ng-if="myForm.fristName.$error.pattern || myForm.fristName.$error.maxlength || myForm.fristName.$error.minlength">*Please enter correct details</span>
+                <input type="text" name="fristName" ng-model="user.firstName" ng-minlength="1" ng-maxlength="30" ng-pattern="/^[a-zA-Z]*$/" required>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Last Name</span>
+                <br />
+                <span style="color:red" ng-if="myForm.lastName.$error.pattern||myForm.lastName.$error.maxlength||myForm.lastName.$error.minlength">*Please enter correct details</span>
+                <input type="text" name="lastName" ng-init="user.lastName=''" ng-model="user.lastName" ng-minlength="1" ng-maxlength="30" ng-pattern="/^[a-zA-Z]*$/">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Age <span class="requerd-filed">*</span></span>
+                <br />
+                <span style="color:red" ng-if="myForm.age.$invalid && !myForm.age.$pristine">*Please enter correct details</span>
+                <input type="number" name="age" ng-model="user.age" min="18" max="99" required
+                 onkeydown="return ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode ==8 || event.keyCode == 46 ) || ((event.charCode >= 48 && event.charCode <= 57)||event.charCode ==8 || event.charCode == 46 );">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Mobile No <span class="requerd-filed">*</span></span>
+                <br />
+                <span style="color:red" ng-if="myForm.mobile.$error.minlength||myForm.mobile.$error.maxlength">*Please enter correct details</span>
+                <input type="number" name="mobile" ng-model="user.mobileNo" ng-minlength="10" ng-maxlength="10" required
+                 onkeydown="return ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode ==8 || event.keyCode == 46 ) || ((event.charCode >= 48 && event.charCode <= 57)||event.charCode ==8 || event.charCode == 46 );">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Email</span>
+                <br />
+                <span style="color:red" ng-if="myForm.email.$error.maxlength || myForm.email.$error.pattern">*Please enter correct Email details</span>
+                <input type="email" name="email" ng-init="user.email=''" ng-model="user.email" ng-maxlength="50" ng-minlength="4" ng-pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/" >
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+     <button class="button button-clear button-positive button-full" ng-disabled="myForm.$invalid" ng-click="submit(user)"> <span class="subtn-arw">Create</span> </button>
+  </ion-content>
+</ion-view>

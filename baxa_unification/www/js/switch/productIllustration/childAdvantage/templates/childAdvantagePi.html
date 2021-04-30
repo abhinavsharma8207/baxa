@@ -1,0 +1,594 @@
+<ion-view view-title="Child Advantage" class="needsPrioritisation childAdvantage">
+  <div class="topProgressBar" ng-include="'js/switch/templates/switchTaps.html'"></div>
+  <ion-content>
+    <div class="content">
+      <!-- Child_Advantage_SWITCH_Tab_02 start -->
+       <div class="twopanel presenceCont" ng-show="cAQuoteData.inYour == 'PRESENCE'">
+         <div class="row">
+           <div class="col elitcolor">
+             <a ng-click="showAssumtion()" class="assmlink">&nbsp;</a>
+             <p>Product Illustrations</p>
+           </div>
+         </div>
+          <div class="bbbk">
+          <div class="row brdbtm">
+            <div class="col">
+              <p>Sum of Guaranteed Annual Benefits (a)</p>
+              <p class="lartxt">₹ <span ng-bind="getData.sumOfGuaranteedAnnualBenefits | commaSeperated"></span></p>
+            </div>
+            <div class="col">
+              <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+              <p class="lartxt">₹ <span ng-bind="getData.nonGuaranteedBonusespaidatMaturity | commaSeperated"></span></p>
+            </div>
+          </div>
+          <div class="text-center">
+            <p class="pt10">Sum of Benefits (a+b)  <span class="lartxt">₹ <span ng-bind="getData.sumofBenefits | commaSeperated"></span></span></p>
+          </div>
+        </div>
+        <!--- In present  Money Back ---------------->
+        <div class="whtbk" ng-show="cAQuoteData.maturityOption == 'Money Back'">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage">
+              <div class="imgdiv-tp"><img src="img/{{userFutureImg}}{{Gender}}.png"><span class="icn-cash"></span></div>
+
+              <div class="green-bar-top">
+                  <div class="grey-circle-top"></div>
+              </div>
+              <div style="position:relative">
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt1 yrtxt"><span ng-bind="lifeAssuredAge"></span><br> YEARS</div>
+                    <div class="rt">At Maturity,<br> Guaranteed Annual Benefit + Non-Guaranteed Bonuses are paid</div>
+                  </div><div class="icn-smallwid" ng-hide="showblueArrowPopup" ng-click="blueArrowup()" ></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="inpbg" ng-show="showblueArrowPopup" >
+               <div>
+                  <ul>
+                    <li>Guaranteed Annual Benefit = &#8377;<b><span ng-bind="getData.guaranteedAnnualBenefit | commaSeperated"></span></b></li>
+                    <li>Non-Guaranteed Bonus = &#8377;<b><span ng-bind="getData.nonGuaranteedBonus | commaSeperated"></span></b></li>
+                  </ul>
+                <div class="icn-smallwid" ng-click="blueArrowdown()"></div>
+              </div>
+              </div>
+            </div>
+             <div class="green-bar" ng-click="onClickGreenBar()">
+              <div class="blurbar-height">
+                <div class="annualpage fl">
+                  <div class="ltrupees ltrpwid90" style="padding-top: 20px" ng-show="coinsShowGreen">
+                    <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue1 | commaSeperated"></span></b></p>
+                    <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue2 | commaSeperated"></span></b></p>
+                    <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue3 | commaSeperated"></span></b></p>
+                    <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue4 | commaSeperated"></span></b></p>
+                    <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue5 | commaSeperated"></span></b></p>
+                    <div class="midContent fl">
+                      <p>Guaranteed Annual Benefits paid till Maturity</p>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="ltrupees"  ng-show="coinsShowBlue">
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="blue-bar p0" ng-click="onClickBlueBar()">
+
+              <div class="listnrm mar-top oldage">
+                  <div class="grey-circle-center marleft"></div>
+                <div class="imgdiv">&nbsp;</div>
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt yrtxt"><span ng-bind="guaranteedBenefitsAge"></span><br> YEARS</div>
+                    <div class="rt">Guaranteed Benefits are paid from the end of <b><span ng-bind="guaranteedBenefitsPaid"></span>th year</b></div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="blurbar-height">
+                <div class="annualpage"  ng-show="coinsShowBlue">
+                    <div class="ltrupees">
+                      <p><span class="yelcircle">&nbsp;</span></p>
+                      <p><span class="yelcircle">&nbsp;</span></p>
+                      <p><span class="yelcircle">&nbsp;</span></p>
+                      <p><span class="yelcircle">&nbsp;</span></p>
+
+                      <p><span class="icn-rupees">&nbsp;</span></p>
+                      <p><span class="icn-rupees">&nbsp;</span></p>
+                      <p><span class="icn-rupees">&nbsp;</span></p>
+                      <p><span class="icn-rupees">&nbsp;</span></p>
+                      <p><span class="icn-rupees">&nbsp;</span></p>
+                    </div>
+                  <div class="ltrupeesdesc">
+                    <p>You pay <span ng-bind="premiumMode"></span> Premium of <br><b>&#8377;<span ng-bind="getData.totalModalPremium | commaSeperated"></span></b> for <b><span ng-bind="cAQuoteData.ppt"></span> years</b></p>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv"><img src="img/{{userCurrentImg}}{{Gender}}.png"></div>
+              <div class="blue-bar-bottom">
+                <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="cAQuoteData.laAge"></span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      <!--- In present Endowment ---------------->
+        <div class="whtbk" ng-show="cAQuoteData.maturityOption == 'Endowment'">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage topperBox">
+              <div class="imgdiv"><img src="img/{{userFutureImg}}{{Gender}}.png"><span class="icn-cash"></span></div>
+              <div class="blue-bar-top">
+                  <div class="grey-circle-top"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="lifeAssuredAge"></span><br> YEARS</div>
+                  <div class="rt">At Maturity,<br> Guaranteed Annual Benefit + Non-Guaranteed Bonuses are paid</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+         <div class="blue-bar p0">
+            <div class="blurbar-height">
+               <div class="annualpage">
+                  <div class="ltrupees">
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                  </div>
+
+                  <div class="ltrupeesdesc">
+                       <p>You pay <span ng-bind="premiumMode"></span> Premium of <br><b>&#8377;<span ng-bind="getData.totalModalPremium | commaSeperated"></span></b> for <b><span ng-bind="cAQuoteData.ppt"></span> years</b></p>
+                  </div>
+                  <div class="clearfix"></div>
+                   </div>
+            </div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv"><img src="img/{{userCurrentImg}}{{Gender}}.png"></div>
+              <div class="blue-bar-bottom">
+                <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="cAQuoteData.laAge"></span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Child_Advantage_SWITCH_Tab_04 start -->
+       <div class="twopanel absenceCont" ng-show="cAQuoteData.inYour == 'ABSENCE'">
+         <div class="row">
+           <div class="col elitcolor">
+             <a ng-click="showAssumtion()" class="assmlink">&nbsp;</a>
+             <p>Product Illustrations</p>
+           </div>
+         </div>
+          <div class="bbbk">
+          <div class="row">
+            <div class="col">
+              <p>Sum of Guaranteed Annual Benefits (a)</p>
+              <p class="lartxt">₹ <span ng-bind="getData.sumOfGuaranteedAnnualBenefits | commaSeperated"></span></p>
+            </div>
+            <div class="col">
+              <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+              <p class="lartxt">₹<span ng-bind="getData.nonGuaranteedBonusespaidatMaturity | commaSeperated"></span></p>
+            </div>
+            <div class="col">
+              <p>Death Benefit (c)</p>
+              <p class="lartxt">₹ <span ng-bind="getData.deathBenefit | commaSeperated"></span></p>
+            </div>
+          </div>
+        </div>
+          <!--- In present  Money Back ---------------->
+        <div class="whtbk" ng-show="cAQuoteData.maturityOption == 'Money Back'">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage">
+              <div class="imgdiv-dp"><img src="img/{{userFutureImg}}{{Gender}}F.png"><span class="icn-cash"></span></div>
+              <div class="green-bar-top">
+                  <div class="grey-circle-top"></div>
+              </div>
+              <div style="position:relative">
+                <div class="desc">
+                  <div class="row">
+                    <div class="lt1 yrtxt"><span ng-bind="LifeAssuredAgeatdeath"></span><br> YEARS</div><div class="clearfix"></div>
+                    <div class="rt">In case of <span class="gpclrtxt">sudden loss of life</span> (Eg. at <span ng-bind="LifeAssuredAgeatdeath"></span> yrs), the Death Benefit is paid immediately & all future Premiums are waived off. Guaranteed & Non-Guaranteed Benefits continue to be paid till end of Policy Term</div>
+                  </div><div class="icn-smallwid" ng-hide="showblueArrowPopup" ng-click="blueArrowup()" ></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="inpbg" ng-show="showblueArrowPopup">
+               <div>
+                  <ul>
+                    <li>Guaranteed Annual Benefit = &#8377;<b><span ng-bind="getData.guaranteedAnnualBenefit | commaSeperated"></span></b></li>
+                    <li>Non-Guaranteed Bonus = &#8377;<b><span ng-bind="getData.nonGuaranteedBonus | commaSeperated"></span></b></li>
+                  </ul>
+               </div>
+                <div class="icn-smallwid" ng-click="blueArrowdown()" ></div>
+              </div>
+            </div>
+            <div class="green-bar" ng-click="onClickGreenBar()">
+              <div class="blurbar-height">
+                 <div class="annualpage">
+                   <div class="ltrupees ltrpwid90" style="padding-top: 20px" ng-show="coinsShowGreen">
+                     <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue1 | commaSeperated"></span></b></p>
+                     <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue2 | commaSeperated"></span></b></p>
+                     <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b><span ng-bind="getData.survivalBenefit.survivalBenefitValue3 | commaSeperated"></span></b></p>
+                     <div class="midContent fl">
+                       <p>Guaranteed Annual Benefits paid till Maturity</p>
+                     </div>
+                   </div>
+                   <div class="clearfix"></div>
+                   <div class="ltrupees" ng-show="coinsShowBlue">
+                     <p><span class="icn-rupees">&nbsp;</span></p>
+                     <p><span class="icn-rupees">&nbsp;</span></p>
+                     <p><span class="icn-rupees">&nbsp;</span></p>
+                   </div>
+                 </div>
+             </div>
+         </div>
+         <div class="blue-bar p0" ng-click="onClickBlueBar()">
+           <div class="listnrm mar-top oldage">
+               <div class="grey-circle-center marleft"></div>
+             <div class="imgdiv">&nbsp;</div>
+             <div class="desc">
+               <div class="row">
+                 <div class="lt yrtxt"><span ng-bind="guaranteedBenefitsAge"><br> YEARS</div>
+                 <div class="rt">Guaranteed Benefits paid from the end of <b><span ng-bind="guaranteedBenefitsPaid"></span>th year</b></div>
+               </div>
+             </div>
+             <div class="clearfix"></div>
+           </div>
+            <div class="blurbar-height">
+               <div class="annualpage" ng-show="coinsShowBlue">
+                  <div class="ltrupees">
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                  </div>
+
+                  <div class="ltrupeesdesc">
+                       <p>You pay <span ng-bind="premiumMode"></span> Premium of <br><b>&#8377;<span ng-bind="getData.totalModalPremium | commaSeperated"></span></b> for <b><span ng-bind="cAQuoteData.ppt"></span> years</b></p>
+                  </div>
+                  </div>
+                  <div class="clearfix"></div>
+            </div>
+            </div>
+
+            <div class="listround listround lowYear">
+              <div class="imgdiv"><img src="img/{{userCurrentImg}}{{Gender}}.png"></div>
+              <div class="blue-bar-bottom">
+                  <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="cAQuoteData.laAge"></span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+     <!--- In present Endowment ---------------->
+        <div class="whtbk" ng-show="cAQuoteData.maturityOption == 'Endowment'">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage toppperBox">
+              <div class="imgdiv"><img src="img/{{userFutureImg}}{{Gender}}F.png"><span class="icn-cash"></span></div>
+              <div class="blue-bar-top">
+                  <div class="grey-circle-top"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="LifeAssuredAgeatdeath"></span><br> YEARS</div>
+                  <div class="rt">In case of <span class="gpclrtxt">sudden loss of life</span> (Eg. at <span ng-bind="LifeAssuredAgeatdeath"></span> yrs), the Death Benefit is paid immediately & all future Premiums are waived off. Guaranteed & Non-Guaranteed Benefits continue to be paid till end of Policy Term</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+         <div class="blue-bar p0" ng-click="onClickBlueBar()">
+            <div class="blurbar-height">
+               <div class="annualpage" ng-show="coinsShowBlue">
+                  <div class="ltrupees">
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                  </div>
+                </div>
+                <div class="ltrupeesdesc">
+                     <p>You pay <span ng-bind="premiumMode"></span> Premium of <br><b>&#8377;<span ng-bind="getData.totalModalPremium | commaSeperated"></span></b> for <b><span ng-bind="MiddleLabelppt"></span> years</b></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+          </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv"><img src="img/{{userCurrentImg}}{{Gender}}.png"></div>
+              <div class="blue-bar-bottom">
+                  <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="cAQuoteData.laAge"></span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Child_Advantage_SWITCH_Tab_04 end -->
+      <!-- Child_Advantage_SWITCH_Tab_05 start -->
+      <!-- <div class="twopanel">
+          <div class="bbbk">
+          <div class="row">
+            <div class="col">
+              <p>Sum of Guaranteed Annual Benefits (a)</p>
+              <p class="lartxt">₹ 1,074,429</p>
+            </div>
+            <div class="col">
+              <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+              <p class="lartxt">₹ 699,453</p>
+            </div>
+            <div class="col">
+              <p>Death Benefit (c)</p>
+              <p class="lartxt">₹ 1,100,000</p>
+            </div>
+          </div>
+        </div>
+        <div class="whtbk">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage">
+              <div class="imgdiv"><img src="../img/icn-aunty-boy.png"> <span class="icn-cash"></span></div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span>54</span><br> YEARS</div>
+                  <div class="rt">In case of <span class="gpclrtxt">sudden loss of life</span> (Eg. at 54 yrs), the Death Benefit is paid immediately & all future Premiums are waived off. Guaranteed & Non-Guaranteed Benefits continue to be paid till end of Policy Term</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="annualpage">
+              <div class="ltrupees">
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="listnrm oldage">
+              <div class="imgdiv">&nbsp;</div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span>51</span><br> YEARS</div>
+                  <div class="rt">Guaranteed Benefits paid from the end of <b>16th year</b></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="annualpage">
+              <div class="ltrupees">
+                <p><span class="yelcircle">&nbsp;</span></p>
+                <p><span class="yelcircle">&nbsp;</span></p>
+                <p><span class="yelcircle">&nbsp;</span></p>
+                <p><span class="yelcircle">&nbsp;</span></p>
+
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+              </div>
+              <div class="ltrupeesdesc">
+                <p>You pay an Annual Premium of <br><b>&#8377; 50,000</b> for <b>19 years</b></p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv"><img src="../img/icn-boy.png"></div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span>35</span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Child_Advantage_SWITCH_Tab_05 end -->
+
+      <!-- Child_Advantage_SWITCH_Tab_05 start -->
+      <!-- <div class="twopanel">
+          <div class="bbbk">
+          <div class="row">
+            <div class="col">
+              <p>Sum of Guaranteed Annual Benefits (a)</p>
+              <p class="lartxt">₹ 1,074,429</p>
+            </div>
+            <div class="col">
+              <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+              <p class="lartxt">₹ 699,453</p>
+            </div>
+            <div class="col">
+              <p>Death Benefit (c)</p>
+              <p class="lartxt">₹ 1,100,000</p>
+            </div>
+          </div>
+        </div>
+        <div class="whtbk">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage">
+              <div class="imgdiv"><img src="../img/icn-aunty-boy.png"> <span class="icn-cash"></span></div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span>54</span><br> YEARS</div>
+                  <div class="rt">In case of <span class="gpclrtxt">sudden loss of life</span> (Eg. at 54 yrs), the Death Benefit is paid immediately & all future Premiums are waived off. Guaranteed & Non-Guaranteed Benefits continue to be paid till end of Policy Term</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="annualpage martpneg20">
+              <div class="ltrupees ltrpwid45" style="padding-top: 20px">
+                <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b>146,513</b></p>
+                <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b>97,675</b></p>
+                <p><span class="cashbx disinblck">&nbsp;</span> &#8377; <b>97,675</b></p>
+              </div>
+              <div class="ltrupeesdesc deschgtnone">
+                <p style="padding-top: 40px">Guaranteed Annual Benefits paid till loss of life</p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="listnrm oldage">
+              <div class="imgdiv">&nbsp;</div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span>51</span><br> YEARS</div>
+                  <div class="rt">Guaranteed Benefits paid from the end of <b>16th year</b></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv"><img src="../img/icn-boy.png"></div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span>35</span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Child_Advantage_SWITCH_Tab_05 end -->
+            <a href="#/app/switchChildAdvantageQuote/{{custId}}" ng-click="setNowAnimate()">
+            <div class="whiteboxdiv inpbtmdiv">
+              <div class="row">
+                <div class="col">Inputs</div>
+                <div class="col text-right">
+                  <span class="icn-fullwid"></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+  </ion-content>
+        <ion-fixed class="fixed-div btm75px">
+          <button fab fab-right fab-bottom dark>
+            <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+          </button>
+        </ion-fixed>
+        <ion-footer-bar class="btnlastbkbg">
+          <button class="button button-clear button-positive col-50" ng-click="backToProduct()">View Another Product</button>
+          <button class="button button-clear button-positive col-50" ng-click="goToEapp()">PROCEED TO FORM FILLING</button>
+        </ion-footer-bar>
+  </ion-view>
+    <div class="adic-modal">
+        <ion-modal-view class="adic-popup" ng-show="showAssumtionPopup">
+          <div class="proassdiv">
+          <a ng-click="hideAssumtionPopup()" class="close">&nbsp;</a>
+           <h5>assumptions</h5>
+           <p>This is for illustative purposes only. Non-Guaranteed Bonuses are assumed at 8% Rate of Return per annum.</p>
+           </div>
+        </ion-modal-view>
+    </div>
+    <div class="adic-modal">
+      <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+        <div class="wealth-popup">
+          <ul class="popuplist">
+            <li ng-show="saveResult"><a class="brochure" href="#" ng-click="brochure()">Brochure <span>&nbsp;</span></a></li>
+            <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+            <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+            <li ng-show="saveResult"><a class="email" href="#" ng-click="email()">Email <span>&nbsp;</span></a></li>
+            <!-- <li><a class="save" href="#">Save <span>&nbsp;</span></a></li>                    -->
+          </ul>
+          <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+        </div>
+        <div class="adic-modal">
+          <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+            <div>
+              <div class="popupdiv">
+                <form name="myForm" novalidate="">
+
+                  <div ng-click="hidesendEmailPopup()" class="close"></div>
+                  <h3>E-mail</h3>
+                  <div class="row">
+                    <div class="col">
+                      <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+                      <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+                      <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+                      <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+                    </div>
+                  </div>
+
+                  <ul class="emailchoice">
+                    <li class="item item-checkbox">
+                      <label class="checkbox checkbox-assertive">
+                          <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+                      </label>
+                      Illustrations
+                    </li>
+                    <li class="item item-checkbox">
+                      <label class="checkbox checkbox-balanced">
+                        <input type="checkbox" ng-model="isBrochureSelected">
+                      </label> Brochure
+                    </li>
+                  </ul>
+                  <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+                </form>
+              </div>
+            </div>
+          </ion-modal-view>
+        </div>
+      </ion-modal-view>
+
+    </div>

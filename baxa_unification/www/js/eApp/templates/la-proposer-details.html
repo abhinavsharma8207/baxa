@@ -1,0 +1,107 @@
+<ion-view title="{{title}}" class="customerProfile">
+    <ion-content>
+      <div class="content formBox" style="margin:0 10px;">
+        <form name="userForm">
+          <div class="whiteboxdiv samlist prodwid50" ng-class="(params.ui_color)?(params.ui_color +'line'):('bronline')">
+            <h4>Are you buying this policy for?</h4>
+            <div class="row">
+              <div class="col">
+              <label>
+                <select id="buyingFor" name="buyingFor" ng-model="data.BuyingFor" required>
+                  <option ng-selected="(data.BuyingFor == undefined)?(data.BuyingFor=='Self'):(data.BuyingFor==option.name)" ng-repeat="option in formData.BUYPOLFOR" value="{{option.name}}">{{option.name}}</option>
+                </select>
+              </label>
+              </div>
+              <br>
+            </div>
+            <h4>Life Insured Details</h4>
+            <div class="row">
+              <div class="col">
+              <label><!-- <span>First Name</span> -->
+                <input id="firstname" only-alphabets name="liFirstName" ng-trim="false" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="data.liFirstName" type="text" value="data.liFirstName" placeholder="First Name" ng-minlength="(data.minLaFirstLastLength)?(data.minLaFirstLastLength):(1)" ng-maxlength="(data.maxLaFirstLastLength)?(data.maxLaFirstLastLength):(50)" required>
+                <div style="color: red;" ng-if="userForm.liFirstName.$error.only-alphabets">dddd</div>
+                <div style="color: red;" ng-if="userForm.liFirstName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</div>
+                <div style="color: red;" ng-if="userForm.liFirstName.$error.pattern">{{validationMessage.data.SpaceAndDotLAN}}</div>
+                <div style="color: red;" ng-if="userForm.liFirstName.$error.maxlength">Please enter no more than {{(data.maxLaFirstLastLength)?(data.maxLaFirstLastLength):(50)}} characters</div>
+                <div style="color: red;" ng-if="userForm.liFirstName.$error.minlength">Please enter no more than {{(data.maxLaFirstLastLength)?(data.maxLaFirstLastLength):(50)}} characters</div>
+              </label>
+              </div>
+              <br>
+            </div>
+            <div class="row">
+              <div class="col">
+              <label><!-- <span>Last Name</span> -->
+                <input id="lastName" only-alphabets name="liLastName" ng-trim="false" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="data.liLastName" type="text" value="data.liLastName" placeholder="Last Name" ng-minlength="(data.minLaFirstLastLength)?(data.minLaFirstLastLength):(1)" ng-maxlength="(data.maxLaFirstLastLength)?(data.maxLaFirstLastLength):(50)">
+                <div style="color: red;" ng-if="userForm.liLastName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</div>
+                <div style="color: red;" ng-if="userForm.liLastName.$error.pattern">{{validationMessage.data.SpaceAndDotLAN}}</div>
+                <div style="color: red;" ng-if="userForm.liLastName.$error.maxlength">Please enter no more than {{(data.maxLaFirstLastLength)?(data.maxLaFirstLastLength):(50)}} characters</div>
+                <div style="color: red;" ng-if="userForm.liLastName.$error.minlength">Please enter no more than {{(data.maxLaFirstLastLength)?(data.maxLaFirstLastLength):(50)}} characters</div>
+              </label>
+              </div>
+              <br>
+            </div>
+
+            <div class="row">
+              <div class="col"><h4 class="gendertitle">Gender</h4></div>
+              <div class="col col-67">
+              <ion-list class="gender">
+                <ion-radio name="laGender" ng-checked="{{option.name == 'Male'?'checked':''}}" ng-model="data.laGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+              </ion-list>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col">                  
+                <input id="dob" format="dd/mm/yyyy" placeholder="Date of Birth" buyfor="data.BuyingFor" e-app-buy-for-age="data.labfAge" ng-model="data.labfAge" type="date" min="{{data.laMinAgeYear}}" max="{{data.laMaxAgeYear}}" required/>
+
+              </div>
+            </div>
+            <div style="color: red;" ng-if="lifeAssureAgeConfirmation">LA age is less than 18 yrs for a SELF case.</div>
+            <h4 ng-if="data.BuyingFor!='Self'">Proposer Details</h4>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col">
+              <label><!-- <span>First Name</span> -->
+                <input id="pfirstname" only-alphabets name="propFirstName" ng-trim="false" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="data.propFirstName" type="text" value="" placeholder="First Name" ng-minlength="(data.minPropFirstLastLength)?(data.minPropFirstLastLength):(1)" ng-maxlength="(data.maxPropFirstLastLength)?(data.maxPropFirstLastLength):(50)" required>
+                <div style="color: red;" ng-if="userForm.propFirstName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</div>
+                <div style="color: red;" ng-if="userForm.propFirstName.$error.pattern">{{validationMessage.data.SpaceAndDotProp}}</div>
+                <div style="color: red;" ng-if="userForm.propFirstName.$error.maxlength">Please enter no more than {{(data.maxPropFirstLastLength)?(data.maxPropFirstLastLength):(50)}} characters</div>
+                <div style="color: red;" ng-if="userForm.propFirstName.$error.minlength">Please enter no more than {{(data.maxPropFirstLastLength)?(data.maxPropFirstLastLength):(50)}} characters</div>
+              </label>
+              </div>
+              <br>
+            </div>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col">
+              <label><!-- <span>Last Name</span> -->
+                <input id="plastName" only-alphabets name="propLastName" ng-trim="false" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="data.propLastName" type="text" value="" placeholder="Last Name" ng-minlength="(data.minPropFirstLastLength)?(data.minPropFirstLastLength):(1)" ng-maxlength="(data.maxPropFirstLastLength)?(data.maxPropFirstLastLength):(50)">
+                <div style="color: red;" ng-if="userForm.propLastName.$error.pattern">{{validationMessage.data.SpaceAndDot}}</div>
+                <div style="color: red;" ng-if="userForm.propLastName.$error.pattern">{{validationMessage.data.SpaceAndDotProp}}</div>
+                <div style="color: red;" ng-if="userForm.propLastName.$error.maxlength">Please enter no more than {{(data.maxPropFirstLastLength)?(data.maxPropFirstLastLength):(50)}} characters</div>
+                <div style="color: red;" ng-if="userForm.propLastName.$error.minlength">Please enter no more than {{(data.maxPropFirstLastLength)?(data.maxPropFirstLastLength):(50)}} characters</div>
+              </label>
+              </div>
+              <br>
+            </div>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col"><h4>Gender</h4></div>
+              <div class="col col-67">
+              <ion-list class="gender">
+                <ion-radio name="proposerGender" ng-checked="{{option.name == 'Male'?'checked':''}}" ng-model="data.proposerGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+              </ion-list>
+            </div>
+            </div>
+            <div class="row" ng-if="data.BuyingFor!='Self'">
+              <div class="col">
+              <h4>Date of Birth</h4>
+                <input id="dob1" format="dd/mm/yyyy" placeholder="Date of Birth" ng-model="data.proposerAge" type="date" min="{{data.propMinAgeYear}}" max="{{data.propMaxAgeYear}}" required/>
+              </div>
+              <br>
+            </div>
+          </div>
+          </form>
+        </div>
+
+        <button class="button button-clear button-positive button-full" ng-disabled="userForm.$invalid" ng-click="ProceedForLAAndProposerDetails(data)">
+          <span class="subtn-arw">Proceed</span>
+        </button>
+    </ion-content>
+  </ion-view>

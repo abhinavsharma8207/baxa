@@ -1,0 +1,17 @@
+<div>
+  <div class="popupdiv">
+        <div ng-click="modal.hide()"; class="close"></div>
+      <h4>Add New Key Note</h4>
+      <form name="keyNotesForm" class="keyNotesForm" form-manager ng-submit="createNote(note)">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input ng-model="note.title" type="text" placeholder="Title" required="true">
+          </label>
+          <label class="item item-input">
+            <textarea ng-model="note.description" rows="8" placeholder="Start typing here..." required="true"></textarea>
+          </label>
+        </div>
+        <button type="submit" class="button button-block button-positive subtn">Save This Note</button>
+      </form>
+  </div>
+</div>

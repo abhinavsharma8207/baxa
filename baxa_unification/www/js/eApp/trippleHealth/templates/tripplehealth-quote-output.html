@@ -1,0 +1,209 @@
+<ion-view view-title="{{title}}">
+  <ion-content>
+    <div class="content">
+      <div class="prodwid50">
+        <div class="whiteboxdiv inputdiv">
+          <div class="row" ng-click="goToHomePage()">
+            <div class="col">Input</div>
+            <div class="col text-right">
+              <a href="#" class="icn-fullwid"></a>
+            </div>
+          </div>
+        </div>
+        <div class="widthsamridhi">
+          <div class="row rowpadltrtnone">
+            <div class="col">
+              <div class="pinkbox">
+                <div class="row zindex">
+                  <div class="col">
+                    <p>Annual Premium</p>
+                    <p><i class="WebRupee">Rs.</i> {{calcData.base | number}}</p>
+                  </div>
+                  <div class="col zindex">
+                    <p>Sum Assured</p>
+                    <p><i class="WebRupee">Rs.</i> {{calcData.sumAssured | number}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row rowpadltrtnone">
+            <div class="col {{outputData.NSAPForLA==true?'hide':''}}">
+              <div class="text-center">
+                <h4 class="riderclick uppercase" ng-click="toggleRiders=(toggleRiders == true)?(false):(true)" ng-model="outputData.riders" ng-class="toggleRiders==true?'neg':''">Add Riders</h4>
+              </div>
+              <ang-accordion ng-show="toggleRiders" class="parentaccordian" icon-position="center" close-icon-class="fa fa-check-circle greyColor" open-icon-class="fa fa-check-circle greenColor">
+                <div class="cell">
+                  <div ng-class="riderHospi==true?'acArrowOn':'acArrowOff'"  target="#riderHCContainer" toggle-accordion="riderHospi" ng-click="riderHospiCashReset(calcData)"></div>
+                  <collapsible-item item-title="Hospi Cash Benefit Rider" id="riderHCContainer" class="icon-ridertwo">
+                    <div class="row hcbrdiv">
+                      <div class="col m0">
+                        <h4 class="mbtm5 mt5">Term <span>( Yrs. )</span></h4>
+                        <div class="list agelist">
+                          <ul>
+                            <li ng-repeat="item in formDataOut.RTERM" ng-if="getHCRTerm(outputData.pt,item.name)">
+                              <label class="item item-radio">
+                                <input name="hospiCashTerm" ng-click="calculateHCRiderPremium(calcData)" type="radio" ng-model="calcData.hospiCashTerm" ng-value="{{item.name}}">
+                                <div class="radio-content">
+                                  <div class="item-content">{{item.name}}</div>
+                                  <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row dhcbdiv">
+                      <div class="col m0">
+                        <h4 class="mbtm5 mt5">DHCB <span>( Rs. )</span></h4>
+                        <div class="list dhcblist">
+                          <ul>
+                            <li ng-repeat="item in formDataOut.DHCB">
+                              <label class="item item-radio">
+                                <input name="hospiCashDHCB" ng-click="calculateHCRiderPremium(calcData);" type="radio" ng-model="calcData.hospiCashDHCB" ng-value="{{item.name}}">
+                                <div class="radio-content">
+                                  <div class="item-content">{{item.name}}</div>
+                                  <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="red p10 marlt20" ng-repeat="error in dbErrors" ng-if="showDbErrors">{{error.ErrorMessage}}</span>
+                  </collapsible-item>
+                </div>
+              </ang-accordion>
+            </div>
+          </div>
+          <div class="whiteboxdiv bronline">
+            <h4>Modal Premium</h4>
+            <div class="row greyborder">
+              <div class="col">
+                <label><strong>BASE POLICY</strong></label>
+                <p><i class="WebRupee">Rs.</i> {{calcData.baseModal | number}}</p>
+              </div>
+              <div class="col">
+                <label><strong>ADB RIDER</strong></label>
+                <p>-</p>
+              </div>
+              <div class="col">
+                <label><strong>DHCB RIDER</strong></label>
+                <p ng-if="calcData.modalHospiCashPremium > 0"><i class="WebRupee">Rs.</i> {{calcData.modalHospiCashPremium | number}}</p>
+                <p ng-if="calcData.modalHospiCashPremium <= 0 || calcData.modalHospiCashPremium == undefined">-</p>
+              </div>
+              <div class="col">
+                <label><strong>PW RIDER</strong></label>
+                <p>-</p>
+              </div>
+            </div>
+            <div class="text-center pt10"><strong>PREMIUM PAYABLE</strong> <span class="fweight700"><i class="WebRupee">Rs.</i> {{calcData.totalModalPremium + calcData.modalHospiCashPremium | number}}</span>
+            </div>
+          </div>
+          <div class="text-center martpbtm"><a ng-click="showPopupPremiumWithTaxes()" class="lasttaxlink" href="#">Premium with Taxes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+<div class="adic-modal" ng-show="premiumWithTaxes">
+  <ion-modal-view class="adic-popup">
+    <div class="modanntble">
+      <a href="#" ng-click="closePopupPremiumWithTaxes()" class="close">&nbsp;</a>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th align="center">Modal Premium</th>
+            <th align="center">Annual Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Base Policy Premium (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.baseModal | number}}</td>
+            <td align="right">{{calcData.base | number}}</td>
+          </tr>
+          <tr>
+            <td>Rider Premium (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.premium.modalHospiCashPremium | number}}</td>
+            <td align="right">{{calcData.premium.annualHospiCashPremium | number}}</td>
+          </tr>
+          <tr>
+            <td>Total Taxes (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.serviceTax + calcData.premium.serviceTaxForModalFirstYear | number}}</td>
+            <td align="right">{{calcData.serviceTaxForAnnualPremFirstYear + calcData.premium.serviceForAnnualFirstYearTax | number}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Premium Payable (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.totalWithTax + calcData.premium.totalModalPremiumWithTaxForFirstYear | number}}</td>
+            <td align="right">{{calcData.totalAnnualPremiumWithTaxForFirstYear + calcData.premium.modalHospiCashPremium + calcData.premium.serviceForAnnualFirstYearTax | number}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ion-modal-view>
+</div>
+<ion-fixed class="fixed-div dwnfix">
+  <button fab fab-right fab-bottom dark>
+    <ion-icon class="addbox" name="add" ng-click="showPlusPopup=true"></ion-icon>
+  </button>
+</ion-fixed>
+<ion-footer-bar class="btnlastbkbg">
+  <button class="button button-clear button-positive col-50" ng-click="saveQuote(false)">Save</button>
+  <button class="button button-clear button-positive col-50" ng-click="proceedToFormFilling()">AGREE & PROCEED TO FORM FILLING</button>
+</ion-footer-bar>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li><a class="email" href="#" ng-click="email()">Email BI Quote<span>&nbsp;</span></a></li>
+      </ul>
+      <a class="popupclose" ng-click="showPlusPopup=false">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>

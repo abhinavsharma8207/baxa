@@ -1,0 +1,53 @@
+<ion-header-bar class="bar-stable">
+  <ion-view view-title="Product Recommendation">
+  <a class="button icon-left ion-chevron-left button-clear button-royal" ng-click="onClickBack()">Product Recommendation</a>
+</ion-header-bar>
+<ion-view class="productRecommendation">
+    <div class="topProgressBar" ng-include="'js/switch/templates/switchTaps.html'"></div>
+  <ion-content>
+    <div class="content" style="margin-top:80px">
+        <div class="row divflexall prodrecom responsive-sm">
+
+            <div class="col col-50" ng-click="productQuote(Product)" ng-repeat="Product  in ProductRec | limitTo:paginationLimit()">
+                <div class="prodinner {{Product.details.class}}">
+              <a class="icon-resize" href="#">&nbsp;</a>
+              <div class="imgdiv">
+                <div><span class="cribx"><span class="helper"><img class="imga" ng-src="{{Product.details.src1}}"/></span></span>
+                </div>
+                <img ng-src="{{Product.details.src}}" />
+              </div>
+              <div class="desc">
+                <h4>{{Product.title}}</h4>
+                <p ng-bind-html="Product.details.desc"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col martp20 text-center">
+            <p class="morelink" ng-show="hasMoreItemsToShow()" ng-click="showMoreItems()">More</p>
+          </div>
+        </div>
+    </div>
+
+    <div ng-show="popupopn" class="popbg"></div>
+    <center>
+      <div ng-show="popupopn">
+        <div class="adic-modal">
+          <ion-modal-view class="adic-popup">
+            <div class="popupdiv">
+              <form name="form">
+                <div ng-click="hidepopupopn()"> <a class="close"></a> </div>
+                <div class="list list-inset">
+                  <label class="item item-input text-center">No Recordes Found</label>
+                </div>
+                <button ng-click="hidepopupopn()"   class="button button-block button-positive subtn">Close</button>
+              </form>
+            </div>
+          </ion-modal-view>
+        </div>
+      </div>
+    </center>
+
+  </ion-content>
+</ion-view>

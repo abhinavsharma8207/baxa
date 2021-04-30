@@ -1,0 +1,29 @@
+<ion-view view-title="" title="Login">
+    <ion-header-bar class="bar-stable">
+        <h1 style="padding:0" class="title">LOGIN</h1>
+    </ion-header-bar>
+
+    <ion-content>
+      <div class="text-center martpbtm"><img src="img/bharti-axa-logo.png" class="logo center" /></div>
+      <form class="text-center mt50">
+        <div class="list list-inset formdiv mr40 ml40">
+          <label class="item item-input pn">
+              <input type="text" value="Agency_User_1" class="text-white" placeholder="Email" ng-model="data.username" id="email">
+          </label>
+          <label class="item item-input pn">
+              <input type="password" value="Fulcrum#1" class="text-white" placeholder="Password" ng-model="data.password">
+          </label>
+          <label class="item item-input item-select">
+              <div class="input-label" class="text-white">password-Type</div>
+              <select name="passwordType" ng-model="data.passwordType">
+                  <option value="sha-256" selected>sha-256</option>
+                  <option value="md-5">md-5</option>
+                  <option value="sha-384">sha-384</option>
+                  <option value="sha-512">sha-512</option>
+              </select>
+          </label>
+          <button class="button button-block button-positive mtn mbn" type="submit" ng-click="doLogin(data)">Sign In</button>
+        </div>
+      </form>
+    </ion-content>
+</ion-view>

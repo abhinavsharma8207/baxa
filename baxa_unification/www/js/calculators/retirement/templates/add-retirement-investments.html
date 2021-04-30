@@ -1,0 +1,250 @@
+<ion-view view-title="Retirement Calculator">
+    <ion-content class="scroll-content">
+        <!-- Retirement 2 Start -->
+        <div class="content">
+            <div class="childfuturediv">
+                <a href="#/app/retirement-home" ng-click="setNowAnimate()">
+                    <div class="whiteboxdiv inputdiv">
+                        <div class="row">
+                            <div class="col">Input</div>
+                            <div class="col text-right"><span class="icn-fullwid"></span> </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="whiteboxdiv">
+                    <div class="row responsive-sm rowblockdiv">
+                        <div class="col col-100">
+                            <div class="row">
+                                <div class="col col-75">
+                                    <h4>Net Corpus required <span>(Rs.)</span></h4>
+                                </div>
+                                <div class="col text-right grytxtcolor martpbtm5"><strong>{{corpus | amtconvert:'Cr'}}</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div id="netCorpus" class="gryfulback">
+                                        <div id="lumpsuminvest"></div>
+                                        <div id="monthlyinvest"></div>
+                                        <!--  <div id="corpusgap"></div>-->
+                                    </div>
+                                    <div class="row investdiv">
+                                        <div class="col"><span class="pkbx">&nbsp;</span>
+                                            <label>Lumpsum Investment</label>
+                        <strong class="croretxt">{{totalLumpsumAssetsCreated  | amtconvert:'Cr' }}</strong>
+                                        </div>
+                                        <div class="col"><span class="yelbx">&nbsp;</span>
+                                            <label>Monthly Investment</label>
+                        <strong class="croretxt">{{totalMonthlyAssetsCreated  | amtconvert:'Cr'}}</strong>
+                                        </div>
+                                        <div class="col"><span class="gybx">&nbsp;</span>
+                                            <label>Corpus Gap</label>
+                        <strong class="croretxt">{{corpusgap  | amtconvert:'Cr'}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-100">
+                            <div class="row">
+                                <div class="col col-75">
+                                    <h4>Monthly Investments required <span>(Rs.)</span></h4>
+                                </div>
+                                <div class="col text-right grytxtcolor martpbtm5"><strong>{{monthlyInvestNeeded | amtconvert:'K'}}</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="gryfulback">
+                                        <div id="reqinvest"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row investdiv">
+                                        <div class="col"><span class="drgybx">&nbsp;</span>
+                                            <label>Current Monthly Investment</label>
+                        <strong class="croretxt">{{currentMonthlyInvestments1.value | amtconvert:'K'}}</strong>
+                                        </div>
+                                        <div class="col"><span class="gybx">&nbsp;</span>
+                                            <label>Monthly Investment Gap</label>
+                        <strong class="croretxt">{{ revisedmonthlygap | amtconvert:'K'}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row responsive-sm padnone rowblockdiv">
+                    <div class="col col-100">
+                        <div class="whiteboxdiv yelwline">
+                            <div class="corner-group fr"><input type="text" value="{{currentLumpsumInvestments1.value}}" ng-model="currentLumpsumInvestments1.value" fcsa-number="{ max: 100000000, min: 0 }" ng-change="refreshCorpus(currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value)" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);" > <span></span></div>
+                            <div class="col-67">
+                            <h4>Current Lumpsum Investments <span>(Rs.)</span> </h4>
+                            </div>
+                            <div class="errortxt text-right">
+                                <span ng-if="currentLumpsumInvestments1.value < 0 || currentLumpsumInvestments1.value > 100000000">*Lumpsum Investment should be between 0 to 10 Cr</span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="colLtRtdiv">
+                                <a href="#" class="addsml fr" ng-model="collapsed" ng-show="collapsed" ng-click="toggle()"></a>
+                                <a href="#" class="minussml fr" ng-model="collapsed" ng-show="uncollapsed" ng-click="toggle()"></a>
+                            </div>
+                            <div class="colLtRtdiv">
+                                <div class="progress-box" ng-show="minLumInvst">
+                                    <div class="progress-bar progress-bar-slider">
+                                        <input type="range" min="0" max="5000000" value="{{currentLumpsumInvestments1.value}}" step="1" ng-model="currentLumpsumInvestments1.value" ng-change="refreshCorpus(currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value)" class="progress-slider">
+                                        <div class="inner"  ng-style="{ width: (currentLumpsumInvestments1.value - ((currentLumpsumInvestments1.value > 5000000?(currentLumpsumInvestments1.value - 5000000) : 0))) / 5000000 * 100 + '%' || '0%' }"></div>
+                                        <div class="row lastrangsmltxt">
+                                            <div class="col">0 <span>L</span></div>
+                                            <div class="col text-right">50<span>L</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="colLtRtdiv">
+                                    <div class="progress-box" ng-show="uncollapsed">
+                                        <div class="progress-bar progress-bar-slider" ng-show="uncollapsed">
+                                            <input type="range" min="5100000" max="100000000" step="1" ng-model="currentLumpsumInvestments1.value" ng-show="uncollapsed" ng-change="refreshCorpus(currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value)" class="progress-slider">
+                                            <div class="inner" ng-style="{width: (currentLumpsumInvestments1.value - 5100000) / yearlyDiffHighLow * 100 < 100 ? (currentLumpsumInvestments1.value - 5100000) / yearlyDiffHighLow * 100  + '%' : 100 + '%' }
+"></div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">0.51 <span>Cr</span></div>
+                                                <div class="col text-right">10 <span>Cr</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="ratetxt padding-vertical">Rate of Return</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="corner-group rateinput fr"><input type="text" ng-model="currentLumpsumrateOfReturn.value"  ng-change="minmax('lumsumrate',0,99,currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value)" fcsa-number="{ max: 99, min: 0 }" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"> <span>%</span></div>
+                                        <div class="errortxt"><span ng-show="lumsumrateVError">Please enter values from 0 to 99</span></div>
+                                    </div>
+                                </div>
+                                <div class="notetxt" ng-click="toggleNotes('LumSum')"><span>Note</span></div>
+                                <div ng-show="showNoteLumSum"> Note Text....</div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col col-100">
+                            <div class="whiteboxdiv yelwline">
+                                <div class="corner-group fr"><input type="text" value="{{currentMonthlyInvestments1.value}}" ng-model="currentMonthlyInvestments1.value"  ng-change="refreshCorpus(currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value);monthlyrenewinvestmentrequired(currentMonthlyInvestments1.value)" fcsa-number="{ max: 500000, min: 0 }" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"> <span></span></div>
+                                <div class="col-67">
+                                        <h4>Current Monthly Investments <span>(Rs.)</span> </h4>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="colLtRtdiv">
+                                    <a href="#" class="addsml fr" ng-click="toggle2()" ng-model="collapsedInvest" ng-show="collapsedInvest"></a>
+                                    <a href="#" class="minussml fr" ng-model="uncollapsedInvest" ng-show="uncollapsedInvest" ng-click="toggle2()"></a>
+                                    <div class="progress-box ylrdbrd" ng-show="minCurrentMnthly">
+                                        <div class="progress-bar progress-bar-slider">
+                                            <input type="range" min="0" max="50000" step="1000" value="{{currentMonthlyInvestments1.value}}" step="1" ng-model="currentMonthlyInvestments1.value" nks-only-number allow-decimal="false" ng-change="refreshCorpus(currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value);monthlyrenewinvestmentrequired(currentMonthlyInvestments1.value)" class="progress-slider">
+                                            <div class="inner" ng-style="{ width: (currentMonthlyInvestments1.value - ((currentMonthlyInvestments1.value > 50000?(currentMonthlyInvestments1.value - 50000) : 0))) / 50000 * 100 + '%' || '0%' }"></div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">0 <span>K</span></div>
+                                                <div class="col text-right">50 <span>K</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="colLtRtdiv">
+                                    <div class="progress-box ylrdbrd" ng-show="uncollapsedInvest">
+                                        <div class="progress-bar progress-bar-slider">
+                                            <input type="range" min="50000" max="500000" step="1" ng-model="currentMonthlyInvestments1.value" ng-show="uncollapsedInvest" valid-number ng-change="refreshCorpus(currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value);monthlyrenewinvestmentrequired(currentMonthlyInvestments1.value)" class="progress-slider">
+                                            <div class="inner" ng-style="{ width: (currentMonthlyInvestments1.value - 51000) / monthlyDiffHighLow * 100  + '%' || '0%' }"></div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">50 <span>K</span></div>
+                                                <div class="col text-right">500 <span>K</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="ratetxt padding-vertical">Rate of Return</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="corner-group rateinput fr"><input type="text" ng-model="currentMonthlyrateOfReturn.value"  ng-change="minmax('monthlyrate',0,99,currentLumpsumInvestments1.value,currentLumpsumrateOfReturn.value,currentMonthlyInvestments1.value,currentMonthlyrateOfReturn.value)" fcsa-number="{ max: 99, min: 0 }"  onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"> <span>%</span></div>
+                                        <span style="color:red;" ng-show="monthlyrateVError">Please enter values from 0 to 99</span>
+                                    </div>
+                                </div>
+                                <div class="notetxt" ng-click="toggleNotes('CurrentMnth')"><span>Note</span></div>
+                                <div ng-show="showNoteCurrentMnth">Include all monthly Household expenses(Eg. Groceries, Conveyance,Medical, Rent etc...),Recerational expenses,Home or Personel Loan EMI's, Investments(Eg. SIP's,FD's etc...)</div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Retirement 2 End -->
+    </ion-content>
+    <ion-fixed class="fixed-div">
+      <button fab fab-right fab-bottom dark>
+        <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+      </button>
+    </ion-fixed>
+    <ion-footer-bar class="btnlastbkbg" ng-show="saveResult" ng-hide="fromSwitchSummary">
+       <button class="button button-clear button-positive col-50" ng-click="viewAnotherCal();">View Another Calculator</button>
+       <button class="button button-clear button-positive col-50" ng-click="proceedToProd();">Proceed to View Products</button>
+    </ion-footer-bar>
+    <ion-footer-bar class="btnlastbkbg" ng-show="fromSwitchSummary">
+    <button class="button button-clear button-positive col-50" ng-click="viewAnotherCal();">Back To Customer Summary Page</button>
+    <button class="button button-clear button-positive col" ng-click="proceedToProd();">Proceed to View Products</button>
+  </ion-footer-bar>
+    <div class="adic-modal">
+       <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+          <div class="wealth-popup">
+               <ul class="popuplist">
+                   <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+                   <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+                   <li><a class="email" href="#" ng-click="email()">Email <span>&nbsp;</span></a></li>
+               </ul>
+               <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+          </div>
+       </ion-modal-view>
+   </div>
+
+   <div class="adic-modal">
+     <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+       <div>
+         <div class="popupdiv">
+           <form name="myForm" novalidate="">
+
+             <div ng-click="hidesendEmailPopup()" class="close"></div>
+             <h3>E-mail</h3>
+             <div class="row">
+               <div class="col">
+                 <!--<div style="color:red" ng-messages="myForm.emailTo.$error">
+                   <span ng-message="emailValidator">Please enter the correct email details</span>
+                 </div>-->
+                 <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+                 <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+                 <!--<div style="color:red" ng-messages="myForm.emailCc.$error">
+                   <span ng-message="emailValidator">Please enter the correct email details</span>
+                 </div>-->
+                 <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+                 <input type="text" name="emailCc" style="width:100%" placeholder="CC"   ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+               </div>
+             </div>
+
+             <ul class="emailchoice">
+               <li class="item item-checkbox">
+                 <label class="checkbox checkbox-assertive">
+                     <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+                 </label>
+                 Illustrations
+               </li>
+               <li class="item item-checkbox">
+                 <label class="checkbox checkbox-balanced">
+                   <input type="checkbox" ng-model="isBrochureSelected">
+                 </label> Brochure
+               </li>
+             </ul>
+             <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+           </form>
+         </div>
+       </div>
+     </ion-modal-view>
+   </div>
+
+</ion-view>

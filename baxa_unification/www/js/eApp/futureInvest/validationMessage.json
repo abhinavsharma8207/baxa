@@ -1,0 +1,16 @@
+{
+    "SpaceAndDotLA":"Space and special characters are not allowed",
+    "SpaceAndDotProp":"Space and special characters are not allowed",
+    "SpaceAndDot":"Space, dot and special characters are not allowed",
+    "length":"Please enter no more than 50 characters.",
+    "Selfselection":"For self selection LA name = to Proposer so gender , age and name shoould be same.",
+    "LifeAssurrerName":"Life Assurer Name length is 10.",
+    "AgeValidation":"Age must be between 18 to 99",
+    "SumAssuredMaxLength":"max length is 10",
+    "NumericValue":"Please enter only numeric value without 'Dot'",
+    "PolicyTerms":"Please select Policy Terms",
+    "PremiumMode":"Please select Premium Mode",
+    "Required":"Field is required",
+    "Number":"Number allowed only",
+    "AgeOutofRange":"Age must be between 18 to 65"
+}

@@ -1,0 +1,43 @@
+<ion-view view-title="Life Stage" class="needsPrioritisation">
+    <div class="lifeTabs" ng-include="'js/switch/templates/switchTaps.html'"></div>
+  <ion-content class="lifeContainer">    
+    <div ng-show="Gender =='0'">
+      <ion-slide-box  on-slide-changed="slideHasChanged(index)" does-continue='true' class="activeSlide"  active-slide="myActiveSlide" pager-click="navSlide(index)">
+
+        <ion-slide ng-class="(img.id == myActiveSlide )? 'ActiveSlide':'';" ng-repeat="img in imagesMale" class="sliderBox">
+          <img class="custom-class" ng-src="{{img['src']}}" />
+          <h3>{{img.title}}</h3>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+    <!-- slider for male-->
+    <div ng-show="Gender =='1'">
+
+      <ion-slide-box  on-slide-changed="slideHasChanged($index)" does-continue='true' class="activeSlide" active-slide="myActiveSlide" pager-click="navSlide(index)">
+        <ion-slide ng-class="(img.id == myActiveSlide )? 'ActiveSlide':'';" ng-repeat="img in imagesFemale" class="sliderBox">
+          <img class="custom-class" ng-src="{{img['src']}}" />
+          <h3>{{img.title}}</h3>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+    <p class="icn-fwdnext" ng-click="lifeStageMale()"></p>
+
+    <div ng-show="popupopn" class="popbg"></div>
+    <center>
+      <div ng-show="popupopn">
+        <div class="popupdiv">
+          <form name="form">
+            <div class="list list-inset">
+              <p>you want to save the life stage ? </p>
+            </div>
+            <div class="popup-buttons">
+              <button class="button button-block button-positive subtn" ng-click="lifeStageMale(true)" class="close">Yes</button>
+              <button class="button button-block button-positive subtn" ng-click="onClickNo()">No</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </center>
+
+  </ion-content>
+</ion-view>

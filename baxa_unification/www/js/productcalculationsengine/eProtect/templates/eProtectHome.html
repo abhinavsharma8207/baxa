@@ -1,0 +1,213 @@
+<ion-view view-title="BAXA Unification">
+<ion-header-bar class="bar-stable">
+<a class="button icon-left ion-chevron-left button-clear button-royal" href="#/app/home"></a>
+        <h1 class="title">E Protect</h1>
+</ion-header-bar>
+  <ion-content>
+    <div ng-show="showDbErrors"><span ng-bind="dbErrors"></span></div>
+    <div ng-show="showDbErrors"><span ng-bind="sAerror"></span></div>
+    <form class="padding mt50">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Life Assurer Name</span>
+              <input type="text"  ng-model="data.laName"value="">
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Life Assurer Age</span>
+             <input type="number" ng-model="data.laAge" value="">
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Proposer Name</span>
+             <input type="text"  ng-model="data.proposerName" value="">
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Proposer Age</span>
+             <input type="number" ng-model="data.proposerAge" value="">
+            </label>
+            <label class="item item-input item-select">
+             <div class="input-label">Proposer Gender</div>
+             <select name="proposerGender" ng-model="data.proposerGender" ng-options="gender.id as gender.name for gender in genders">
+            </select>
+            </label>
+            <label class="item item-input item-select" >
+             <div class="input-label"> Life Assurer Gender</div>
+             <select name="laGender" ng-model="data.laGender" ng-options="gender.id as gender.name for gender in genders">
+            </select>
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Sum Assured*</span>
+             <input type="number" ng-model="data.sumAssured" value="0" ng-blur = "chkValidSA(data.sumAssured)" required>
+            </label>
+
+            <label class="item item-input item-select" >
+             <div class="input-label"> Category</div>
+             <select name="laGender" ng-model="data.ePCategory" ng-options="category.name as category.name  for category in categories" ng-disabled=ePCategoryOptn>
+            </select>
+            </label>
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">Self</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.isSelf"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+
+            <label class="item item-input item-select" >
+             <div class="input-label">Premium Mode</div>
+             <select name="premiumMode" ng-model="data.premiumMode" ng-options="pMode.id as pMode.name for pMode in pModes">
+             </select>
+            </label>
+            <ion-toggle ng-model="data.isPT" toggle-class="toggle-calm">{{data.isPT ? 'Select PT' : 'Select UptoAge'}}</ion-toggle>
+            <input name= "isPT" type="hidden" ng-model="data.isPT"  >
+
+            <label class="item item-input"  ng-show="data.isPT">
+            <span class="input-label">Premium Term</span>
+            <select type="text" ng-model="data.pt"    ng-options = "pt.name as pt.name for pt in pts"  name="pt"  ng-change = "populatePPT(data)" >
+                <option value="">-- Select Premium Term --</option>
+            </select>
+           </label>
+           <label class="item item-input"  ng-hide="data.isPT">
+           <span class="input-label">UP to Age</span>
+           <select type="text" ng-model="data.uptoage"  ng-options = "uptoage.name as uptoage.name for uptoage in uptoages"  name="uptoage" ng-change = "populatePPTByUptoAge(data)"  >
+               <option value="">-- Select UPTOAGE --</option>
+           </select>
+          </label>
+
+           <label class="item item-input item-select">
+            <span class="input-label">Premium Payment Term</span>
+            <input name="ppt" ng-model="data.ppt"  ng-disabled="true">
+            </label>
+
+               <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">eADB Rider</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.eADBRider" ng-click="copyTerm()"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+            <label class="item item-input item-select" ng-show="data.eADBRider">
+             <div class="input-label">ADB Sum Assured</div>
+             <input type="text" ng-model="data.sumAssuredForEADBRiders"  name="sumAssuredForEADBRiders"   value="0">
+            </label>
+            <label class="item item-input item-select" ng-show="data.eADBRider">
+             <div class="input-label">Rider Term</div>
+             <input type="text" ng-model="data.riderterm"  name="riderterm" ng-disabled=true   >
+
+            </label>
+             <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">HospiCash</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.hospiCash"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+            <label class="item item-input item-select" ng-show="data.hospiCash">
+             <div class="input-label">DHCB</div>
+             <select name="sumAssuredForRiders" ng-model="data.sumAssuredForRiders">
+                <option value="1000" >1000</option>
+                <option value="2000">2000</option>
+                <option value="3000" >3000</option>
+
+             </select>
+            </label>
+            <label class="item item-input item-select" ng-show="data.hospiCash">
+             <div class="input-label">Rider Term</div>
+             <select name="riderPpt" ng-model="data.riderPpt">
+                <option value="5" >5</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
+                <option value="15" >15</option>
+               <option value="20" >20</option>
+             </select>
+            </label>
+
+
+
+             <button class="button button-full button-assertive mt25" ng-click="validateBaseProduct(data)" ng-disabled="isValidSA">Submit</button>
+
+          </div>
+        </form>
+          <div class="padding">
+          <div class="mt35" ng-show="showOutput">
+           <span class=" "><b>Calculated Output</b></span>
+           <div class="item row" >
+            <div class="col-80"><p class="test">ProdCode</p></div>
+            <div class="col-20"><span ng-bind="answer.prodcode"></span></div>
+
+          </div>
+          <div class="item row" >
+           <div class="col-80"><p class="test">Modal Factor</p></div>
+           <div class="col-20"><span ng-bind="answer.modalFactor"></span></div>
+
+         </div>
+           <div class="item row" >
+                <div class="col-80"><p class="test">Base Premium</p></div>
+                <div class="col-20"><span ng-bind="answer.basePremium"></span></div>
+              </div>
+               <div class="item row" >
+                <div class="col-80"><p class="test">Modal Premium</p></div>
+                <div class="col-20"><span ng-bind="answer.modalPremium"></span></div>
+
+              </div>
+
+
+              <div class="item row" >
+                <div class="col-80"><p class="test"></p>Total Modal Premium</div>
+                <div class="col-20"><span ng-bind="answer.totalModalPremium"></span></div>
+                 </div>
+              <div class="item row" >
+                <div class="col-80"><p class="test"></p>Service Tax for First Year</div>
+                <div class="col-20"><span ng-bind="answer.serviceTaxForModalFirstYear"></span></div>
+                 </div>
+              <div class="item row" >
+                <div class="col-80"><p class="test"></p>Service Tax For Second Year</div>
+                <div class="col-20"><span ng-bind="answer.serviceTaxForModalSecondYear"></span></div>
+                 </div>
+              <div class="item row" >
+
+                <div class="col-80"><p class="test"></p>Total Premium for First Year</div>
+                <div class="col-20"><span ng-bind="answer.totalModalPremiumWithTaxForFirstYear"></span></div>
+                 </div>
+              <div class="item row" >
+                <div class="col-80"><p class="test"></p>Total Premium For Second Year</div>
+                <div class="col-20"><span ng-bind="answer.totalModalPremiumWithTaxForSecondYear"></span></div>
+              </div>
+          </div>
+                  <div class="mt30 border"></div>
+
+
+
+
+          <div class="mt35">
+          <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  eAdbData">
+                <div class="col-80"><p class="test">{{key}}</p></div>
+                <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+
+
+
+          <div class="mt35" >
+          <span class=" "><b>Calculated Output</b></span>
+          <div class="item row" ng-repeat="(key,value) in  hospiCashData">
+                <div class="col-80"><p class="test">{{key}}</p></div>
+                <div class="col-20"><span class=" ">{{value}}</span></div>
+          </div>
+          </div>
+
+
+
+
+
+  </ion-content>
+</ion-view>

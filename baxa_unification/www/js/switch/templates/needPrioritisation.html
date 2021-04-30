@@ -1,0 +1,46 @@
+<ion-view view-title="Needs Prioritisation" class="needsPrioritisation">
+  <ion-header-bar class="bar-stable">
+    <a class="button icon-left ion-chevron-left button-clear button-royal" ng-click="onClickBack()"></a>
+  </ion-header-bar>
+<div class="topProgressBar" ng-include="'js/switch/templates/switchTaps.html'"></div>
+  <ion-content>
+    <div class="content">
+      <div class="whiteboxdiv prioritsationsec">
+        <label class="toggle toggle-balanced"ng-click=" data.showReorder = !data.showReorder" style="
+    margin-left: 230px;">
+          <input type="checkbox" >
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+        <div class="listpriority">
+          <div class="priocollt col-20">
+            <div class="prioritybx">Priority <span>1</span></div>
+            <div class="prioritybx">Priority <span>2</span></div>
+            <div class="prioritybx">Priority <span>3</span></div>
+            <div class="prioritybx">Priority <span>4</span></div>
+          </div>
+          <div class="roundcolrt col-80">
+            <ion-list show-reorder="data.showReorder">
+              <ion-item ng-repeat="item in items" ng-class="item.class">
+                <span class="icn-circlegren" ng-show="item.count>=1">&nbsp;</span>
+                <div class="circlebx">
+                  <div class="helper"><img ng-src="{{item['src']}}" /></div>
+                </div>
+                <h4 ng-click="calculaterPageRedriect(currentCustId,item.id)">{{item.name}}</h4>
+                <ion-reorder-button class="resize"  on-reorder="moveItem(item, $fromIndex, $toIndex,$onchange)"></ion-reorder-button>
+                <div class="clearfix"></div>
+              </ion-item>
+            </ion-list>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="bar bar-footer">
+    <button ng-click="productRecPage(currentCustId)" class="button button-clear button-positive button-full">
+      <span class="subtn-arw">SEE PRODUCTS</span>
+    </button>
+  </ion-footer-bar>
+</ion-view>

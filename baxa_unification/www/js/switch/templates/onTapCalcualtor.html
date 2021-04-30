@@ -1,0 +1,72 @@
+<ion-view view-title="{{pageTitle.title}}" class="tpCalcualtor">
+  <ion-content class="pageBG">
+    <div class="screenContainer">
+        <div class="leftPanel fl">
+          <div class="content">
+            <ion-list>
+              <ion-item ng-show="calculatorData.length == 0">
+                No records
+              </ion-item>
+
+              <ion-item ng-if="typeId != 3" ng-show="calculatorData.length > 0 "  class="whiteboxdiv pkline listcreation" ng-repeat="calData in calculatorData">
+                <a ng-show = "!isTablet" href="{{calData.link.link}}/{{calData.PKSwitchCalculator}}" class="icon-resize">&nbsp;</a>
+                <a ng-show = "isTablet" ng-click="goToCalOutput(typeId,calData.link.link,calData.PKSwitchCalculator)" class="icon-resize">&nbsp;</a>
+                <div class="row">
+                  <div class="col col-20">
+                    <div class="circle-number">{{$index+1}}</div>
+                  </div>
+                  <div class="col">
+                    <label class="dt">Date of Creation</label>{{calData.CreatedDate | date : "dd/MM/yy"}}</div>
+                  <div class="col">
+                    <label class="tm">Time of Creation</label>{{calData.CreatedDate | date : "h:mma"}}</div>
+                </div>
+                <ion-option-button class="button-assertive" ng-click="showCalculatorPopup(calData.PKSwitchCalculator)">Delete</ion-option-button>
+              </ion-item>
+              <ion-item ng-if="typeId == 3" ng-show="calculatorData.length > 0 " class="whiteboxdiv pkline listcreation" ng-repeat="calData in calculatorData">
+                <a ng-show = "!isTablet" href="{{calData.link.link}}/{{calData.PKSwitchCalculator}}" class="icon-resize">&nbsp;</a>
+                <a ng-show = "isTablet" ng-click="goToCalOutput(typeId,calData.link.link,calData.PKSwitchCalculator)" class="icon-resize">&nbsp;</a>
+                <div class="row">
+                  <div class="col col-20">
+                    <div class="circle-number">{{$index+1}}</div>
+                  </div>
+                  <div class="col">
+                    <label class="dt">Date of Creation</label>{{calData.CreatedDate | date : "dd/MM/yy"}}</div>
+                  <div class="col">
+                    <label class="tm">Time of Creation</label>{{calData.CreatedDate | date : "h:mma"}}</div>
+                </div>
+                <ion-option-button class="button-assertive" ng-click="showCalculatorPopup(calData.PKSwitchCalculator)">Delete</ion-option-button>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+        <div class="rightPanel fr entinvestdiv">
+          <div ng-if="isShow">
+            <div ng-if="typeId == 1"  ng-controller="childPlanInvestmentController" ng-include="'js/calculators/childPlan/templates/childFuturePlannerDetailsView.html'"></div>
+            <div ng-if="typeId == 3"  ng-controller="retirementCalculatorInvestController" ng-include="'js/calculators/retirement/templates/add-retirement-investments.html'"></div>
+            <div ng-if="typeId == 2"  ng-controller="wealthChartController" ng-include="'js/calculators/wealth/templates/enter-investment.html'"></div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+
+
+  </ion-content>
+  <div class="adic-modal">
+    <ion-modal-view class="adic-popup" ng-show="showDeleteCalculatorPopup">
+      <div>
+        <div class="popupdiv">
+          <div ng-click="hideCalculatorPopup()" class="close"></div>
+          <br/>
+          <br/>
+          <p class="text-center" style="color:red;">Are you sure you want to delete</p>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="deleteCalculatorPopupOnOk()">OK</button>
+            <button class="button button-block button-positive subtn" ng-click="hideCalculatorPopup()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </ion-modal-view>
+  </div>
+</ion-view>

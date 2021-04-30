@@ -1,0 +1,128 @@
+<ion-view view-title="BAXA Unification">
+  <ion-header-bar class="bar-stable"> <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/home"></a>
+    <h1 class="title">Samriddhi</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="content">
+      <div class="whiteboxdiv inputdiv">
+        <div class="row">
+          <div class="col">Input</div>
+          <div class="col text-right"><a href="#" class="icn-fullwid"></a></div>
+        </div>
+      </div>
+      <div class="widthsamridhi">
+        <div class="row">
+          <div class="col text-center estimatediv">
+            <h4>Estimate Payement Rate<span> (%)</span></h4>
+            <div class="tbar">
+              <div class="button-bar wd200" style="margin-top:0"> <a class="button button-item1 active" ng-class="{'button-positive' : isActive('item1')}" ng-click="setActive('item1')">8%</a> <a class="button button-item2" ng-class="{'button-positive' : isActive('item2')}" ng-click="setActive('item2')">4%</a> </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="pinkbox">
+              <div class="row pinkborder zindex">
+                <div class="col">
+                  <p>Sum Assured on Maturity</p>
+                  <p>₹ 1,396,258</p>
+                </div>
+                <div class="col zindex">
+                  <p>Bonus at<br/>
+                    Maturity</p>
+                  <p>₹ 1,363,097</p>
+                </div>
+              </div>
+              <p class="pt10">Sum of Benefits at Maturity<br/>
+                ₹ 2,759,355</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h4 class="text-center">Add Riders <i class="fa fa-plus-circle"></i></h4>
+            <ang-accordion class="parentaccordian" one-at-a-time="true" icon-position="center" close-icon-class="fa fa-check-circle greyColor" open-icon-class="fa fa-check-circle greenColor">
+              <collapsible-item item-title="Accedental Death Benefit Rider" >
+                <div class="row">
+                  <div class="col">
+                    <label>Term</label>
+                    <span class="corner-group fr">35 <span>K</span></span> </div>
+                  <div class="col">
+                    <label>Cover</label>
+                    <div class="corner-group fr">35 <span>K</span></div>
+                  </div>
+                </div>
+              </collapsible-item>
+              <collapsible-item item-title="Hospi Cash Benefit Rider" >
+                <div class="row">
+                  <div class="col">
+                    <h4>Term<span>(Yrs.)</span></h4>
+                    <ion-list class="agenumber">
+                      <ion-radio ng-model="choice" class="" ng-value="'10'">5</ion-radio>
+                      <ion-radio ng-model="choice" class="" ng-value="'15'">7</ion-radio>
+                      <ion-radio ng-model="choice" class="" ng-value="'20'">10</ion-radio>
+                      <ion-radio ng-model="choice" class="" ng-value="'25'">15</ion-radio>
+                      <ion-radio ng-model="choice" class="" ng-value="'30'">20</ion-radio>
+                    </ion-list>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <h4>DHCB<span>(Rs.)</span></h4>
+                    <ion-list class="Amountnumber">
+                      <ion-radio ng-model="choice" class="" ng-value="'10'">1000</ion-radio>
+                      <ion-radio ng-model="choice" class="" ng-value="'15'">2000</ion-radio>
+                      <ion-radio ng-model="choice" class="" ng-value="'20'">3000</ion-radio>
+                    </ion-list>
+                  </div>
+                </div>
+              </collapsible-item>
+              <collapsible-item item-title="Permium Wavier Rider" >
+                <div class="row greyborder">
+                  <div class="col estimatediv col-center mb0">
+                    <h4>PWR on</h4>
+                    <div class="tbar">
+                      <div class="button-bar wd200" style="margin:0"> <a class="button button-item1 active" ng-class="{'button-positive' : isActive('item1')}" ng-click="setActive('item1')">INDIA</a> <a class="button button-item2" ng-class="{'button-positive' : isActive('item2')}" ng-click="setActive('item2')">ABROAD</a> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col estimatediv col-center mb0">
+                    <div class="tbar">
+                      <div class="button-bar wd200" style="margin:0"> <a class="button button-item1 active" ng-class="{'button-positive' : isActive('item1')}" ng-click="setActive('item1')">INDIA</a> <a class="button button-item2" ng-class="{'button-positive' : isActive('item2')}" ng-click="setActive('item2')">ABROAD</a> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="disclosure text-center">Note: Permium Wavier Rider on Death & Total Permanent Disability is only available for the Proposer</div>
+              </collapsible-item>
+            </ang-accordion>
+          </div>
+        </div>
+        <div class="whiteboxdiv bronline">
+          <div class="row greyborder">
+            <div class="col text-center">
+              <label>BASE POLICY</label>
+              <p>₹ 50,000</p>
+            </div>
+            <div class="col text-center">
+              <label>PW RIDER</label>
+              <p>₹ 2,000</p>
+            </div>
+            <div class="col text-center">
+              <label>ADB RIDER</label>
+              <p>NA</p>
+            </div>
+            <div class="col text-center">
+              <label>DHCB RIDER</label>
+              <p>NA</p>
+            </div>
+          </div>
+          <div class="text-center pt10">TOTAL PREMIUM <span class="fweight700">₹ 50,000</span></div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer">
+          
+  </div>
+</ion-view>

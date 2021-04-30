@@ -1,0 +1,225 @@
+[{
+"courseTitle": "MBA",
+"courseCost": 1500000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-mba",
+"active": true,
+"id":  "inmba"
+},{
+"courseTitle": "Medicine",
+"courseCost": 3000000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-medicine",
+"active": false,
+"id":  "inmed"
+},{
+"courseTitle": "M.com",
+"courseCost": 100000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "inmcom"
+},{
+"courseTitle": "M.A",
+"courseCost": 100000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "inma"
+},{
+"courseTitle": "M.Sc",
+"courseCost": 100000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "inmsc"
+},{
+"courseTitle": "M.Tech",
+"courseCost": 250000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "inmtech"
+},{
+"courseTitle": "Pilot",
+"courseCost": 2000000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-pilot",
+"active": false,
+"id":  "inpilot"
+},{
+"courseTitle": "PhD",
+"courseCost": 858000,
+"coursePlace":"India",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-phd",
+"active": false,
+"id":  "inphd"
+},{
+"courseTitle": "MBA",
+"courseCost": 2580000,
+"coursePlace":"Abroad",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-mba",
+"active": true,
+"id":  "abrmba"
+},{
+"courseTitle": "Medicine",
+"courseCost": 5000000,
+"coursePlace":"Abroad",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-medicine",
+"active": false,
+"id":  "abrmed"
+},{
+"courseTitle": "Law",
+"courseCost": 3008000,
+"coursePlace":"Abroad",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-law",
+"active": false,
+"id":  "abrlaw"
+},{
+"courseTitle": "Masters",
+"courseCost": 2208000,
+"coursePlace":"Abroad",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "abrmas"
+},{
+"courseTitle": "M.com",
+"courseCost": 2208000,
+"coursePlace":"Abroad",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "abrmcom"
+},{
+"courseTitle": "PhD",
+"courseCost": 3108000,
+"coursePlace":"Abroad",
+"eduMilestone": "PostGrad",
+"piclass":"box icn-phd",
+"active": false,
+"id":  "abrphd"
+},{
+"courseTitle": "B.com",
+"courseCost": 75000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-masters",
+"active": true,
+"id":  "inbcom"
+},{
+"courseTitle": "B.sc",
+"courseCost": 75000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "inbsc"
+},{
+"courseTitle": "B.A",
+"courseCost": 75000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "inba"
+},{
+"courseTitle": "Medicine",
+"courseCost": 1000000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-medicine",
+"active": false,
+"id":  "ingmed"
+},{
+"courseTitle": "Engineering",
+"courseCost": 400000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-phd",
+"active": false,
+"id":  "ineng"
+},{
+"courseTitle": "Law",
+"courseCost": 300000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-law",
+"active": false,
+"id":  "inglaw"
+},{
+"courseTitle": "C.A",
+"courseCost": 300000,
+"coursePlace":"India",
+"eduMilestone": "Grad",
+"piclass":"box icn-mba",
+"active": false,
+"id":  "ingca"
+},{
+"courseTitle": "B.com",
+"courseCost": 1258000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-masters",
+"active": true,
+"id":  "abrbcom"
+},{
+"courseTitle": "B.sc",
+"courseCost": 1558000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-medicine",
+"active": true,
+"id":  "abrbsc"
+},{
+"courseTitle": "B.A",
+"courseCost": 1158000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "abrba"
+},{
+"courseTitle": "Medicine",
+"courseCost": 1580000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-medicine",
+"active": false,
+"id":  "abrgmed"
+},{
+"courseTitle": "Engg",
+"courseCost": 1858000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-phd",
+"active": false,
+"id":  "abreng"
+},{
+"courseTitle": "Law",
+"courseCost": 1758000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-law",
+"active": false,
+"id":  "abrglaw"
+},{
+"courseTitle": "C.A",
+"courseCost": 2008000,
+"coursePlace":"Abroad",
+"eduMilestone": "Grad",
+"piclass":"box icn-masters",
+"active": false,
+"id":  "abrgca"
+}]

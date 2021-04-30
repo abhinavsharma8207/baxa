@@ -1,0 +1,238 @@
+<ion-view view-title="BAXA Unification">
+<ion-header-bar class="bar-stable">
+<a class="button icon-left ion-chevron-left button-clear button-royal" href="#/app/home"></a>
+        <h1 class="title">Future Invest</h1>
+</ion-header-bar>
+  <ion-content>
+
+    <form class="padding mt50" name="userForm" novalidate>
+      <span ng-repeat ="err in errs">
+        {{err}}
+      </span>
+
+
+            <label class="item item-input" ng-repeat="error in errorMessages">
+              <span style="color: red;">{{error}}</span>
+            </label>
+
+         <label class="item item-input item-select">
+              <span class="input-label">Premium Payment  Term</span>
+              <select name="ppt" ng-model="data.ppt"
+              ng-options="ppt.id as ppt.name for ppt in ppts" ng-change="populatePT(data.ppt)">
+              </select>
+            </label>
+
+            <label class="item item-input">
+             <span class="input-label">Premium Term</span>
+             <input type="text" ng-model="data.pt"  name="pt"   value="0">
+            </label>
+
+
+          <div class="list form-group"  >
+            <label class="item item-input">
+              <span class="input-label">Life Assurer Name</span>
+              <input type="text"  name="name" ng-model="data.laName"    />
+            </label>
+
+          </div>
+
+            <label class="item item-input">
+             <span class="input-label">Life Assurer Age</span>
+             <input type="number" ng-model="data.laAge"  value="">
+             <span ng-bind="ageMessage" ng-show=""></span>
+            </label>
+
+            <label class="item item-input item-select" ng-model="data.LifeAssurerGender">
+             <div class="input-label"> Life Assurer Gender</div>
+             <select name="laGender" ng-model="data.laGender">
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+             </select>
+            </label>
+
+            <label class="item item-input">
+             <span class="input-label">Proposer Name</span>
+             <input type="text"  ng-model="data.proposerName"  value="null">
+            </label>
+
+            <label class="item item-input">
+             <span class="input-label">Proposer Age</span>
+             <input type="number" ng-model="data.proposerAge" ng-blur="validatePropAge(data.proposerAge,'PropAge')" value="null">
+             <span ng-bind="ageMessage" ng-show=""></span>
+            </label>
+           <!--  ng-blur="validateAge(data,'PROPAGE')"  -->
+            <label class="item item-input item-select">
+             <div class="input-label" >proposer Gender</div>
+             <select ng-model="data.proposerGender">
+               <option value="0">Male</option>
+                <option value="1">Female</option>
+             </select>
+            </label>
+
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">Self</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.isSelf"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+             <div class="list form-group"  show-errors='{showSuccess: true}'>
+            <label class="item item-input item-select">
+             <div class="input-label">Premium Mode</div>
+             <select name="premiumMode"  ng-model="data.premiumMode" ng-change="validatePremium(data)" required>
+                <option value="1">Yearly</option>
+                <option value="2">Half Yearly</option>
+                <option value="4" >Quarterly</option>
+                <option value="12">Monthly</option>
+             </select>
+            </label>
+
+          </div>
+
+            <label class="item item-input">
+             <span class="input-label">Sum Assured</span>
+             <input type="number" ng-model="data.sumAssured" ng-blur="populateBasePremium(data.sumAssured,data.ppt)"  value="0">
+            <!--  ng-change="validateSumAssured(data)"  -->
+            </label>
+            <input type="hidden" ></div>
+            <!-- ng-model="data.prodCode" -->
+            <label class="item item-input">
+             <span class="input-label">Base Premium</span>
+             <input type="number" ng-model="data.basePremium"  ng-blur="populateSumAssured(data.basePremium,data.ppt)"   value="0">
+            </label>
+
+            <label class="item item-input">
+              <div class="row">
+                 <div class="col-75">
+                 <div class="input-label">NSAP For LA</div>
+                 </div>
+                 <div class="col-25">
+                  <ion-checkbox ng-model="data.NSAPForLA"></ion-checkbox>
+                 </div>
+              </div>
+            </label>
+
+            <div ng-repeat="fund in funds track by $index">
+            <label class="item item-input">
+              <span class="input-label" ng-bind="fund.Name" ></span>
+               <input type="number" ng-model="data.allFund[fund.id][fund.FMC]"  value="0">
+
+            </label>
+            </div>
+
+           <button class="button button-full button-assertive mt25" ng-click="dbValidation(data)">Calculate</button>
+          </div>
+        </form>
+ <div class="padding">
+          <div class="mt35" ng-show="showOutput">
+                <span><b>Calculated Output</b></span>
+
+          <div class="item row" >
+                <div class="col-80"><p class="test">Base Premium</p></div>
+                <div class="col-20"><span ng-bind="answer.base"></span></div>
+              </div>
+               <div class="item row" >
+                <div class="col-80"><p class="test">Modal Premium</p></div>
+                <div class="col-20"><span ng-bind="answer.baseModal"></span></div>
+
+              </div>
+
+              <div class="item row" >
+                <div class="col-80"><p class="test">Nsap base Premium</p></div>
+                <div class="col-20"><span ng-bind="answer.extraPremiumDueToNSAP"></span></div>
+                </div>
+              <div class="item row">
+                <div class="col-80"><p class="test">Nsap Modal Premium </p></div>
+                <div class="col-20"><span ng-bind="answer.extraModalPremiumDueToNSAP"></span></div>
+                 </div>
+              <div class="item row" >
+                <div class="col-80"><p class="test"></p>Total Modal Premium</div>
+                <div class="col-20"><span ng-bind="answer.totalModalPremium"></span></div>
+                 </div>
+
+
+
+
+          </div>
+          </div>
+
+
+
+          <div class="mt30 border"></div>
+
+
+         <div class="mt35" ng-show="biOutput" style="overflow:scroll;">
+
+          <span class=" "><b>Calculated Output For BI</b></span>
+            <TABLE BORDER="2"   WIDTH="80%"   CELLPADDING="4" CELLSPACING="3">
+              <tr>
+               <th colspan="20"><br><h3 align="center">BI Calculation</h3></th>
+              </tr>
+              <tr>
+               <th colspan="5"></th>
+               <th colspan="7">Assumed gross investment rate of 8%</th>
+               <th colspan="7">Assumed gross investment rate of 4%</th>
+                <th colspan="1"></th>
+              </tr>
+              <tr>
+                 <th>Policy Year</th>
+                <th>AnnualisedPremium</th>
+                <th>PremiumAllocationCharge</th>
+                <th>Amountavailable forInvestment(out of thepremium)</th>
+                <th>PolicyAdministration charges</th>
+
+                <th>MortalityCharge</th>
+                <th>Fund Valuebefore FMC
+                (at thebeginning ofthe year)π</th>
+                <th>FundManagementCharge</th>
+                <th>Service taxon allcharges</th>
+                <th>Fund at theend of theyear</th>
+                <th>SurrenderValue</th>
+                <th>DeathBenefit</th>
+
+                 <th>MortalityCharge</th>
+                <th>Fund Value
+                 before FMC
+                (at the beginning of the year)π</th>
+                <th>FundManagementCharge</th>
+                <th>Service taxon allcharges</th>
+                <th>Fund at the end of the year</th>
+                <th>SurrenderValue</th>
+                <th>DeathBenefit</th>
+                <th>Total Commissions</th>
+              </tr>
+
+              <tr align="center" ng-repeat="policyYears in BIData.oPolicyYear">
+             <TD>{{BIData.oPolicyYear[$index]}}</TD>
+                <TD>{{BIData.oAnnulisedPrem[$index]}}</TD>
+                <TD>0</TD>
+                <TD>{{BIData.oAnnulisedPrem[$index]}}</TD>
+                <TD>{{BIData.oAnnualAdminFee[$index]}}</TD>
+
+                 <TD>{{BIData.o10COICharge[$index]}}</TD>
+                <TD>{{BIData.o10FundAfterDeduction[$index]}}</TD>
+                <TD>{{BIData.o10FundManagmentCharges[$index]}}</TD>
+                <TD>{{BIData.o10AllStax[$index]}}</TD>
+                <TD>{{BIData.o10fundAtTheEndOfTheYear[$index]}}</TD>
+                <TD>{{BIData.o10Sv[$index]}}</TD>
+                <TD>{{BIData.o10DeathBenfit[$index]}}</TD>
+
+                <TD>{{BIData.o6COICharge[$index]}}</TD>
+                <TD>{{BIData.o6FundAfterDeduction[$index]}}</TD>
+                <TD>{{BIData.o6FundManagmentCharges[$index]}}</TD>
+                <TD>{{BIData.o6AllStax[$index]}}</TD>
+                <TD>{{BIData.o6fundAtTheEndOfTheYear[$index]}}</TD>
+                <TD>{{BIData.o6Sv[$index]}}</TD>
+                <TD>{{BIData.o6DeathBenfit[$index]}}</TD>
+
+                <TD>{{BIData.oCommision[$index]}}</TD>
+              </tr>
+              <tr></tr>
+            </TABLE>
+          </div>
+
+</ion-content>
+</ion-view>

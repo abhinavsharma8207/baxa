@@ -1,0 +1,9 @@
+
+      {       
+		  "SpaceAndDot":"Space and Dot at starting position is not allowed in Life Assurer Name.",
+          "length":"Life Assurer Name length between 1 to 50.",
+          "Selfselection":"For self selection LA name = to Proposer so gender , age and name shoould be same.",
+          "LifeAssurrerName":"Life Assurer Name length is 10.",
+          "AgeValidation":"Age must be between 18 to 99",
+          "SumAssuredMaxLength":"max length is 10"
+      }

@@ -1,0 +1,157 @@
+<ion-view view-title="Wealth Calculator" class="wealthCalcu">
+    <form name="wealthFrm" ng-submit="doCalculate(wealth)" novalidate >
+        <ion-content ng-class="animateClass" class="formBoxTwo" >
+            <div class="content">
+                <div class="row responsive-sm rowpadltrtnone3">
+                    <div class="col mbtm5">
+                        <div class="whiteboxdiv blueline">
+                            <div class="row rowfix marpadnone">
+                                <div class="col col-80">
+                                    <h4 class="pt7">Current age?</h4>
+                                </div>
+                                <div class="col">
+                                    <div class="inpbtncrnyrs">
+                                        <input type="number" name="currentAge" value="wealth.currentAge" step="1" ng-change="checkNumber(wealth.currentAge);" ng-model="wealth.currentAge" min="{{wealth.minAge}}" max="{{wealth.maxAge}}" ng-maxlength="2" required="true" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);" string-to-number>
+                                        <span>YRS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="errortxt">
+                                  <span ng-show="wealthFrm.currentAge.$error.notnumber">Not number.</span>
+                                  <span ng-show="wealthFrm.currentAge.$error.number">Please enter Current Age.</span>
+                                    <span ng-if="wealthFrm.currentAge.$error.maxlength">Please enter valid input.</span>
+                                    <span ng-if="(wealthFrm.currentAge.$error.max || wealthFrm.currentAge.$error.min) && !wealthFrm.currentAge.$error.maxlength">*Age should be between 25 to 60.</span>
+                                </div>
+                            <div class="progress-box">
+                                <div class="progress-bar progress-bar-slider">
+                                    <input type="range" ng-change="rangeStyle('currentAge')" min="{{wealth.minAge}}" max="{{wealth.maxAge}}" value="{{wealth.currentAge}}" ng-model="wealth.currentAge" class="progress-slider" numericsaving/>
+                                    <div class="inner" ng-style="{width: (wealth.currentAge - 34) / 35 * 100 < 100 ? (wealth.currentAge - 25) / 35 * 100  + '%' : 100 + '%' }">
+                                    </div>
+                                    <div class="row lastrangsmltxt">
+                                        <div class="col">
+                                            <span ng-bind="wealth.minAge"></span>
+                                            <span>YRS</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span ng-bind="wealth.maxAge"></span>
+                                            <span>YRS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mbtm5">
+                        <div class="whiteboxdiv blueline">
+                            <div class="row rowfix marpadnone">
+                                <div class="col col-67">
+                                    <h4 class="pt7">Funds required? <span>(Rs.)</span></h4>
+                                </div>
+                                <div class="col">
+                                    <div class="inpbtncrnrupees">
+                                        <input type="number" value="{{wealth.fundsRequired}}" class="wd150"
+                      name="fundsRequired" ng-model="wealth.fundsRequired" ng-change="showExtra();" ng-maxlength="9"
+                      min="100000" required="required" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);" string-to-number />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="errortxt">
+                                    <span ng-if="wealthFrm.fundsRequired.$error.maxlength">Please enter valid input.</span>
+                                    <span ng-if="wealthFrm.fundsRequired.$error.min">*Minimum funds required should be greater than 1000.</span>
+                                </div>
+                                <div class="colLtRtdiv pt20">
+                                    <a href="#" ng-show="extraFundsAdd" ng-click="addFundsRange()" class="addsml fr"></a>
+                                    <a href="#" ng-show="extraFundsMin" ng-click="addFundsRange()" class="negsml fr"></a>
+                                    <div class="progress-box" ng-show="fundRangeMin">
+                                        <div class="progress-bar progress-bar-slider">
+                                            <input type="range" id="fundsRequired" step="100000" min="{{wealth.minFunds}}" max="{{wealth.maxFunds}}" value="{{wealth.fundsRequired}}" ng-model="wealth.fundsRequired" class="progress-slider"/>
+                                            <div class="inner" ng-style="{ width: (wealth.fundsRequired - ((wealth.fundsRequired > 5000000?(wealth.fundsRequired - wealth.maxFunds) : 0))) / wealth.maxFunds * 100 + '%' || '0%' }"></div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">0
+                                                    <span>L</span>
+                                                </div>
+                                                <div class="col text-right">50
+                                                    <span>L</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-box" ng-show="extraFundsRange">
+                                        <div class="progress-bar progress-bar-slider">
+                                            <input type="range" step="100000" min="{{wealth.minFundsP}}" max="100000000" value="{{wealth.fundsRequired}}" ng-model="wealth.fundsRequired" class="progress-slider"/>
+                                            <div class="inner" ng-style="{ width: (wealth.fundsRequired - 5100000) / 95000000 * 100  + '%' || '0%' }"></div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">0.51
+                                                    <span>Cr</span>
+                                                </div>
+                                                <div class="col text-right">10
+                                                    <span>Cr</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col mbtm5">
+                            <div class="whiteboxdiv blueline ">
+                            <div class="row rowfix marpadnone">
+                                <div class="col col-80">
+                                    <h4 class="pt7">After how many years?</h4>
+                                </div>
+                                <div class="col">
+                                    <div class="inpbtncrnyrs">
+                                        <input type="number" value="{{wealth.years}}" ng-model="wealth.years" name="years" size="2" ng-maxlength="2" class="wd30" step="1" min="{{wealth.minYears}}" max="{{wealth.maxYears}}" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57)"  string-to-number>
+                                            <span>YRS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class="errortxt">
+                                          <span ng-if="wealthFrm.years.$error.maxlength">Please enter valid input.</span>
+                                            <span ng-if="(wealthFrm.years.$error.max || wealthFrm.years.$error.min) && !wealthFrm.years.$error.maxlength">*Funds required in years should be between {{wealth.minYears}} to {{wealth.maxYears}} years.</span>
+                                        </div>
+                                    <div class="progress-box">
+                                        <div class="progress-bar progress-bar-slider">
+                                            <input type="range" id="years" min="{{wealth.minYears}}" max="{{wealth.maxYears}}" value="{{wealth.years}}" ng-model="wealth.years" class="progress-slider" numericsaving/>
+                                            <div class="inner" ng-style="{ width: (wealth.years / wealth.maxYears * 100 ) <= 100 ? wealth.years / wealth.maxYears * 100 + '%'  : 0 + '%' }">
+                                            </div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">0 <span>YRS</span></div>
+                                                <div class="col text-right">20 <span>YRS</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row responsive-sm wealthCreAss m0">
+                            <div class="col m0"></div>
+                            <div class="col m0">
+                                <div class="row rowfix rowpadltrtnone">
+                                    <div class="col m0">
+                                        <h4 class="m0">Assumptions:</h4>
+                                    </div>
+                                    <div class="col col-67 rtoren">
+                                            <span class="fs13 fl">Rate of Return</span>
+                                        <div class="inpbtncrnyrs fl">
+                                                <input type="number" ng-model="wealth.rateOfRtrn" value="{{wealth.rateOfRtrn}}" name="rateOfRtrn"  min="0" max="99" maxlength="2" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57)" string-to-number>
+                                            <span>%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="errortxt">
+                                        <span ng-if="wealthFrm.rateOfRtrn.$error.max || wealthFrm.rateOfRtrn.$error.min">*Rate of returns should be between 0 to 99.</span>
+                                    </div>
+                                </div>
+                                <div class="col m0"></div>
+                            </div>
+                        </div>
+                    </ion-content>
+                    <ion-footer-bar ng-if="!tabInclude">
+                        <button class="button button-clear button-positive button-full" ng-disabled="wealthFrm.$invalid">
+                            <span class="subtn-arw">Calculate</span>
+                        </button>
+                    </ion-footer-bar>
+                </form>
+            </ion-view>

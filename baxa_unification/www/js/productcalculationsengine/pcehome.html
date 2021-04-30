@@ -1,0 +1,9 @@
+ <ion-view view-title="BAXA Unification">
+   <ion-header-bar class="bar-stable">
+   </ion-header-bar>
+   <ion-content>
+     <div ng-repeat="product in productsListData" class="button-bar padding" style="float:left;" >
+	      <a class="button icon-right ion-chevron-right button-calm padding" ng-click="setSelectedProduct(product.FkProductId)">{{product.Label}}</a>
+     </div>
+   </ion-content>
+</ion-view>

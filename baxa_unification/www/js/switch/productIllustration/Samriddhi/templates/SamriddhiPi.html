@@ -1,0 +1,264 @@
+<ion-view view-title="Samriddhi"  class="needsPrioritisation">
+  <div class="topProgressBar" ng-include="'js/switch/templates/switchTaps.html'"></div>
+  <ion-content>
+    <div class="content">
+
+      <!-- Samriddhi_SWITCH_Tab_02 start -->
+      <div class="twopanel" ng-show="samriddhiQuoteData.inYour == 'PRESENCE'">
+        <div class="row">
+          <div class="col elitcolor">
+            <a ng-click="showAssumtion()" class="assmlink">&nbsp;</a>
+            <p>Product Illustrations</p>
+          </div>
+        </div>
+          <div class="brwbk">
+          <div class="row brdbtm">
+            <div class="col">
+              <p>Sum Assured at Maturity (a)</p>
+              <p class="lartxt">₹ <span ng-bind="sumAssured | commaSeperated "></span></p>
+            </div>
+            <div class="col zindex">
+              <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+              <p class="lartxt">₹ <span ng-bind="nonGuaranteedBonusesMaturity | commaSeperated "></span></p>
+            </div>
+          </div>
+          <div class="text-center">
+            <p class="pt10">Sum of Benefits (a+b) <span class="lartxt">₹ <span ng-bind="sumofBenefits | commaSeperated "></span></span></p>
+          </div>
+        </div>
+        <div class="whtbk">
+          <div class="listwid">
+            <div class="listround oldage">
+              <div class="imgdiv-top">
+                <img src="img/{{userFutureImg}}{{Gender}}.png"> <span class="icn-cash"></span>
+              </div>
+              <div class="blue-bar-top">
+                <div class="grey-circle-top"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="lifeAssuredAge"></span><br> YEARS</div>
+                  <div class="rt">At Maturity, Sum Assured +Non-Guaranteed Bonuses are paid</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="blue-bar" ng-click="onClickBlueBar()">
+                <div class="blurbar-height">
+                 <div class="annualpage" ng-show="coinsShow">
+
+                  <div class="ltrupees" ng-show="samriddhiQuoteData.ppt > 10">
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                  </div>
+                  <div class="ltrupees" ng-show="samriddhiQuoteData.ppt <= 10">
+                    <p ng-repeat="coins in coinsCount track by $index"><span class="icn-rupees"><img src="img/rupee-circle.png"/>&nbsp;</span></p>
+                  </div>
+                  <div class="ltrupeesdesc">
+                    <p>You pay <span ng-bind="premiumMode"></span> Premium<br> of ₹ <b><span ng-bind="modalPremium | commaSeperated "></span></b> for <b><span ng-bind="samriddhiQuoteData.ppt"></span> years</b></p>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv">
+                <img src="img/{{userCurrentImg}}{{Gender}}.png">
+              </div>
+              <div class="blue-bar-bottom">
+                <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="samriddhiQuoteData.laAge"></span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Samriddhi_SWITCH_Tab_02 end -->
+      <!--  in Your ABSENCE -->
+      <div class="twopanel" ng-show="samriddhiQuoteData.inYour == 'ABSENCE'">
+        <div class="row">
+          <div class="col elitcolor">
+            <a ng-click="showAssumtion()" class="assmlink">&nbsp;</a>
+            <p><b>Product Illustrations</b></p>
+          </div>
+        </div>
+          <div class="brwbk">
+          <div class="row">
+            <div class="col">
+              <p>Sum of Non-Guaranteed Bonuses</p>
+              <p class="lartxt">₹ <span ng-bind="sumofNonGuaranteedBonuses | commaSeperated "></span></p>
+            </div>
+            <div class="col zindex">
+              <p>Death Benefit</p>
+              <p class="lartxt">₹ <span ng-bind="deathBenefit | commaSeperated "></span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="whtbk">
+          <div class="listwid">
+            <div class="listround oldage">
+              <div class="imgdiv-top">
+                <img src="img/{{userFutureImg}}{{Gender}}F.png"> <span class="icn-cash"></span></div>
+                   <div class="blue-bar-top">
+                    <div class="grey-circle-top"></div>
+                  </div>
+                  <div class="desc">
+                    <div class="row">
+                      <div class="lt yrtxt"><span ng-bind="lifeAssuredAgeDeath"></span><br> YEARS</div>
+                      <div class="rt">In case of <span class="gpclrtxt">sudden loss of life</span> (Eg. at <span ng-bind="lifeAssuredAgeDeath"></span> yrs), the Death Benefit is immediately paid out to the family and the Policy is terminated</div>
+                    </div>
+                  </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="blue-bar">
+               <div class="blurbar-height" ng-click="onClickBlueBar()">
+                <div class="annualpage" ng-show="coinsShow">
+                  <div class="ltrupees" ng-show="samriddhiQuoteData.ppt > 10">
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+                    <p><span class="yelcircle">&nbsp;</span></p>
+
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                    <p><span class="icn-rupees">&nbsp;</span></p>
+                  </div>
+                  <div class="ltrupees" ng-show="samriddhiQuoteData.ppt <= 10">
+                    <p ng-repeat="coins in coinsCount track by $index"><span class="icn-rupees"><img src="img/rupee-circle.png"/>&nbsp;</span></p>
+                  </div>
+                  <div class="ltrupeesdesc">
+                    <p>You pay <span ng-bind="premiumMode"></span> Premium<br> of ₹ <b><span ng-bind="modalPremium | commaSeperated "></span></b> for <b><span ng-bind="samriddhiQuoteData.ppt"></span> years</b></p>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+             </div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv">
+                <img src="img/{{userCurrentImg}}{{Gender}}.png">
+              </div>
+              <div class="blue-bar-bottom">
+                <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><span ng-bind="samriddhiQuoteData.laAge"></span><br> YEARS</div>
+                  <div class="rt">Start of the Plan</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Samriddhi_SWITCH_Tab_04 start -->
+
+      <!-- Samriddhi_SWITCH_Tab_04 end -->
+      <a href="#/app/switchSamriddhiQuote/{{custId}}" ng-click="setNowAnimate()">
+      <div class="whiteboxdiv inpbtmdiv">
+        <div class="row">
+          <div class="col">Inputs</div>
+          <div class="col text-right">
+            <span class="icn-fullwid"></span>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+  </ion-content>
+  <ion-fixed class="fixed-div btm75px">
+    <button fab fab-right fab-bottom dark>
+      <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+    </button>
+  </ion-fixed>
+  <ion-footer-bar class="btnlastbkbg">
+    <button class="button button-clear button-positive col-50" ng-click="backToProduct()">View Another Product</button>
+    <button class="button button-clear button-positive col-50" ng-click="goToEapp()">PROCEED TO FORM FILLING</button>
+  </ion-footer-bar>
+  <!-- <div class="bar bar-footer">
+    <button class="button button-clear button-positive button-full" ng-click="calculate()"> <span class="subtn-arw">Calculate</span> </button>
+  </div> -->
+</ion-view>
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="brochure" href="#" ng-click="brochure()">Brochure <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="email" href="#" ng-click="email()">Email <span>&nbsp;</span></a></li>
+        <!-- <li><a class="save" href="#">Save <span>&nbsp;</span></a></li>                    -->
+      </ul>
+      <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<div class="adic-modal">
+    <ion-modal-view class="adic-popup" ng-show="showAssumtionPopup">
+      <div class="proassdiv">
+      <a ng-click="hideAssumtionPopup()" class="close">&nbsp;</a>
+       <h5>assumptions</h5>
+       <p>This is for illustrative purposes only. Non-Guaranteed Bonuses are assumed at 8% Rate of Return per annum.</p>
+       </div>
+    </ion-modal-view>
+</div>
+
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              Illustrations
+            </li>
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>

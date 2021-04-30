@@ -1,0 +1,93 @@
+[{
+  "1":{
+      "src": "img/img4.jpg",
+      "src1": "img/icn-sml-ea.png",
+      "class": "ea",
+      "title": "Aajeevan Sam",
+      "desc": "<span>-</span>Pay for short term (10 or 15 yrs) & get benefits over a long term (up to Age 85 or 100 yrs)<br><span>-</span> Receive Guaranteed Benefits every year from 6th yr onwards<br><span>-</span> Plus, receive Non-Guaranteed Bonus every year from 11th yr onwards <br><span>-</span> Plus, 100% Sum Assured (Guaranteed) at Maturity"
+  },
+  "2":{
+    "src": "img/img2.jpg",
+    "src1": "img/icn-sml-ea.png",
+    "class": "ea",
+    "title": "Samriddhi",
+    "desc": "<span>-</span> Guranateed Benefits (100% Sum Assured) + accrued Non-Guaranteed Bonuses at Maturity <br><span>-</span> Choose between 8 Limited & Regular Pay options"
+  },
+  "3":{
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-ea.png",
+    "class": "ea",
+    "title": "Triple Health",
+    "desc": "<span>-</span>Covers 13 Critical Illnesses, across 3 Groups <br><span>-</span> You can make up to 3 Claims, max of 1 in each Group <br><span>-</span> Future Premiums waived off after 1st Claim, even as benefits continue"
+  },
+  "8": {
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-si.png",
+    "class": "si",
+    "title": "Elite Secure",
+    "desc": "<span>-</span> A comprehensive and long-term plan that promises a secure life along with financial protection in case of an unfortunate event"
+  },
+  "9": {
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-si.png",
+    "class": "si",
+    "title": "Secure Income",
+    "desc": "<span>-</span> Get Guaranteed Monthly Income, for 10 yrs (i.e. 120 months) from the end of the Premium Payment Term <br><span>-</span> Plus, up to 200% of Sum Assured (Guaranteed), at Maturity <br><span>-</span> PPT options of 5, 7 & 10 years "
+  },
+  "10": {
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-ma.png",
+    "class": "ma",
+    "title": "Flexi Save",
+    "desc": "<span>-</span> 100% Sum Assured (Guaranteed) + accrued non-Guaranteed Bonus + Terminal Bonus, at Maturity <br><span>-</span> Flexibility to pre-pone & avail your Maturity benefits accured till date, at any time during the Flexi Benefit period (last 10 years of the Term)<br><span>-</span> PPT options of 5, 7 & 12 years"
+  },
+  "11": {
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-ma.png",
+    "class": "ma",
+    "title": "Future Invest",
+    "desc": "<span>-</span> ULIP Plan with 0% Allocation Charges <br><span>-</span> PPT of 5 yrs & Maturity at 10 yrs <br><span>-</span> Choose between 6 Investment Funds"
+  },
+  "12": {
+    "src": "img/img3.jpg",
+    "src1": "img/icn-sml-ea.png",
+    "class": "ss",
+    "title": "Elite Adv",
+    "desc": "<span>-</span> Guaranteed Payouts paid regularly, from end of Policy Term to end of 19th year<br><span>-</span> Plus,100% Sum Assured (Guaranteed) at Maturity (end of 20th year)<br><span>-</span> PPT options of 5, 7 & 12 years"
+  },
+  "13":{
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-ss.png",
+    "class": "ss",
+    "title": "Super Series",
+    "desc": "<span>-</span>Super 6 & Super 10 PPT Get <br><span>-</span> 50% of SA (Guaranteed) at end of PPT <br><span>-</span> Plus, get Guaranteed Payout every yr from the next yr till Maturity, starting from 12% of SA and increasing by 3% every yr <br><span>-</span> Plus, 100% of SA (Guaranteed) + 30% of SA as Guaranteed Additions, at Maturity"
+  },
+  "14":{
+    "src": "img/img1.jpg",
+    "src1": "img/icn-sml-ea.png",
+    "class": "ea",
+    "title": "Child Advantage",
+    "desc": "<span>-</span> Guaranteed Benefits + Non-Guaranteed Bonuses at Maturity <br><span>-</span>Option to receive Guaranteed Benefits from 5 years before Maturity<br><span>-</span> In built Premium Waiver Rider"
+  },
+  "15":{
+    "src": "img/img2.jpg",
+    "src1": "img/icn-sml-si.png",
+    "class": "ma",
+    "title": "Monthly Advantage",
+    "desc": " <span>-</span> Get Guaranteed Monthly Income, from end of the Premium Payment Term till Maturity <br> <span>-</span> Plus, get non-Guaranteed Annual Reversionary Bonus accrued from 1st year + non-Guaranteed Terminal Bonus, at Maturity <br><span>-</span>PPT options of 7, 10 & 15 years "
+  },
+  "16":{
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-si.png",
+    "class": "si",
+    "title": "e-Protect",
+    "desc": "<span>-</span> High level of Protection, at affordable Premiums <br><span>-</span> Cover till Age 75 year <br><span>-</span> In-built Family Care Benefit"
+  },
+  "17": {
+    "src": "img/img4.jpg",
+    "src1": "img/icn-sml-ss.png",
+    "class": "ss",
+    "title": "e-Protect +",
+    "desc": "<span>-</span> High level of Protection, at affordable Premiums <br><span>-</span> Cover till Age 75 years <br><span>-</span> 2 felxible options for Death Benefit payout : a) As Monthly Income for 15 yrs (180 months)  ;  b) 50% of SA upfront + annual increasing installments over 10 yrs"
+  }
+}]

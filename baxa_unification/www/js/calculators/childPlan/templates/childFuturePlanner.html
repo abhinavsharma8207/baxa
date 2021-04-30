@@ -1,0 +1,87 @@
+<ion-view view-title="Child Future Planner" class="childFuturePlanner">
+  <ion-content>
+    <div class="screenContainer padTop10">
+      <div class="rightPanel fr" id="chartDiv">
+        <div class="content">
+          <div class="childfuturediv">
+            <a href="#/app/childplan" ng-click="setNowAnimate()">
+              <div class="whiteboxdiv inputdiv inpdivM">
+                <div class="row">
+                  <div class="col">Input</div>
+                  <div class="col text-right"><span class="icn-fullwid"></span> </div>
+                </div>
+              </div>
+            </a>
+            <div class="whiteboxdiv">
+              <div class="disclosure text-center">Cost of doing an {{childstudyobj.courseTitle}} in <span class="large-txt">{{childstudyobj.yearsToAchieveGoal}} yrs</span> will be <span class="large-txt">₹{{childstudyobj.futureCostofEducation | amtconvert:'L'}}.</span>
+                <br> To achieve this corpus, you need to invest <span class="large-txt">₹{{childstudyobj.monthlyInvestMentRequired | amtconvert:'K' }} p.m.</span>, starting now!!</div>
+              <div class="chartbrd grpback chart2Container">
+                <div class="rotatetxt">Cost of Education</div>
+                <div class="rstxt">Rs.</div>
+                <div class="ratetxt">Inflation
+                  <div class="circlebox">{{childstudyobj.rateofReturnvalue}}%</div>
+                </div>
+                <div class="levelHeight1"> {{childstudyobj.courseCost  | amtconvert:'L'}} 
+                  <div class="levelwid">
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                  </div>
+                </div>
+                <div class="levelHeight2">
+                  {{childstudyobj.futureCostofEducation | amtconvert:'L'}}
+                  <br>
+                  <div class="levelwid">
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                    <div class="smlbxlevel"></div>
+                  </div>
+                </div>
+                <svg style='width: 100%; height: 100%;'>
+                  <line x1="92" y1="87%" x2="82%" y2="7" style="stroke:rgb(220,220,220);stroke-width:0" />
+                </svg>
+              </div>
+              <div class="row chartAge">
+                <div class="col text-center">{{childstudyobj.cagevalue}} yrs</div>
+                <div class="col text-center">Child's Age</div>
+                <div class="col text-center">{{childstudyobj.fundagevalue}} yrs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="leftPanel fl" id="inputDiv">
+        <div ng-if="tabInclude" ng-include="'js/calculators/childPlan/templates/childFuturePlan.html'"></div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-fixed class="fixed-div" ng-show="saveResult">
+    <button fab fab-right fab-bottom dark>
+      <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+    </button>
+  </ion-fixed>
+  <ion-footer-bar>
+    <button ng-disabled="formInvalid" class="button button-clear button-positive button-full" ng-click="investment()"> <span class="subtn-arw">Enter Investments</span> </button>
+  </ion-footer-bar>
+  <div class="adic-modal">
+    <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+      <div class="wealth-popup">
+        <ul class="popuplist">
+          <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+          <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        </ul>
+        <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+      </div>
+    </ion-modal-view>
+  </div>
+</ion-view>

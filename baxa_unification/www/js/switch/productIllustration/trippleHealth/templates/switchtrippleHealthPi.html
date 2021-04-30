@@ -1,0 +1,182 @@
+<ion-view view-title="BAXA Unification" class="needsPrioritisation">
+  <ion-header-bar class="bar-stable">
+    <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/home"></a>
+    <h1 class="title">Triple Health Pi</h1>
+  </ion-header-bar>
+   <div class="topProgressBar" ng-include="'js/switch/templates/switchTaps.html'"></div>
+  <ion-content>
+    <div class="content">
+      <!-- Triple_Health_SWITCH_Tab_01 start -->
+      <div class="twopanel">
+        <div class="row">
+          <div class="col elitcolor">
+            <p>Product Illustration</p>
+          </div>
+        </div>
+        <div class="brwbk2">
+          <div class="row">
+            <div class="col">
+              <p>Annual Premium </p>
+              <p class="lartxt"><i class="WebRupee">Rs.</i> {{getcaldata.base}}</p>
+            </div>
+            <div class="col zindex">
+              <p>Sum Assured</p>
+
+              <p class="lartxt"><i class="WebRupee">Rs.</i> {{getcaldata.sumAssured}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="whtbk">
+          <div class="listwid">
+            <br>
+            <div class="listround oldage">
+
+              <div class="imgdiv-top">
+                <img src="img/{{userFutureImg}}{{getcaldata.laGender}}.png"> <span class="icn-cash"></span>
+              </div>
+              <div></div>
+              <div class="blue-bar-top">
+                <div class="grey-circle-top"></div>
+              </div>
+              <div class="desc">
+                <div class="row">
+                  <div class="lt yrtxt"><div class="divmid"><span>{{uptoAges}}</span>
+                    <br> YEARS</div></div>
+                  <div class="rt"><div class="divmid">At Maturity, the Policy is terminated</div></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="blue-bar">
+            <div class="annualpage martpneg marbtmneg">
+              <div class="ltrupees">
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+
+                <p><span class="yelcircle">&nbsp;</span></p>
+                <p><span class="yelcircle">&nbsp;</span></p>
+                <p><span class="yelcircle">&nbsp;</span></p>
+                <p><span class="yelcircle">&nbsp;</span></p>
+
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+                <p><span class="icn-rupees">&nbsp;</span></p>
+              </div>
+              <div class="ltrupeesdesc">
+                <p class="headisp">You pay an Annual Premium of <b><i class="WebRupee">Rs.</i> {{getcaldata.base}}</b> for <b>15 years</b></p>
+                <p class="headcolr"><strong>Benefits</strong></p>
+                <div class="clearfix"></div>
+                <ul class="benlist">
+                  <li>Cover for 13 Critical Illnesses</li>
+                  <li>Make up to 3 Claims during the Policy Term</li>
+                  <li>Get 100% Sum Assured for each Claim </li>
+                  <li>Future Premiums are waived off after the first Claim is made </li>
+                </ul>
+                <div class="clearfix"></div>
+
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            </div>
+            <div class="listround listround lowYear">
+              <div class="imgdiv">
+                <img src="img/{{userCurrentImg}}{{getcaldata.laGender}}.png">
+              </div>
+              <div class="blue-bar-bottom">
+                <div class="grey-circle-bottom"></div>
+              </div>
+              <div class="desc">
+<div class="ltrtdivmid">
+                <div class="row">
+                  <div class="lt yrtxt"><div class="divmid"><span>{{getcaldata.laAge}}</span>
+                    <br> YEARS</div></div>
+                  <div class="rt"><div class="divmid"> <span> Start of the Plan</span></div></div>
+                </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#/app/trippleHealthQuoteInput/{{custId}}" ng-click="setNowAnimate()">
+      <div class="whiteboxdiv inpbtmdiv">
+        <div class="row">
+          <div class="col">Input</div>
+          <div class="col text-right">
+            <span class="icn-fullwid"></span>
+          </div>
+        </div>
+      </div>
+    </a>
+      <!-- Triple_Health_SWITCH_Tab_01 end -->
+    </div>
+  </ion-content>
+  <ion-fixed class="fixed-div">
+    <button fab fab-right fab-bottom dark>
+      <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+    </button>
+  </ion-fixed>
+  <ion-footer-bar class="btnlastbkbg">
+    <button class="button button-clear button-positive col-50" ng-click="backToProduct()">View Another Product</button>
+    <button class="button button-clear button-positive col-50" ng-click="goToEapp()">PROCEED TO FORM FILLING</button>
+  </ion-footer-bar>
+  <!-- <div class="bar bar-footer">
+    <button class="button button-clear button-positive button-full" ng-click="calculate()"> <span class="subtn-arw">Calculate</span> </button>
+  </div> -->
+
+
+  <div class="adic-modal">
+    <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+      <div class="wealth-popup">
+        <ul class="popuplist">
+          <li ng-show="saveResult"><a class="brochure" href="#" ng-click="brochure()">Brochure <span>&nbsp;</span></a></li>
+          <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+          <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+          <li ng-show="saveResult"><a class="email" href="#" ng-click="email()">Email <span>&nbsp;</span></a></li>
+          <!-- <li><a class="save" href="#">Save <span>&nbsp;</span></a></li>                    -->
+        </ul>
+        <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+      </div>
+    </ion-modal-view>
+  </div>
+
+  <div class="adic-modal">
+    <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+      <div>
+        <div class="popupdiv">
+          <form name="myForm" novalidate="">
+
+            <div ng-click="hidesendEmailPopup()" class="close"></div>
+            <h3>E-mail</h3>
+            <div class="row">
+              <div class="col">
+                <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+                <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+                <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+                <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+              </div>
+            </div>
+
+            <ul class="emailchoice">
+              <li class="item item-checkbox">
+                <label class="checkbox checkbox-assertive">
+                    <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+                </label>
+                Illustrations
+              </li>
+              <li class="item item-checkbox">
+                <label class="checkbox checkbox-balanced">
+                  <input type="checkbox" ng-model="isBrochureSelected">
+                </label> Brochure
+              </li>
+            </ul>
+            <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+          </form>
+        </div>
+      </div>
+    </ion-modal-view>
+  </div>
+
+
+</ion-view>

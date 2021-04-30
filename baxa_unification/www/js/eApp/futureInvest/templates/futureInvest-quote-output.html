@@ -1,0 +1,155 @@
+<ion-view view-title="{{title}}">
+  <ion-content>
+    <div class="content">
+      <div class="prodwid50">
+        <div class="whiteboxdiv inputdiv">
+          <div class="row" ng-click="goToHomePage()">
+            <div class="col">Input</div>
+            <div class="col text-right">
+              <a href="#" class="icn-fullwid"></a>
+            </div>
+          </div>
+        </div>
+        <div class="row responsive-sm tpestimatdiv">
+          <div class="col">
+            <h4>Estimated Rate of Return<span> (%)</span></h4>
+          </div>
+          <div class="col">
+            <div class="tbar">
+              <div class="button-bar" ng-init="output.precent=8"> <a class="button button-item1" ng-class="(output.precent==8?'active':'')" ng-click="output.precent=8">8%</a> <a class="button button-item2" ng-class="(output.precent==4?'active':'')" ng-click="output.precent=4">4%</a> </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row rowpadltrtnone">
+          <div class="col" ng-if="output.precent==4">
+            <div class="pinkbox">
+              <p class="pt10">Fund Value at Maturity4
+                <br/><i class="WebRupee">Rs.</i> {{calcData.maturityAtFour}}
+
+                </p>
+            </div>
+
+          </div>
+          <div class="col" ng-if="output.precent==8">
+            <div class="pinkbox">
+              <p class="pt10">Fund Value at Maturity8
+                <br/><i class="WebRupee">Rs.</i>{{calcData.maturityAtEight}}
+                </p></p>
+            </div>
+          </div>
+        </div>
+        <div class="widthsamridhi">
+
+          <div class="whiteboxdiv bronline">
+            <h4>Modal Premium</h4>
+            <div class="row greyborder">
+              <div class="col">
+                <label><strong>BASE POLICY</strong></label>
+                <p><i class="WebRupee">Rs.</i> {{calcData.baseModal | number}}</p>
+              </div>
+            </div>
+            <div class="text-center pt10"><strong>PREMIUM PAYABLE</strong> <span class="fweight700"><i class="WebRupee">Rs.</i> {{calcData.totalModalPremium  | number}}</span>
+            </div>
+          </div>
+          <div class="text-center martpbtm"><a ng-click="showPopupPremiumWithTaxes()" class="lasttaxlink" href="#">Premium with Taxes</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+<div class="adic-modal" ng-show="premiumWithTaxes">
+  <ion-modal-view class="adic-popup">
+    <div class="modanntble">
+      <a href="#" ng-click="closePopupPremiumWithTaxes()" class="close">&nbsp;</a>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th align="center">Modal Premium</th>
+            <th align="center">Annual Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Base Policy Premium (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.baseModal | number}}</td>
+            <td align="right">{{calcData.base | number}}</td>
+          </tr>
+          <tr>
+            <td>Total Taxes (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.serviceTax + calcData.premium.serviceTaxForModalFirstYear | number}}</td>
+            <td align="right">{{calcData.serviceTaxForAnnualPremFirstYear + calcData.premium.serviceForAnnualFirstYearTax | number}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Premium Payable (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.totalWithTax + calcData.premium.totalModalPremiumWithTaxForFirstYear | number}}</td>
+            <td align="right">{{calcData.totalAnnualPremiumWithTaxForFirstYear + calcData.premium.modalHospiCashPremium + calcData.premium.serviceForAnnualFirstYearTax | number}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ion-modal-view>
+</div>
+<ion-fixed class="fixed-div dwnfix">
+  <button fab fab-right fab-bottom dark>
+    <ion-icon class="addbox" name="add" ng-click="showPlusPopup=true"></ion-icon>
+  </button>
+</ion-fixed>
+<ion-footer-bar class="btnlastbkbg">
+  <button class="button button-clear button-positive col-50" ng-click="saveQuote(false)">Save</button>
+  <button class="button button-clear button-positive col-50" ng-click="proceedToFormFilling()">AGREE & PROCEED TO FORM FILLING</button>
+</ion-footer-bar>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li><a class="email" href="#" ng-click="email()">Email BI Quote<span>&nbsp;</span></a></li>
+      </ul>
+      <a class="popupclose" ng-click="showPlusPopup=false">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>

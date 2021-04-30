@@ -1,0 +1,129 @@
+<ion-view title="App Form" class="customerProfile">
+    <ion-content>
+      <div class="content formBox" style="margin:0 10px">
+        <form name="userForm">
+
+
+          <div class="topBox">
+          <ul class="forlList">
+
+            <li ng-style="{padding:(40-array.length*10)+'%'}">
+            </li>
+              <li class="formContent" ng-show="array.length>0" ng-class="(array.length>0?'trnsitionClass':'')">
+                  <label>First Name :</label>
+                  <input  ng-model="firstname" type="text" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length>1"  ng-class="(array.length>1?'trnsitionClass':'')">
+                  <label>Last Name :</label>
+                  <input type="text" ng-model="lastname" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length>2"  ng-class="(array.length>2?'trnsitionClass':'')">
+                  <label>Date of Birth</label>
+                  <input type="date" ng-model="dateofbirth" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length>3"  ng-class="(array.length>3?'trnsitionClass':'')">
+                  <label>Educational Qualification</label>
+                  <select class="selectBox" ng-model="educationalQualification"><optgroup><option>Professional</option><option>Post Graduate</option><option>Graduate</option><option>Diploma</option><option>12th Pass</option></optgroup></select>
+              </li>
+              <li class="formContent genderControl" ng-show="array.length>4"  ng-class="(array.length>4?'trnsitionClass':'')">
+                  <label>Gender</label>
+                  <div class="clear"></div>
+                  <div class="genderControl">
+                  <label>Male</label>
+                  <input ng-model="gender" type="radio" value="male"   ng-click="genderSelection(gender)" checked="{{gender=='male'}}"  class="inputBox"/>
+                  </div>
+                  <div class="genderControl">
+                  <label>Female</label>
+                  <input ng-model="gender" type="radio" value="female"   ng-click="genderSelection(gender)" checked="{{gender=='female'}}"  class="inputBox"/>
+                  </div>
+                  <div class="clear"></div>
+              </li>
+
+
+              <li class="formContent" ng-show="array.length>5" ng-class="(array.length>5?'trnsitionClass':'')">
+                  <label>First Name :</label>
+                  <input  ng-model="firstname" type="text" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length>6"  ng-class="(array.length>6?'trnsitionClass':'')">
+                  <label>Last Name :</label>
+                  <input type="text" ng-model="lastname" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length>7"  ng-class="(array.length>7?'trnsitionClass':'')">
+                  <label>Date of Birth</label>
+                  <input type="date" ng-model="dateofbirth" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length>8"  ng-class="(array.length>8?'trnsitionClass':'')">
+                  <label>Educational Qualification</label>
+                  <select class="selectBox" ng-model="educationalQualification"><optgroup><option>Professional</option><option>Post Graduate</option><option>Graduate</option><option>Diploma</option><option>12th Pass</option></optgroup></select>
+              </li>
+
+
+
+          </ul>
+          </div>
+          <div class="bottomBox">
+          <button class="button" ng-click="onSend(firstname1,lastname1,dateofbirth1,educationalQualification1,gender1)">send</button>
+            <ul class="forlList">
+              <li class="formContent" ng-show="array.length==0">
+                <label>First Name :</label>
+                <input type="text"  ng-model="firstname1" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length==1">
+                  <label>Last Name :</label>
+                  <input type="text"  ng-model="lastname1" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length==2">
+                  <label>Date of Birth</label>
+                  <input type="date" ng-model="dateofbirth1" class="inputBox"/>
+              </li>
+              <li class="formContent" ng-show="array.length==3">
+                  <label>Educational Qualification</label>
+                  <select ng-model="educationalQualification1" class="selectBox"><optgroup><option>Professional</option><option>Post Graduate</option><option>Graduate</option><option>Diploma</option><option>12th Pass</option></optgroup></select>
+              </li>
+              <li class="formContent genderControl" ng-show="array.length==4">
+                  <label>Gender</label>
+                  <div class="clear"></div>
+                  <div class="genderControl">
+                  <label>Male</label>
+                  <input ng-model="gender1" type="radio" value="male" ng-click="genderSelection(gender1)"  class="inputBox"/>
+                  </div>
+                  <div class="genderControl">
+                  <label> Female</label>
+                  <input ng-model="gender1" type="radio" value="female"  ng-click="genderSelection(gender1)" class="inputBox"/>
+                  </div>
+                  <div class="clear"></div>
+              </li>
+
+
+
+
+                            <li class="formContent" ng-show="array.length==5" ng-class="(array.length>5?'trnsitionClass':'')">
+                                <label>First Name :</label>
+                                <input  ng-model="firstname" type="text" class="inputBox"/>
+                            </li>
+                            <li class="formContent" ng-show="array.length==6"  ng-class="(array.length>6?'trnsitionClass':'')">
+                                <label>Last Name :</label>
+                                <input type="text" ng-model="lastname" class="inputBox"/>
+                            </li>
+                            <li class="formContent" ng-show="array.length==7"  ng-class="(array.length>7?'trnsitionClass':'')">
+                                <label>Date of Birth</label>
+                                <input type="date" ng-model="dateofbirth" class="inputBox"/>
+                            </li>
+                            <li class="formContent" ng-show="array.length==8"  ng-class="(array.length>8?'trnsitionClass':'')">
+                                <label>Educational Qualification</label>
+                                <select class="selectBox" ng-model="educationalQualification"><optgroup><option>Professional</option><option>Post Graduate</option><option>Graduate</option><option>Diploma</option><option>12th Pass</option></optgroup></select>
+                            </li>
+
+
+          </ul>
+        </div>
+
+        </form>
+        </div>
+
+        <button class="button button-clear button-positive button-full" ng-disabled="userForm.$invalid" ng-click="ProceedForLAAndProposerDetails(data)">
+          <span class="subtn-arw">Proceed</span>
+        </button>
+    </ion-content>
+  </ion-view>
+</ion-view>

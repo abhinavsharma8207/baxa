@@ -1,0 +1,159 @@
+<ion-view view-title="{{title}}" class="eliteSecure">
+  <div ng-show="showDbErrors"><span ng-bind="dbErrors"></span></div>
+    <form name="eliteQuoteFrm">
+  <ion-content ng-class="animateClass">
+    <div class="content">
+      <div class="row responsive-sm eliteminHeightone">
+        <div class="col mb0">
+          <div class="whiteboxdiv trblueline plr13 gendiv">
+            <div class="row">
+              <div class="col col-center mb0" >
+                <h4>Gender</h4>
+                <ion-list class="gender">
+                <ion-radio ng-disabled="true" ng-checked="{{option.name == 'Male'?'checked':''}}" ng-model="data.laGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}} {{option.name == 'Male'?'active':''}}" value="{{option.id}}" ng-click="openPopupForChangeDetails()" >{{option.name}}</ion-radio>
+                </ion-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="whiteboxdiv trblueline">
+            <div class="row">
+              <div class="col">
+                <h4>Current age?</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">
+                    <input type="number"  value="{{data.laAge}}" ng-model="data.laAge" name="currentAgeValue"  class="form-control"  min="18" max="65" string-to-number required readonly ng-click="openPopupForChangeDetails()"/>
+                      <span>YRS</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="progress-pink">
+              <!-- <input type="text" id="samriddhi_currentAge" name="example_name" value="" /> -->
+              <div class="progress-box" ng-click="openPopupForChangeDetails()">
+                  <div class="progress-bar progress-bar-slider">
+                      <input disabled type="range" id="currentAge"   min="18" max="65"  value="data.laAge" step="1" ng-model="data.laAge" class="progress-slider"  />
+                      <div class="inner" ng-style="{width: (data.laAge - 18) / 47 * 100 <= 100 ? (data.laAge - 18) / 47 * 100  + '%' : 0 + '%' }">
+                      </div>
+                      <div class="row lastrangsmltxt">
+                          <div class="col">18
+                              <span>YRS</span>
+                          </div>
+                          <div class="col text-right">65
+                              <span>YRS</span>
+                          </div>
+                      </div>
+                        <span style="color: red;" ng-show="showDbErrors">{{dbErrors.ENTAGE}}</span>
+                  </div>
+              </div>
+              <div class="errortxt">
+              <span ng-show="eliteQuoteFrm.currentAgeValue.$error.number">The value is not a valid number</span>
+              <span ng-show="eliteQuoteFrm.currentAgeValue.$error.required">Current Age is required.</span>
+              <span ng-show="eliteQuoteFrm.currentAgeValue.$error.min || eliteQuoteFrm.currentAgeValue.$error.max">The value must be in range 18 to 65</span>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col mb0">
+          <div class="whiteboxdiv trblueline gendiv martpnone">
+            <div class="row">
+              <div class="col col-center mb0">
+                <h4>Smoking habits</h4>
+                <ion-list class="smokehabits">
+                  <ion-radio name="smoke" ng-model="data.smoke" class="smoke" ng-value="'smoke'" ng-change="smokeChange()">Choose A</ion-radio>
+                  <ion-radio name="smoke" ng-model="data.smoke" class="nonsmoke" ng-value="'nonsmoke'" ng-change="smokeChange()">Choose B</ion-radio>
+                </ion-list>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row responsive-sm eliteminHeighttwo">
+        <div class="col">
+          <div class="whiteboxdiv trblueline">
+            <div class="row">
+              <div class="col">
+                <h4>Policy Term<span> (Yrs.)</span></h4>
+                <ul class="agelist">
+                  <li  ng-repeat="pt in pts">
+                    <ion-radio  name="agelist" class=""  value={{pt.name}} ng-model="data.pt" ng-click="populatePPT(data,data.pt)">{{pt.name}}</ion-radio>
+                  </li>
+                  <li ng-repeat="ptupto in uptoage">
+                    <div class="brdlast">
+                    <ion-radio name="agelist"  class="last75" value={{ptupto.name}} ng-model="data.ptupto" ng-click="populatePPT(data,data.ptupto)"><span class="smlsz2">Up to<br /> Age</span> {{ptupto.name}}</ion-radio>
+                  </div>
+                </li>
+                </ul>
+                <div class="row mt10 marbtm">
+                  <div class="col col-80"><h4 class="mt10">Premium Payment Term</h4></div>
+                  <div class="col"><div class="cornergrybg fr"><span>{{data.ppt}} YRS</span></div></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="whiteboxdiv trblueline">
+            <div class="row">
+              <div class="col">
+                <h4>Life Cover</h4>
+              </div>
+              <div class="col">
+                <div class="corner-group fr">  <input  type="number" ng-trim="false" ng-pattern="/^[0-9]*$/"  value="{{data.sumAssured}}" ng-model="data.sumAssured" name="sumAssured"  class="form-control" ng-minlength="7" ng-maxlength="10" ng-required="true" ng-change="sumAssuredChange()"  /></div>
+                <div class="errortxt">
+                <span ng-show="eliteQuoteFrm.sumAssured.$error.number">The value is not a valid number</span>
+                  <span style="color: red;" ng-show="eliteQuoteFrm.sumAssured.$error.required">{{validationMessage.data.Required}}</span>
+                <span ng-show="eliteQuoteFrm.sumAssured.$error.min || eliteQuoteFrm.sumAssured.$error.max">The value must be in range greater than 2500000RS</span>
+                <span style="color: red;" ng-show="eliteQuoteFrm.sumAssured.$error.maxlength">{{validationMessage.data.annualPremiumLength}}</span>
+  							                <span style="color: red;" ng-show="eliteQuoteFrm.sumAssured.$error.minlength">{{validationMessage.data.annualPremiumLength}}</span>
+                <span style="color: red;" ng-show="showDbErrors">{{dbErrors.SA}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="list agelist">
+              <ul>
+                <li ng-repeat="option in formData.PMODE" ng-init="data.mode!=undefined ? '':data.mode=formData.PMODE[0].id">
+                  <label class="item item-radio">
+                    <input type="radio" name="group" value="{{option.id}}" checked="checked" ng-model="data.mode" ng-change="modeChange()">
+                    <div class="radio-content">
+                      <div class="item-content"> {{option.id}} </div>
+                      <i class="radio-icon ion-checkmark"></i> </div>
+                  </label>
+                  <span>{{option.name}}</span>
+                </li>
+              </ul>
+            </div>
+
+            <span style="color: red;" ng-show="showDbErrors"></span>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+    <div ng-show="showPopupToGoForLAAndProposerDetails" class="popbg"></div>
+    <center>
+    <div ng-show="showPopupToGoForLAAndProposerDetails">
+    <div class="popupdiv"> <br/>
+      <br/>
+      <p>Are you sure you want to change the Life Insured Details?</p>
+      <br/>
+      <div class="popup-buttons">
+        <button class="button button-block button-positive subtn" ng-click="goToLAAndProposer()">OK</button>
+        <button class="button button-block button-positive subtn" ng-click="closePopupForChangeDetails()">Cancel</button>
+      </div>
+    </div>
+    </center>
+  </ion-content>
+  <div class="bar bar-footer">
+    <button class="button button-clear button-positive button-full" ng-click="calculate(data)"> <span class="subtn-arw">Calculate</span> </button>
+  </div>
+  </form>
+    <div ng-show="errorMessage.length>0" class="popbg"></div>
+</ion-view>

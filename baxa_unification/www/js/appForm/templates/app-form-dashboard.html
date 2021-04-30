@@ -1,0 +1,57 @@
+<ion-view view-title="Summary" class="summaryPage">
+  <ion-content class="pageBG">
+    <div class="screenContainer">
+      <div class="leftPanel fl">
+        <div class="content switchListing">
+          <div class="list list-inset srchdiv">
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" ng-model="searchBox" placeholder="Search by Name, Mobile No. or Customer ID">
+            </label>
+          </div>
+          <div class="whiteboxdiv pkline custlist">
+            <div>
+              <h4>Vikram Dhangar</h4></div>
+            <div class="row">
+              <div class="col col-33">
+                <label class="icn-custid">Cust. ID.:</label>
+                <br>145298_ABD145</div>
+
+              <div class="col col-33 ">
+                <label class="icn-contact">Contact</label>
+                <br><a class="icn-contactA" href="tel:(+91){{userData.MobileNo}}">{{userData.MobileNo}}</a></div>
+              <div class="col col-40">
+                <label class="icn-date">Date of Creation</label>
+                <br> 10/01/2016 00:00 AM{{userData.CreatedDate | date : "dd/MM/yy | h:mm a "}}</div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <div class="rightPanel fr custsumdiv">
+        <div ng-show="screenschng" ng-include="'js/switch/templates/customer-summary.html'"></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </ion-content>
+  <div class="ftdiv bar bar-footer bar-balanced wid40 text-center btnDivIpad" ng-click="productsListing()">
+    <div class="title">ADD NEW QUOTE</div>
+  </div>
+  <div ng-show="flagShowPopup" class="popbg"></div>
+  <center>
+    <div ng-show="flagShowPopup">
+      <div class="popupdiv">
+        <form name="form">
+          <div class="list list-inset">
+            <p>Does the customer exist in SWITCH?</p>
+          </div>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="onClickYes()" class="close">Yes</button>
+            <button class="button button-block button-positive subtn" ng-click="onClickNo()">No</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </center>
+</ion-view>

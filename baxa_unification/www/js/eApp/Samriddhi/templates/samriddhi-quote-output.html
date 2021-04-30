@@ -1,0 +1,623 @@
+<ion-view class="samriddhiQuote" view-title="{{title}}">
+  <ion-content>
+    <div class="content">
+      <div class="prodwid50">
+        <div class="whiteboxdiv inputdiv">
+          <div class="row" ng-click="goToHomePage()">
+            <div class="col">Input</div>
+            <div class="col text-right">
+              <a href="#" class="icn-fullwid"></a>
+            </div>
+          </div>
+        </div>
+        <div class="row responsive-sm tpestimatdiv">
+          <div class="col">
+            <h4>Estimated Rate of Return<span> (%)</span></h4>
+          </div>
+          <div class="col">
+            <div class="tbar">
+              <div class="button-bar" ng-init="output.precent=8"> <a class="button button-item1" ng-class="(output.precent==8?'active':'')" ng-click="output.precent=8">8%</a> <a class="button button-item2" ng-class="(output.precent==4?'active':'')" ng-click="output.precent=4">4%</a> </div>
+            </div>
+          </div>
+        </div>
+        <div class="row rowpadltrtnone">
+          <div class="col" ng-if="output.precent==4">
+            <div class="pinkbox">
+              <div class="row pinkborder zindex">
+                <div class="col">
+                  <p>Sum Assured at Maturity (a)</p>
+                  <p><i class="WebRupee">Rs.</i> {{calcData.biCalculation.guaranteedMaturityBenefit[calcData.biCalculation.guaranteedMaturityBenefit.length-1] | number}}</p>
+                </div>
+                <div class="col zindex">
+                  <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+                  <p><i class="WebRupee">Rs.</i> {{calcData.biCalculation.nonguaranteedMaturityBenefit4Per[calcData.biCalculation.nonguaranteedMaturityBenefit4Per.length-1] - calcData.biCalculation.guaranteedMaturityBenefit[calcData.biCalculation.guaranteedMaturityBenefit.length-1]
+                    | number}}</p>
+                </div>
+              </div>
+              <p class="pt10">Sum of Benefits (a + b)
+                <br/><i class="WebRupee">Rs.</i> {{calcData.sumAssured + calcData.biCalculation.nonguaranteedMaturityBenefit4Per[calcData.biCalculation.nonguaranteedMaturityBenefit4Per.length-1] - calcData.biCalculation.guaranteedMaturityBenefit[calcData.biCalculation.guaranteedMaturityBenefit.length-1]
+                | number}}</p>
+            </div>
+          </div>
+          <div class="col" ng-if="output.precent==8">
+            <div class="pinkbox">
+              <div class="row pinkborder zindex">
+                <div class="col">
+                  <p>Sum Assured at Maturity (a)</p>
+                  <p><i class="WebRupee">Rs.</i> {{calcData.sumAssured | number}}</p>
+                </div>
+                <div class="col zindex">
+                  <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+                  <p><i class="WebRupee">Rs.</i> {{calcData.biCalculation.nonguaranteedMaturityBenefit8Per[calcData.biCalculation.nonguaranteedMaturityBenefit8Per.length-1] - calcData.biCalculation.guaranteedMaturityBenefit[calcData.biCalculation.guaranteedMaturityBenefit.length-1]
+                    | number}}</p>
+                </div>
+              </div>
+              <p class="pt10">Sum of Benefits (a + b)
+                <br/><i class="WebRupee">Rs.</i> {{calcData.sumAssured + calcData.biCalculation.nonguaranteedMaturityBenefit8Per[calcData.biCalculation.nonguaranteedMaturityBenefit8Per.length-1] - calcData.biCalculation.guaranteedMaturityBenefit[calcData.biCalculation.guaranteedMaturityBenefit.length-1]
+                | number}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <div class="text-center"><h4 ng-click="addRiders()" class="riderclick" ng-class="addriders==true ?'neg':''">ADD RIDERS</h4></div>
+              <ang-accordion ng-show="addriders==true" class="parentaccordian" icon-position="center" close-icon-class="fa fa-check-circle greyColor" open-icon-class="fa fa-check-circle greenColor">
+                <div class="cell" ng-if="!outputData.NSAPForLA">
+                  <div ng-class="riders.isADBActive==true?'acArrowOn':'acArrowOff'" target="#riderADBContainer" toggle-accordion="riders.isADBActive" ng-click="riders.resetADB(calcData)"></div>
+                  <collapsible-item target="{{riders.isADBActive}}" id="riderADBContainer" class="icon-riderone" ng-click="riders.ADB(calcData)" item-title="Accidental Death Benefit Rider">
+                    <div class="row rowfix tmcvdiv" ng-click="riders.ADB(calcData)">
+                      <div class="col col-50">
+                        <div class="row rowfix">
+                          <div class="col col-50">
+                            <h4>Term</h4></div>
+                          <div class="col">
+                            <div ng-init="calcData.pt=outputData.ppt" class="aridinpbtnyrs">{{calcData.ppt}} <span>YRS</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col col-50">
+                        <div class="row rowfix hgtdiv40">
+                          <div class="col col-50">
+                            <h4>Cover</h4>
+                          </div>
+                          <div class="col">
+                            <div class="ardrpinpbtn">
+                              <i class="WebRupee">Rs.</i>
+                              <input type="number" ng-change="riders.ADB(calcData)" ng-minlength="outputData.sumAssuredMinLength" ng-maxlength="outputData.sumAssuredMaxLength" ng-pattern="/^[0-9]*$/" ng-required="true" value="" name="sumAssuredForADBRiders" placeholder="SumAssured For ADB Rider"
+                                  ng-model="calcData.sumAssuredForADBRiders" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="red" ng-if="riders.dbErrorADB.length >0  && $index==0" ng-show="showDbErrors" ng-repeat="error in riders.dbErrorADB">{{error.ErrorMessage}}</div>
+                  </collapsible-item>
+                </div>
+                <div class="cell icon-ridertwo" ng-if="!outputData.NSAPForLA">
+                  <div ng-class="riders.isHCActive==true?'acArrowOn':'acArrowOff'" target="#riderHCContainer" toggle-accordion="riders.isHCActive" ng-click="riders.resetHC(calcData)"></div>
+                  <collapsible-item id="riderHCContainer" item-title="Hospi Cash Benefit Rider">
+                    <div class="row">
+                      <div class="col hcbrdiv">
+                        <h4>Term <span>( Yrs. )</span></h4>
+                        <div class="list agelist">
+                          <ul class="dhcblist">
+                            <li ng-repeat="item in formDataOut.RTERM" ng-if="getHCRTerm(outputData.ppt,item.name)">
+                              <label class="item item-radio">
+                                <input name="hospiCashTerm" ng-click="riders.HC(calcData)" type="radio" ng-model="calcData.hospiCashTerm" ng-value="{{item.name}}">
+                                <div class="radio-content">
+                                  <div class="item-content">{{item.name}}</div>
+                                  <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col dhcbdiv">
+                        <h4>DHCB <span>( Rs. )</span></h4>
+                        <div class="list dhcblist">
+                          <ul>
+                            <li ng-repeat="item in formDataOut.DHCB">
+                              <label class="item item-radio">
+                                <input name="hospiCashDHCB" ng-click="riders.HC(calcData)" type="radio" ng-model="calcData.hospiCashDHCB" ng-value="{{item.name}}">
+                                <div class="radio-content">
+                                  <div class="item-content">{{item.name}}</div>
+                                  <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="color: red;" ng-if="riders.dbErrorPWR.length > 0  && $index==0" ng-show="showDbErrors" ng-repeat="error in riders.dbErrorHC">{{error.ErrorMessage}}</div>
+                  </collapsible-item>
+                </div>
+                <div class="cell icon-riderthree">
+                  <div ng-class="riders.isPWRActive==true?'acArrowOn':'acArrowOff'" target="#riderPWRContainer" toggle-accordion="riders.isPWRActive" ng-click="riders.resetPWR(calcData)"></div>
+                  <collapsible-item class="icon-riderthree" id="riderPWRContainer" ng-click="riders.PWR(calcData)" item-title="Permium Wavier Rider">
+                      <div class="tilaccrddiv">
+                        <div class="accordlink">
+                          <span ng-click="riders.PWRII=(riders.PWRII==true)?false:true;riders.PWR(calcData);" ng-class="riders.PWRII==true?'active':''">Critical Illness</span>
+                          <span ng-click="riders.PWRI=(riders.PWRI==true)?false:true;riders.PWR(calcData);" ng-class="riders.PWRI==true?'active':''" ng-if="outputData.isSelf==false">Death & TPD</span>
+                        </div>
+                        <h4>PWR on</h4>
+                      </div>
+                      <div ng-show="outputData.isSelf == true" class="row">
+                        <div class="col estimatediv col-center mb0">
+                          <div class="tbar" ng-init="outputData.NSAPForPrposer=false">
+                            <div class="button-bar mt10" >
+                              <a class="button button-item1 active">Life Assured</a>
+                              <a class="button button-item2" >Proposer</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-show="outputData.isSelf != true" class="row">
+                        <div class="col estimatediv col-center mb0">
+                          <div class="tbar" ng-init="outputData.NSAPForPrposer=false">
+                            <div class="button-bar mt10">
+                              <a class="button button-item1">Life Assured</a>
+                              <a class="button button-item2 active" >Proposer</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="outputData.isSelf==false">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4>Proposer age?</h4>
+                                    </div>
+                                    <div class="col">
+                                        <div class="aridinpbtnyrs1 fr">{{calcData.proposerAge}} <span>YRS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div  class="progress-pink">
+                                    <div class="progress-box">
+                                        <div class="progress-bar progress-bar-slider">
+                                            <input type="range" min="25" max="60" value="{{calcData.proposerAge}}" step="1" ng-model="calcData.proposerAge" class="progress-slider" ng-disabled="true" />
+                                            <div class="inner" style="width:20px">
+                                            </div>
+                                            <div class="row lastrangsmltxt">
+                                                <div class="col">25
+                                                    <span>YRS</span>
+                                                </div>
+                                                <div class="col text-right">60
+                                                    <span>YRS</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gendiv">
+                          <div class="col col-center mb0">
+                            <ion-list class="gender">
+                              <ion-radio ng-disabled="true" name="laGender" ng-class="{{outputData.proposerGender == option.name ?'checked':''}}" ng-model="outputData.proposerGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+                            </ion-list>
+                            <h4>Proposed Gender {{outputData.proposerGender}}</h4>
+                          </div>
+                        </div>
+                        <div class="row nsapdiv">
+                          <div class="col nsaplist">
+                            <h4>NSAP</h4>
+                          </div>
+                          <div class="col selcheck">
+                            <input type="checkbox" ng-click="calculatePWRRider(data)" ng-model="calcData.NSAPForPrposer" ng-bind="data.NSAPForPrposer">
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                      <div style="color: red;" ng-if="riders.dbErrorPWR.length > 0 && $index==0" ng-show="showDbErrors" ng-repeat="error in riders.dbErrorPWR">{{error.ErrorMessage}}</div>
+                  </collapsible-item>
+                </div>
+              </ang-accordion>
+
+              <!-- <ang-accordion ng-show="riders==true"  class="parentaccordian "  one-at-a-time="true" icon-position="center"   open-icon-class="fa fa-check-circle">
+                              <div class="cell">
+                                <div ng-class="adbRider==true?'acArrowOn':'acArrowOff'" ng-click="selectADBRider(data)"></div>
+                                <collapsible-item   class="icon-riderone" ng-click="calculateAdbRider(data)" item-title="Accidental Death Benefit Rider">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Term </label><span class="corner-group fr">{{outputData.ppt}} <span>YRS</span></span>
+                                        </div>
+                                        <div class="col">
+                                            <label>Cover </label>
+                                        </div>
+                                        <div class="corner-group fr">
+                                            <input   ng-change="calculateAdbRider(data)" ng-model="outputData.sumAssuredForADBRiders" name="sumAssuredForADBRiders" type="number" placeholder="SumAssured For ADB Rider" class="form-control">
+                                            <span>YRS</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                      <p  ng-repeat="error in errormessagesForADBRider" ng-if="$index==0">{{error}}</p>
+                                    </div>
+                                </collapsible-item>
+                                </div>
+                                <div class="cell">
+                                    <div ng-class="hospiCashRider==true?'acArrowOn':'acArrowOff'" ng-click="selectHospiCashRider(data)"></div>
+                                <collapsible-item  class="{{hospiCashRider==true?'icon-ridertwo icnrid':'icon-ridertwo'}}"  item-title="Hospi Cash Benefit Rider">
+                                  <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4>Term <span>(Yrs.)</span></h4>
+                                            <ion-list class="agenumber" >
+                                                <ion-radio name="Dhcsdb" ng-repeat="term in formDataOut.RTERM" ng-click="data.term=term.name;calculateHospiCashRider(data);" ng-model="data.term" class="" ng-value="term.name" ng-if="getHCRTerm(outputData.ppt,term.name)">{{term.name}}</ion-radio>
+                                            </ion-list>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4>DHCB<span>(Rs.)</span></h4>
+                                            <ion-list class="Amountnumber" >
+                                                <ion-radio name="Dhcb" ng-repeat="dhcb in formDataOut.DHCB" ng-click="data.Dhcb==dhcb.name;calculateHospiCashRider(data);" ng-model="data.Dhcb" class="" ng-value="dhcb.name">{{dhcb.name}}</ion-radio>
+                                            </ion-list>
+                                        </div>
+                                    </div>
+                                    <div>
+                                      <p  ng-repeat="error in errormessagesForHOSPICASHRider" ng-if="$index==0">{{error}}</p>
+                                    </div>
+                                  </div>
+                                </collapsible-item>
+                                </div>
+                                <div class="cell">
+                                <div ng-class="pwrRider==true?'acArrowOn':'acArrowOff'" ng-click="selectPWRRider(data)"></div>
+                                <collapsible-item  class="{{pwrRider==true?'icon-riderthree icnrid':'icon-riderthree'}}" ng-click="calculatePWRRider(outputData)" item-title="Permium Waiver Rider">
+                                  <div  class="dtpdiv">
+                                    <div  class="tilaccrddiv">
+                                      <div class="accordlink" ng-show="outputData.isSelf==true">
+                                      <span ng-click="calculatePWRRider(outputData)" ng-class="outputData.pwrRiderOption2==true?'active':''">Critical Illness</span>
+                                    </div>
+                                      <div class="accordlink" ng-show="outputData.isSelf==false">
+                                        <span ng-click="outputData.pwrRiderOption2=!outputData.pwrRiderOption2;calculatePWRRider(outputData)" ng-class="outputData.pwrRiderOption2==true?'active':''">Critical Illness</span>
+                                         <span  ng-click="outputData.pwrRiderOption1=!outputData.pwrRiderOption1;calculatePWRRider(outputData);" ng-class="outputData.pwrRiderOption1==true?'active':''">Death & TPD</span>
+                                       </div>
+                                      <h4>PWR on</h4>
+                                    </div>
+                                    <div class="row" ng-if="outputData.pwrRiderOption2==true">
+                                        <div class="col estimatediv col-center mb0">
+                                            <div class="tbar" ng-if="data.BuyingFor == 'Self' && outputData.pwrRiderOption1==false && outputData.pwrRiderOption2==true">
+                                                <div class="button-bar" > <a class="button button-item1 active">Life Insured</a> <a class="button button-item2" >Proposer</a> </div>
+                                            </div>
+                                            <div class="tbar" ng-if="data.BuyingFor != 'Self' && outputData.pwrRiderOption1==false && outputData.pwrRiderOption2==true">
+                                                <div class="button-bar" > <a class="button button-item1">Life Insured</a> <a class="button button-item2 active" >Proposer</a> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  ng-if="outputData.pwrRiderOption1==true">
+                                      <div class="col estimatediv col-center mb0">
+                                          <div class="tbar" ng-if="data.BuyingFor != 'Self' && outputData.pwrRiderOption1==true && outputData.pwrRiderOption2==false">
+                                              <div class="button-bar"> <a class="button button-item1">Life Insured</a> <a class="button button-item2 active" >Proposer</a> </div>
+                                          </div>
+                                          <div class="tbar" ng-if="data.BuyingFor != 'Self' && outputData.pwrRiderOption1==true && outputData.pwrRiderOption2==true">
+                                              <div class="button-bar"> <a class="button button-item1">Life Insured</a> <a class="button button-item2 active" >Proposer</a> </div>
+                                          </div>
+                                      </div>
+                                      <div class="row proposerAge">
+                                          <div class="col">
+                                              <h4>Proposer age?</h4>
+                                          </div>
+                                          <div class="col">
+                                              <div class="corner-group fr"> {{outputData.proposerAge}}<span>YRS</span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div  class="progress-pink">
+                                          <div ng-click="openPopupForChangeDetails()" class="progress-box">
+                                              <div class="progress-bar progress-bar-slider">
+                                                  <input type="range" min="18" max="99" value="{{outputData.proposerAge}}" step="1"  class="progress-slider" />
+                                                  <div class="inner" ng-style="{width: (outputData.proposerAge - 18) / (99 - 18) * 100 <= 100 ? (outputData.proposerAge - 18) / (99 - 18) * 100  + '%' : 0 + '%' }">
+                                                  </div>
+                                                  <div class="row lastrangsmltxt">
+                                                      <div class="col">18
+                                                          <span>YRS</span>
+                                                      </div>
+                                                      <div class="col text-right">99
+                                                          <span>YRS</span>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row gendiv">
+                                          <div class="col col-center mb0">
+                                              <ion-list class="gender" ng-init="outputData!= undefined ? outputData.proposerGender=outputData.proposerGender : outputData.proposerGender=0">
+                                                <ion-radio ng-disabled="true" name="laGender" ng-class="{{outputData.proposerGender == option.name ?'checked':''}}" ng-model="outputData.proposerGender" ng-repeat="option in formData.GENDER" class="{{option.name | lowercase}}" ng-click="openPopupForChangeDetails()" value="{{option.id}}">{{option.name}}</ion-radio>
+                                              </ion-list>
+                                              <h4>Proposed Gender</h4>
+                                          </div>
+                                      </div>
+                                      <div class="row nsapdiv">
+                                        <div class="col nsaplist"><h4>NSAP</h4></div>
+                                        <div class="col selcheck" ng-init="outputData.NSAPForPrposer=0">
+                                          <input type="checkbox" ng-model="outputData.NSAPForPrposer"  value="1">
+                                        </div>
+                                        <div class="clearfix"></div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <p ng-repeat="error in errormessagesForPWRRider" ng-if="$index==0">{{error}}</p>
+                                    </div>
+                                  </div>
+                                </collapsible-item>
+                                </div>
+                                <div>
+                                  <p>{{nsapErrorMessages}}</p>
+                                </div>
+                            </ang-accordion> -->
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="whiteboxdiv mb20" ng-class="params.ui_color">
+          <b>Modal Premium</b>
+            <div class="row greyborder">
+                <div class="col col-25 fl text-center">
+                  <b> BASE POLICY</b>
+                    <p><i class="WebRupee">Rs.</i>  {{calcData.totalModalPremium  | number}}</p>
+                </div>
+                <div class="col col-25 fl text-center">
+                  <b>  ADB RIDER</b>
+                    <p ng-show="riders.isADBActive==true"><i class="WebRupee">Rs.</i>  {{calcData.modalAdbRiderPremium | number}}</p>
+                    <p ng-show="riders.isADBActive==false">-</p>
+                </div>
+                 <div class="col col-25 fl text-center">
+                  <b>  DHCB RIDER</b>
+                    <p ng-show="riders.isHCActive==true"><i class="WebRupee">Rs.</i>  {{calcData.modalHospiCashPremium | number}}</p>
+                    <p ng-show="riders.isHCActive==false">-</p>
+                </div>
+                <div class="col col-25 fl text-center">
+                  <b> PW RIDER</b>
+                    <p ng-show="riders.isPWRActive==true"><i class="WebRupee">Rs.</i>  {{calcData.modalPWRIIRiderPremium + calcData.modalPWRIRiderPremium   | number}}</p>
+                    <p ng-show="riders.isPWRActive==false">-</p>
+                </div>
+            </div>
+            <div class="text-center pt10"><b>PREMIUM PAYABLE </b><span class="fweight700"><i class="WebRupee">Rs.</i>  {{calcData.totalModalPremium + calcData.modalAdbRiderPremium + calcData.modalHospiCashPremium + calcData.modalPWRIRiderPremium + calcData.modalPWRIIRiderPremium | number}}</span>
+            </div>
+        </div>
+            </div>
+            <div ng-click="showPopupPremiumWithTaxes()" class="text-center martpbtm"><a class="lasttaxlink">Premium with Taxes</a></div>
+            </div>
+  </ion-content>
+</ion-view>
+
+<ion-fixed class="fixed-div">
+  <button fab fab-right fab-bottom dark>
+    <ion-icon class="addbox" name="add" ng-click="showPlusPopup=true"></ion-icon>
+  </button>
+</ion-fixed>
+<ion-footer-bar class="btnlastbkbg">
+  <button class="button button-clear button-positive col-50" ng-click="saveQuote(false)">Save</button>
+  <button class="button button-clear button-positive col-50" ng-click="proceedToFormFilling()">AGREE & PROCEED TO FORM FILLING</button>
+</ion-footer-bar>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li><a class="email" href="#" ng-click="email()">Email BI Quote<span>&nbsp;</span></a></li>
+      </ul>
+      <a class="popupclose" ng-click="showPlusPopup=false">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<!--Send Email Popup-->
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" placeholder="To" ng-model="email_To" ng-minlength="4" ng-maxlength="50" required="">
+              <span ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid" ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>
+<!--Send Email Popup-->
+
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li><a class="email" href="#" ng-click="email()">Email BI Quote<span>&nbsp;</span></a></li>
+      </ul>
+      <a class="popupclose" ng-click="showPlusPopup=false">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+
+              <span style="color:red" ng-if="myForm.emailTo.$error.pattern">*Please enter correct Email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z]+\.[a-z]{3,5}$/" ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="myForm.emailCc.$error.pattern">*Please enter correct Email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC"  ng-model="email_Cc" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z]+\.[a-z]{3,5}$/" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>
+
+
+
+
+<div class="adic-modal" ng-show="premiumWithTaxes">
+  <ion-modal-view class="adic-popup">
+    <div class="modanntble">
+    <a href="#" ng-click="closePopupPremiumWithTaxes()" class="close">&nbsp;</a>
+     <table width="100%">
+      <thead>
+       <tr>
+         <th>&nbsp;</th>
+         <th align="center">Modal Premium</th>
+         <th align="center">Annual Premium</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>Base Policy Premium (<i class="WebRupee">Rs.</i>)</td>
+         <td align="right">{{calcData.totalModalPremium | number}}</td>
+         <td align="right">{{calcData.totalAnnualPremium | number}}</td>
+       </tr>
+       <tr>
+         <td>Rider Premium (<i class="WebRupee">Rs.</i>)</td>
+         <td align="right">{{calcData.modalPWRIRiderPremium + calcData.modalPWRIIRiderPremium + calcData.modalAdbRiderPremium + calcData.modalHospiCashPremium | number}}</td>
+         <td align="right">{{calcData.annualPWRIRiderPremium + calcData.annualPWRIIRiderPremium + calcData.annualAdbRiderPremium + calcData.annualHospiCashPremium | number}}</td>
+       </tr>
+       <tr>
+         <td>Total Taxes (<i class="WebRupee">Rs.</i>)</td>
+         <td align="right">{{calcData.serviceTaxFactorForFirstYear + calcData.serviceTaxPWRIForModalFirstYear + calcData.serviceTaxPWRIIForModalFirstYear + calcData.serviceTaxAdbForModalFirstYear + calcData.serviceTaxHospiCashForModalFirstYear | number}}</td>
+         <td align="right">{{calcData.serviceForAnnualFirstYearTax + calcData.serviceTaxPWRIForAnnualFirstYear + calcData.serviceTaxPWRIIForAnnualFirstYear + calcData.serviceTaxAdbForAnnualFirstYear + calcData.serviceTaxHospiCashForAnnualFirstYear | number}}</td>
+       </tr>
+       </tbody>
+       <tfoot>
+        <tr>
+         <td>Total Premium Payable (<i class="WebRupee">Rs.</i>)</td>
+         <td align="right">{{calcData.totalModalPremium + calcData.modalPWRIRiderPremium + calcData.modalPWRIIRiderPremium + calcData.modalAdbRiderPremium + calcData.modalHospiCashPremium +calcData.serviceTaxFactorForFirstYear + calcData.serviceTaxPWRIForModalFirstYear + calcData.serviceTaxPWRIIForModalFirstYear + calcData.serviceTaxAdbForModalFirstYear + calcData.serviceTaxHospiCashForModalFirstYear | number}}</td>
+         <td align="right">{{calcData.totalAnnualPremium +calcData.annualPWRIRiderPremium + calcData.annualPWRIIRiderPremium + calcData.annualAdbRiderPremium + calcData.annualHospiCashPremium + calcData.serviceForAnnualFirstYearTax + calcData.serviceTaxPWRIForAnnualFirstYear + calcData.serviceTaxPWRIIForAnnualFirstYear + calcData.serviceTaxAdbForAnnualFirstYear + calcData.serviceTaxHospiCashForAnnualFirstYear | number}}</td>
+       </tr>
+      </tfoot>
+     </table>
+     </div>
+  </ion-modal-view>
+</div>
+
+<!--PWR Alert Popup-->
+<div class="popupbg" ng-show="riderSelectAlert"></div>
+<center>
+  <div ng-show="riderSelectAlert">
+        <div class="popupdiv">
+          <br/>
+          <br/>
+          <p>PWR rider cannot be taken along with other riders. Are you sure you want to select another Rider?</p>
+          <br/>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="riders.alertADBHS();pwrSelectAlert=false">OK</button>
+            <button class="button button-block button-positive subtn" ng-click="riderSelectAlert=false;riders.resetPWR()">Cancel</button>
+          </div>
+        </div>
+ </div>
+</center>
+<!--PWR Alert Popup-->
+
+
+
+<!--PWR Alert Popup-->
+<div class="popupbg" ng-show="pwrSelectAlert"></div>
+<center>
+  <div ng-show="pwrSelectAlert">
+    <div class="popupdiv">
+      <br/>
+      <br/>
+      <p>PWR Rider cannot be taken along with other riders. Are you sure you want to select another rider?</p>
+      <br/>
+      <div class="popup-buttons">
+        <button class="button button-block button-positive subtn btnlt" ng-click="riders.alertPWR();pwrSelectAlert=false">OK</button>
+        <button class="button button-block button-positive subtn btnrt" ng-click="pwrSelectAlert=false;riders.resetHC();riders.resetADB();">Cancel</button>
+      </div>
+    </div>
+   </div>
+</center>
+<!--PWR Alert Popup-->

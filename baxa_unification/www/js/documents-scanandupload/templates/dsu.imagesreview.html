@@ -1,0 +1,99 @@
+<ion-view view-title="Proposal No. : {{selProposalNo}}" class="psuTitleViewer">
+  <ion-content style="overflow:hidden;">
+    <div ng-show="showChooseDocPopup" class="popbg"></div>
+    <div  class="whiteboxdiv imgreview fullheight">
+      <div ng-init="checkboxPopup= false" class="row divflex">
+        <div class="col col-33" ng-repeat="image in reviewImagesArray">
+          <img ng-src="{{image.src}}" ng-click="showPreviewPopupDialog($index)" style="border-radius: 50%;width: 50px;height: 50px;"/>
+        </div>
+        <img ng-show="reviewImagesArray.length<15" ng-click="showChooseDocPopupDialog()" class="addNewImg" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+    </div>
+    <div ng-show="showChooseDocPopup" class="popupdiv">
+      <div class="headpopup">Choose From</div>
+      <div ng-click="hideChooseDocPopup()" class="close"></div>
+      <ul class="camerapage">
+        <li ng-click="getImageFromCamera()">
+          <a class="icn-take"></a>
+          <p>Take Picture</p>
+        </li>
+        <li ng-click="getImageFromGallery()">
+          <a class="icn-myGal"></a>
+          <p>My Gallery</p>
+        </li>
+      </ul>
+    </div>
+
+  </ion-content>
+  <!-- pop up-->
+
+
+</ion-view>
+<ion-footer-bar>
+  <div ng-show="!showChooseDocPopup" style="width:100%">
+    <div ng-show="!showPreviewPopup" style="display: block; clear: both;" class="btntwomarauto">
+      <button ng-click="backtoScanAndUpload()" class="button button-clear button-positive fl">
+        <span class="subtn-arw-left">Cancel</span>
+      </button>
+      <button ng-show="_isEnablePreviewSubmitBtn" ng-click="showChooseCategorisePopup()" class="button button-clear button-positive fr" style="float:right">
+        <span class="subtn-arw">Submit</span>
+      </button>
+    </div>
+  </div>
+</ion-footer-bar>
+<!--end of pop up-->
+
+<div ng-show="showPreviewPopup" ng-click="closePopup()" class="popbg"></div>
+<div ng-show="showPreviewPopup" class="popupimgdiv">
+  <div ng-show="showPreviewPopup" class="popupPrevdiv">
+    <div class="headPrevpopup">Preview</div>
+    <div ng-click="deleteSelectedImage()">
+      <a class="button icn-del button-icon ion-trash-a"></a>
+    </div>
+    <div ng-click="hidePreviewPopup()" class="close"></div>
+    <img ng-src="{{imgURL}}" on-swipe-right="showPrevImage()" on-swipe-left="showNextImage()">
+    <a class="arrow prev" ng-click="showPrevImage()"></a>
+    <a class="arrow next" ng-click="showNextImage()"></a>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+<div ng-show="checkboxPopup" class="popbg"></div>
+<center>
+  <div ng-show="checkboxPopup">
+    <div class="popupdiv">
+      <form name="form">
+        <div ng-click="hideCategorisePopup()" class="close"></div>
+        <div class="list list-inset">
+          <div class="headpopup">Re-Use this document for other categories?</div>
+          <div class="row">
+            <div></div>
+            <div></div>
+          </br>
+          <div class="clearfix"></div>
+        </div>
+        <div class="checklist">
+          <ion-list>
+            <div ng-show="proposerObject.documentSubType.Reuse1Name.length>0">
+              <ion-label>{{proposerObject.documentSubType.Reuse1Name}}</ion-label>
+              <ion-checkbox ng-model="checkboxModel.proof1" ng-checked="proof1" ng-click="toggleValue(checkboxModel.proof1,1)" ng-init="{{checkboxModel.proof1=proof1}}" ng-true-value="true" ng-false-value="false">&nbsp;</ion-checkbox>
+            </div>
+          </ion-list>
+          <ion-list>
+            <div ng-show="proposerObject.documentSubType.Reuse2Name.length>0">
+              <ion-label>{{proposerObject.documentSubType.Reuse2Name}}</ion-label>
+              <ion-checkbox ng-model="checkboxModel.proof2" ng-checked="proof2" ng-click="toggleValue(checkboxModel.proof2,2)" ng-init="{{checkboxModel.proof2=proof2}}" ng-true-value="true" ng-false-value="false">&nbsp;</ion-checkbox>
+            </div>
+          </ion-list>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <span class="error" ng-show="form.min.$error.lowerThan">
+        Min cannot exceed max.
+      </span>
+      <button ng-click="DoneButton(checkboxModel.proof1,checkboxModel.proof2)" class="button button-block button-positive subtn">DONE</button>
+    </form>
+  </div>
+</center>

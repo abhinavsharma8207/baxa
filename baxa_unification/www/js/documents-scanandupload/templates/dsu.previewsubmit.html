@@ -1,0 +1,49 @@
+<ion-view view-title="<span class='smallTitle'>Proposal No.: {{selProposalNo}}</span>">
+<ion-content>
+  <div class="whiteboxdiv">
+    <div class="row">
+      <div class="col col-33"><img ng-click="showPreviewPopupDialog('/img/adam.jpg')" ng-src="/img/adam.jpg" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+      <div class="col col-33"><img ng-src="/img/ben.png" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+      <div class="col col-33"><img ng-src="/img/max.png" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-33"><img ng-src="/img/mike.png" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+      <div class="col col-33"><img ng-click="showPreviewPopupDialog({{tempURL}})" ng-src="{{tempURL}}" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+      <div class="col col-33"><img ng-click="showChooseDocPopupDialog()" ng-src="/img/sound-04-128.png" class="addNewImg" style="border-radius: 50%;width: 50px;height: 50px;">
+      </div>
+    </div>
+  </div>
+  <div style="display: block; clear: both; height: 1px;">
+    <button class="button button-positive">Cancel</button>
+    <button class="button button-positive" style="float: right;">Submit</button>
+  </div>
+  <div ng-show="showPreviewPopup"  class="popbg"></div>
+  <div ng-show="showPreviewPopup" class="popupPrevdiv">
+    <div class="headPrevpopup">Preview</div>
+    <a ng-click="hidePreviewPopup()" class="close"></a>
+    <img ng-src="{{imgURL}}"/>
+    <div class="clearfix"></div>
+  </div>
+   <div ng-show="showChooseDocPopup"  class="popbg"></div>
+  <div ng-show="showChooseDocPopup" class="popupdiv">
+    <div class="headpopup">Choose From</div>
+    <a ng-click="hideChooseDocPopup()" class="close"></a>
+    <ul class="camerapage">
+      <li>
+        <a ng-click="getImageFromCamera()" class="icn-take"></a>
+        <p>Take Picture</p>
+      </li>
+      <li>
+        <a ng-click="getImageFromGallery()" class="icn-myGal"></a>
+        <p>My Gallery</p>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+</ion-content>
+</ion-view>

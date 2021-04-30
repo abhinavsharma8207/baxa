@@ -1,0 +1,179 @@
+<ion-view view-title="BAXA Unification" class="retirementCalcul">
+  <form name="childCalculatorForm" ng-submit=" childCalculatorForm.$valid && calculate(childFuturePlanObj)" novalidate>
+    <ion-header-bar class="bar-stable" ng-if="!tabInclude">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="onClickBack1()"></a>
+      <h1 class="title">Child Future Planner</h1>
+    </ion-header-bar>
+    <ion-content scroll="true">
+      <div class="content" ng-class="animateClass">
+        <div class="childfuturediv">
+          <div class="row responsive-sm">
+            <div class="col">
+              <div class="whiteboxdiv grpline chilHeight">
+                <div class="row rowfix">
+                  <div class="col col-80">
+                    <h4>Child’s current age?</h4></div>
+                  <div class="col">
+                    <div class="inpbtncrnyrs">
+                      <input type="text" value="childFuturePlanObj.cagevalue" ng-model="childFuturePlanObj.cagevalue" fcsa-number="{ max: 25, min: 0 }" name="cagevalue" required onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"
+                          lower-than="{{childFuturePlanObj.fundagevalue}}"> <span>YRS</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="errortxt">
+                  <span ng-if="childCalculatorForm.cagevalue.$viewValue > 25">*Enter Valid Age.</span>
+                  <span class="error" ng-if="cageVError">Current age cannot exceed the age when funds are needed.</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="progress-pink">
+                  <div class="progress-box">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" min="0" max="25" value="{{childFuturePlanObj.cagevalue}}" step="1" ng-model="childFuturePlanObj.cagevalue" class="progress-slider" />
+                      <div class="inner" ng-style="{width: (childFuturePlanObj.cagevalue - 0) / ageDiffHighLow * 100 < 100 ? (childFuturePlanObj.cagevalue - 0) / ageDiffHighLow * 100  + '%' : 100 + '%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">0 <span>YRS</span></div>
+                        <div class="col text-right">25 <span>YRS</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="whiteboxdiv grpline chilHeight">
+                <h4>Education Milestone</h4>
+                <div class="tbar">
+                  <div class="button-bar"> <a class="button button-item1" ng-class="{'active' : gradButtoncheck}" ng-click="Active('gradButton')">GRADUATION</a> <a class="button button-item2 " ng-class="{'active' : postGradButtoncheck}" ng-click="Active('postGradButton')">POST GRADUATION</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row responsive-sm">
+            <div class="col">
+              <div class="whiteboxdiv grpline childageheight">
+                <div class="tbar" style="float:right; width:50%">
+                  <div class="button-bar" style="margin-top:0"> <a class="button button-item1 " ng-class="{'active' : indiaButtoncheck}" ng-click="Active('indiaButton')">INDIA</a> <a style="display:none;" class="button button-item2" ng-class="{'active' : abroadButtoncheck}" ng-click="Active('abroadButton')">ABROAD</a>                    </div>
+                </div>
+                <h4>Specialization</h4>
+                <div class="clearfix"></div>
+                <div class="row specialzdiv">
+                  <div class="cfdiv" id="indiaPostGrad" ng-show="indiaPostGrad">
+                    <div class="cfinner" ng-repeat="item in indiaPostGradlist">
+                      <div class="{{item.piclass}}" ng-class="{'active' : item.active}" ng-click="getStudyCost(item.coursePlace,item.eduMilestone,item.courseTitle); setactive(item.id)">&nbsp;</div>
+                      <p>{{item.courseTitle}}</p>
+                    </div>
+                  </div>
+                  <div class="cfdiv" id="indiaGrad" ng-show="indiaGrad">
+                    <div class="cfinner" ng-repeat="item in indiaGradlist">
+                      <div class="{{item.piclass}}" ng-class="{'active' : item.active}" ng-click="getStudyCost(item.coursePlace,item.eduMilestone,item.courseTitle); setactive(item.id)">&nbsp;</div>
+                      <p>{{item.courseTitle}}</p>
+                    </div>
+                  </div>
+                  <div class="cfdiv" id="abroadPostGrad" ng-show="abroadPostGrad">
+                    <div class="cfinner" ng-repeat="item in abroadPostGradlist">
+                      <div class="{{item.piclass}}" ng-class="{'active' : item.active}" ng-click="getStudyCost(item.coursePlace,item.eduMilestone,item.courseTitle); setactive(item.id)">&nbsp;</div>
+                      <p>{{item.courseTitle}}</p>
+                    </div>
+                  </div>
+                  <div class="cfdiv" id="abroadGrad" ng-show="abroadGrad">
+                    <div class="cfinner" ng-repeat="item in abroadGradlist">
+                      <div class="{{item.piclass}}" ng-class="{'active' : item.active}" ng-click="getStudyCost(item.coursePlace,item.eduMilestone,item.courseTitle); setactive(item.id)">&nbsp;</div>
+                      <p>{{item.courseTitle}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row rowfix">
+                  <div class="col col-66">
+                    <h4>Current Cost</h4></div>
+                  <div class="col">
+                    <div class="inpbtncrnyrs">
+                      <input type="text" name="courseCost" ng-model="childFuturePlanObj.courseCost" value="{{childFuturePlanObj.courseCost}}" fcsa-number="{ max: 100, min: 0.10 }" required></div>
+                  </div>
+                </div>
+                <div class="errortxt">
+                  <span ng-if="childCalculatorForm.courseCost.$invalid || childCalculatorForm.courseCost.$viewValue == null">*Enter cost between 0.10 L and 100 L.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="whiteboxdiv grpline childageheight">
+                <div class="row rowfix">
+                  <div class="col col-80">
+                    <h4>Child's Age when funds are needed?</h4></div>
+                  <div class="col">
+                    <div class="inpbtncrnyrs">
+                      <input type="text" value=childFuturePlanObj.fundagevalue ng-model="childFuturePlanObj.fundagevalue" fcsa-number="{ max: 30, min: 5 }" name="fundagevalue" required onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"> <span>YRS</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="errortxt">
+                  <span ng-if="childCalculatorForm.fundagevalue.$invalid || childCalculatorForm.fundagevalue.$viewValue == null">*Child's Age when funds are needed should be between 5 to 30.</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="progress-pink">
+                  <input type="text" id="childAge" name="example_name" value="" />
+                </div>
+                <div class="progress-pink">
+                  <div class="progress-box">
+                    <div class="progress-bar progress-bar-slider">
+                      <input type="range" min="5" max="30" step="1" class="progress-slider" ng-model="childFuturePlanObj.fundagevalue" />
+                      <div class="inner" ng-style="{width: (childFuturePlanObj.fundagevalue - 5) / fundageDiffHighLow * 100 < 100 ? (childFuturePlanObj.fundagevalue - 5) / fundageDiffHighLow * 100  + '%' : 100 + '%' }"></div>
+                      <div class="row lastrangsmltxt">
+                        <div class="col">5<span>YRS</span></div>
+                        <div class="col text-right">30<span>YRS</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+          <div class="row responsive-sm">
+            <div class="col">
+              <div class="row rowfix flxdisblM">
+                <div class="col col-33">
+                  <h4>Assumptions</h4>
+                </div>
+                <div class="col col-67">
+                  <div class="row pad0">
+                    <div class="col col-75">
+                      <div class="ratetxt">Inflation of Education Cost</div>
+                    </div>
+                    <div class="col">
+                      <div class="inpbtncrnyrs">
+                        <input type="text" value="childFuturePlanObj.inflationvalue" ng-model="childFuturePlanObj.inflationvalue" fcsa-number="{ max: 50, min: 0 }" name="inflationvalue" required onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"> <span>%</span></div>
+                    </div>
+                  </div>
+                  <div class="errortxt">
+                    <span ng-if="childCalculatorForm.inflationvalue.$invalid">*Inflation rate should be between 0 to 50.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <div class="ratetxt padding-vertical">Rate of Return</div>
+                </div>
+                <div class="col">
+                  <div class="corner-group fr">
+                    <input type="text" value="childFuturePlanObj.rateofReturnvalue" ng-model="childFuturePlanObj.rateofReturnvalue" fcsa-number="{ max: 99, min: 0 }" name="rateofReturnvalue" required onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);"><span>%</span></div>
+                  <div class="errortxt">
+                    <span ng-if="childCalculatorForm.rateofReturnvalue.$invalid ">*Rate of Return should be between 0 to 99.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </ion-content>
+    <ion-footer-bar ng-if="!tabInclude">
+      <button class="button button-clear button-positive button-full" ng-disabled="!formValid">
+        <span class="subtn-arw">Calculate</span>
+      </button>
+    </ion-footer-bar>
+  </form>
+</ion-view>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale = 1, maximum-scale = 1, user-scalable = no, width = device-width">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+  <title>Unification</title>
+  <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+  <link href="css/ion.rangeSlider.css" rel="stylesheet" />
+  <link href="css/ion.rangeSlider.skinFlat.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet">
+  <!-- -->
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/animate_custom.css" rel="stylesheet">
+  <link href="css/developer-style.css" rel="stylesheet">
+  <link href="css/responsive.css" rel="stylesheet">
+  <link href="lib/ionic/css/tabSlideBox.css" rel="stylesheet" />
+  <link href="lib/ionic/css/ang-accordion.css" rel="stylesheet" />
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href = "css/ionic.app.css" rel = "stylesheet">
+    -->
+  <!-- godb sync lib required js -->
+  <script src="customlibs/godbsynclib/jquery-1.5.1.min.js"></script>
+  <script src="customlibs/godbsynclib/jquery.md5.js"></script>
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+  <script src="lib/ionic/js/angular/tabSlideBox.js"></script>
+  <script src="lib/ionic/js/angular/ang-accordion.js"></script>
+  <!-- <script src = "customlibs/ng-cordova.min.js"></script> -->
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+  <script src="lib/ocLazyLoad.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+  <!-- godb sync lib js -->
+  <script src="customlibs/godbsynclib/gsync2.js"></script>
+  <script src="customlibs/godbsynclib/sha.js"></script>
+  <!-- chart js -->
+  <!-- <script src = "customlibs/Chart.StackedBar.js/Chart.StackedBar.js"></script>-->
+  <!-- your app's js -->
+
+  <!--ngMessage-->
+  <script src="lib/angular-messages.min.js"></script>
+  <script src="js/common/app.js"></script>
+  <script src="js/common/router.js"></script>
+
+  <script src="js/common/services/formula.service.js"></script>
+  <script src="js/common/services/database.js"></script>
+  <script src="js/common/constants.js"></script>
+  <script src="js/common/services/utilityService.js"></script>
+  <!-- <script src="js/common/services/quoteProposalNumbersDataService.js"></script> -->
+  <script src="js/common/factory/base64Factory.js"></script>
+  <script src="js/common/controllers/loginController.js"></script>
+  <script src="js/common/controllers/menuController.js"></script>
+  <script src="js/common/directives/customDirective.js"></script>
+  <script src="js/common/directives/only-number.js"></script>
+  <script src="js/common/factory/commonFileFunctionFactory.js"></script>
+  <!-- <script src="js/common/factory/quoteProposalRefNosFactory.js"></script>
+  <script src="js/common/factory/quoteProposalRefNosFactory.js"></script> -->
+  <script src="js/common/services/userCommonData.js"></script>
+
+  <!-- productcalculationsengine Common files -->
+  <script src="js/productcalculationsengine/pceHomeController.js"></script>
+  <script src="js/productcalculationsengine/pceHomeDataService.js"></script>
+  <script src="js/productcalculationsengine/pceHomeDbService.js"></script>
+  <script src="js/productcalculationsengine/pcerouter.js"></script>
+  <!-- Added here custom controllers and services -->
+  <script src="js/productcalculationsengine/riders/services/adbRiderDataService.js"></script>
+  <script src="js/productcalculationsengine/riders/services/adbRiderCalculationService.js"></script>
+  <script src="js/productcalculationsengine/riders/services/pwrRiderDataService.js"></script>
+  <script src="js/productcalculationsengine/riders/services/pwrRiderCalculationService.js"></script>
+  <script src="js/productcalculationsengine/riders/services/hospicashRiderDataService.js"></script>
+  <script src="js/productcalculationsengine/riders/services/hospicashRiderCalculationService.js"></script>
+  <script src="js/productcalculationsengine/riders/services/riderValidationService.js"></script>
+  <!--AjeevanSampatti Files-->
+  <script src="js/productcalculationsengine/aajeevansampatti/services/asDataService.js"></script>
+  <script src="js/productcalculationsengine/aajeevansampatti/services/asCalculationService.js"></script>
+  <script src="js/productcalculationsengine/aajeevansampatti/controllers/asBasePremiumController.js"></script>
+  <script src="js/productcalculationsengine/aajeevansampatti/services/asValidationService.js"></script>
+
+  <!--Tripple Health Files-->
+  <script src="js/productcalculationsengine/trippleHealth/services/trippleHealthDataService.js"></script>
+  <script src="js/productcalculationsengine/trippleHealth/services/trippleHealthCalculationService.js"></script>
+  <script src="js/productcalculationsengine/trippleHealth/services/tHValidationService.js"></script>
+  <script src="js/productcalculationsengine/trippleHealth/controllers/trippleHealthBasePremiumController.js"></script>
+  <!--Samriddhi Files-->
+  <script src="js/productcalculationsengine/samriddhi/controllers/samriddhiBasePremiumController.js"></script>
+  <script src="js/productcalculationsengine/samriddhi/services/samriddhiCalculationService.js"></script>
+  <script src="js/productcalculationsengine/samriddhi/services/samriddhiDataService.js"></script>
+  <script src="js/productcalculationsengine/samriddhi/services/samriddhiValidationService.js"></script>
+  <!--Elite Secure Files-->
+  <script src="js/productcalculationsengine/elitesecure/controllers/eSCalculationController.js"></script>
+  <script src="js/productcalculationsengine/elitesecure/services/eSCalculationService.js"></script>
+  <script src="js/productcalculationsengine/elitesecure/services/eSCalculationDataService.js"></script>
+  <script src="js/productcalculationsengine/elitesecure/services/eSValidationService.js"></script>
+  <!--Flexi Save Files-->
+  <script src="js/productcalculationsengine/flexiSave/controllers/fSCalculationController.js"></script>
+  <script src="js/productcalculationsengine/flexiSave/services/fSCalculationService.js"></script>
+  <script src="js/productcalculationsengine/flexiSave/services/fSCalculationDataService.js"></script>
+  <script src="js/productcalculationsengine/flexiSave/services/fSValidationService.js"></script>
+
+
+  <!--secureIncome Files-->
+  <script src="js/productcalculationsengine/secureIncome/controllers/sICalculationController.js"></script>
+  <script src="js/productcalculationsengine/secureIncome/services/sICalculationService.js"></script>
+  <script src="js/productcalculationsengine/secureIncome/services/sIDataService.js"></script>
+  <script src="js/productcalculationsengine/secureIncome/services/sIValidationService.js"></script>
+  <!--Future Invest Files-->
+  <script src="js/productcalculationsengine/futureInvest/controllers/fICalculationController.js"></script>
+  <script src="js/productcalculationsengine/futureInvest/services/fICalculationService.js"></script>
+  <script src="js/productcalculationsengine/futureInvest/services/fIDataService.js"></script>
+  <script src="js/productcalculationsengine/futureInvest/services/fIValidationService.js"></script>
+  <!--Elite Advantage Files-->
+  <script src="js/productcalculationsengine/eliteAdvantage/controllers/eACalculationController.js"></script>
+  <script src="js/productcalculationsengine/eliteAdvantage/services/eACalculationService.js"></script>
+  <script src="js/productcalculationsengine/eliteAdvantage/services/eACalculationDataService.js"></script>
+  <script src="js/productcalculationsengine/eliteAdvantage/services/eAValidationService.js"></script>
+  <!--Super Series Files-->
+  <script src="js/productcalculationsengine/superSeries/controllers/sSCalculationController.js"></script>
+  <script src="js/productcalculationsengine/superSeries/services/sSCalculationService.js"></script>
+  <script src="js/productcalculationsengine/superSeries/services/sSCalculationDataService.js"></script>
+  <script src="js/productcalculationsengine/superSeries/services/sSValidationService.js"></script>
+
+  <!--document scan and upload files -->
+  <script src="js/documents-scanandupload/controllers/docScanandUploadSummeryController.js"></script>
+  <script src="js/documents-scanandupload/controllers/docScanandUploadController.js"></script>
+  <script src="js/documents-scanandupload/controllers/documentImagesReviewController.js"></script>
+  <script src="js/documents-scanandupload/dsuRouter.js"></script>
+  <script src="js/documents-scanandupload/services/selectedCaseDetailsService.js"></script>
+  <script src="js/documents-scanandupload/services/docScanandUploadService.js"></script>
+  <script src="js/documents-scanandupload/services/docScanandUploadSDbService.js"></script>
+  <script src="js/documents-scanandupload/filter/docScannedUploadFilter.js"></script>
+
+
+    <!--Switch Files-->
+
+    <script src = "js/switch/switchRouter.js"></script>
+    <script src = "js/switch/switchFilter.js"></script>
+	  <script src = "js/switch/controllers/switchSummaryController.js"></script>
+    <script src = "js/switch/controllers/switchCusrtomerProfileController.js"></script>
+    <script src = "js/switch/controllers/customerSummaryController.js"></script>
+    <script src = "js/switch/controllers/switchTabsController.js"></script>
+    <script src = "js/switch/controllers/lifeStageController.js"></script>
+    <script src = "js/switch/controllers/needPrioritisationController.js"></script>
+    <script src = "js/switch/controllers/productRecommendationController.js"></script>
+    <script src = "js/switch/productIllustration/eliteSecure/controllers/eliteSecureQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/eliteSecure/controllers/eliteSecurePiController.js"></script>
+    <script src = "js/switch/controllers/onTapCalcualtorController.js"></script>
+    <script src = "js/switch/services/selectedSwitchDetailsService.js"></script>
+    <script src = "js/switch/services/switchDbService.js"></script>
+    <script src = "js/switch/services/switchDataService.js"></script>
+    <script src = "js/switch/productIllustration/eliteSecure/controllers/eliteSecureQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/eliteSecure/services/eliteSecureSwitchService.js"></script>
+    <script src = "js/switch/productIllustration/eliteSecure/services/eSValidationServiceSwitchPi.js"></script>
+    <script src = "js/switch/productIllustration/Samriddhi/controllers/switchSamriddhiQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/Samriddhi/controllers/switchSamriddhiPiController.js"></script>
+    <script src = "js/switch/productIllustration/Samriddhi/services/samriddhiSwitchService.js"></script>
+    <script src = "js/switch/productIllustration/trippleHealth/controllers/trippleHealthQuoteInputController.js"></script>
+    <script src = "js/switch/productIllustration/trippleHealth/controllers/switchTrippleHealthPiController.js"></script>
+    <script src = "js/switch/productIllustration/trippleHealth/services/seviceTrippleHealth.js"></script>
+    <script src = "js/switch/productIllustration/flexiSave/controllers/flexiSaveQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/childAdvantage/controllers/switchChildAdvantageQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/childAdvantage/controllers/switchChildAdvantagePiController.js"></script>
+
+    <script src = "js/switch/productIllustration/eliteAdvantage/controllers/eliteAdvantageQuoteController.js "></script>
+    <script src = "js/switch/productIllustration/eliteAdvantage/controllers/eliteAdvantagePiController.js"></script>
+    <script src = "js/switch/productIllustration/eliteAdvantage/services/eliteAdvantageSwitchService.js"></script>
+    <script src = "js/switch/productIllustration/flexiSave/controllers/switchFlexiSavePiController.js"></script>
+    <script src = "js/switch/productIllustration/SecureIncome/controllers/switchSecureIncomePiComtroller.js"></script>
+    <script src = "js/switch/productIllustration/SecureIncome/controllers/switchSecureIncomQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/SecureIncome/services/secureIncomeSwitchservice.js"></script>
+    <script src = "js/switch/productIllustration/Aajeevan Sampatti/controllers/switchAajeevanSampattiQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/Aajeevan Sampatti/controllers/switchAajeevanSampattiPiController.js"></script>
+
+
+    <!--Switch Monthy advantage -->
+    <script src = "js/switch/productIllustration/monthlyAdvantage/controller/monthlyAdvQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/monthlyAdvantage/controller/monthlyAdvPiController.js"></script>
+
+    <script src = "js/switch/productIllustration/superSeries/controllers/superSeriesQuoteController.js"></script>
+    <script src = "js/switch/productIllustration/superSeries/controllers/switchSuperSeriesPiController.js"> </script>
+
+
+    <!-- Calculator Router  -->
+    <script type = "text/javascript" src = "js/calculators/calculatorHomeController.js"></script>
+    <script type = "text/javascript" src = "js/calculators/calculatorRouter.js"></script>
+    <script type = "text/javascript" src = "js/calculators/calculatorDirectives.js"></script>
+
+    <script type = "text/javascript" src = "js/calculators/calculatorCommonService.js"></script>
+    <!-- <script type = "text/javascript" src = "js/calculators/calculatorHomeController.js"></script> -->
+    <script type = "text/javascript" src = "js/calculators/filter/calculatorFilters.js"></script>
+
+  <!--Other Calculators -->
+  <script src="js/calculators/directives/only-numbers.js"></script>
+  <script src="js/calculators/retirement/angular-pure-slider.js"></script>
+  <script src="js/calculators/retirement/angular-pure-slider.value-converter.js"></script>
+  <!-- <script src="js/calculators/retirement/controllers/demoCtrl.js"></script> -->
+  <script src="js/calculators/fcsaNumber.js"></script>
+  <script src="js/calculators/wealth/controllers/wealthCalculatorController.js"></script>
+  <script src="js/calculators/wealth/controllers/wealthChartController.js"></script>
+  <script src="js/calculators/wealth/services/wealthCalculatorService.js"></script>
+  <script src="js/calculators/childPlan/controllers/childFuturePlanController.js"></script>
+  <script src="js/calculators/childPlan/controllers/childFuturePlannerController.js"></script>
+  <script src="js/calculators/childPlan/controllers/childPlanInvestmentController.js"></script>
+  <script src="js/calculators/childPlan/services/retChildStudyService.js"></script>
+  <script src="js/calculators/hlv/controllers/humanLifeCalculatorController.js"></script>
+  <script src="js/calculators/retirement/controllers/retirementCalculatorController.js"></script>
+  <script src="js/calculators/retirement/controllers/retirementCalculatorChartController.js"></script>
+  <script src="js/calculators/retirement/controllers/retirementCalculatorInvestController.js"></script>
+  <script src="js/calculators/retirement/services/retirementCorpusCalSvc.js"></script>
+  <script src="js/calculators/retirement/constants.js"></script>
+  <script src="js/calculators/retirement/filters/conversionFilter.js"></script>
+  <script src="js/calculators/retirement/directives/lowerthan.js"></script>
+
+  <!--Super Series Files-->
+  <script src="js/eApp/eAppRouter.js"></script>
+  <script src="js/eApp/services/eAppForms.js"></script>
+  <script src="js/eApp/services/eAppDataServices.js"></script>
+  <script src="js/eApp/services/eAppServices.js"></script>
+  <script src="js/eApp/controllers/eAppController.js"></script>
+  <script src="js/eApp/factory/quoteDataFactory.js"></script>
+  <script src="js/eApp/services/quoteDataService.js"></script>
+
+  <!-- Files for aajeevansampatti -->
+  <script src="js/eApp/aajeevansampatti/controllers/aajeevansampattiController.js"></script>
+
+  <script src="js/eApp/Samriddhi/controllers/samriddhiController.js"></script>
+  <script src="js/eApp/trippleHealth/controllers/tripplehealthController.js"></script>
+  <script src="js/eApp/childAdvantage/controllers/childAdvantageController.js"></script>
+  <script src="js/eApp/flexiSave/controllers/flexiSaveController.js"></script>
+
+  <script src="js/eApp/trippleHealth/services/trippleHealthObjectService.js"></script>
+  <script src="js/eApp/elitesecure/controllers/elitesecureController.js"></script>
+  <script src="js/eApp/elitesecure/services/elitesecureObjectService.js"></script>
+  <script src="js/eApp/Samriddhi/services/samriddhiCalculationService.js"></script>
+  <script src="js/eApp/Samriddhi/services/samruddhiObjectService.js"></script>
+  <script src="js/eApp/Samriddhi/services/samriddhiEappDbService.js"></script>
+  <script src="js/eApp/secureIncome/controllers/secureincomeController.js"></script>
+  <script src="js/eApp/secureIncome/services/secureIncomeObjectService.js"></script>
+  <script src="js/eApp/superSeries/controllers/superSeriesController.js"></script>
+  <script src="js/eApp/eProtect/controllers/eProtectController.js"></script>
+
+    <script src="js/eApp/futureInvest/controllers/futureInvestController.js"></script>
+    <script src="js/eApp/futureInvest/services/futureInvestObjectService.js"></script>
+
+  <!--Child Advantage-->
+    <script src = "js/productcalculationsengine/childAdvantage/controllers/cACalculationController.js"></script>
+    <script src = "js/productcalculationsengine/childAdvantage/services/cACalculationService.js"></script>
+    <script src = "js/productcalculationsengine/childAdvantage/services/cACalculationDataService.js"></script>
+    <script src = "js/productcalculationsengine/childAdvantage/services/cAValidationService.js"></script>
+
+    <!--Monthly Advantage-->
+      <script src = "js/productcalculationsengine/monthlyAdvantage/controllers/mACalculationController.js"></script>
+      <script src = "js/productcalculationsengine/monthlyAdvantage/services/mACalculationService.js"></script>
+      <script src = "js/productcalculationsengine/monthlyAdvantage/services/mACalculationDataService.js"></script>
+      <script src = "js/productcalculationsengine/monthlyAdvantage/services/mAValidationService.js"></script>
+
+    <link href="css/chart.css" rel="stylesheet">
+    <!--elite Advantage -->
+    <script src = "js/eApp/eliteAdvantage/controllers/eliteAdvantageController.js"></script>
+    <script src = "js/eApp/eliteAdvantage/services/eliteAdvantageOutputCalculation.js"></script>
+    <script src = "js/common/services/productValidation.js"></script>
+
+    <!--Animation JS -->
+    <script src = "js/common/animate/animate.js"></script>
+
+    <!--App Form -->
+    <script src = "js/appForm/controllers/appFormController.js"></script>
+    <script src = "js/appForm/appFormRouter.js"></script>
+    <script src = "js/appForm/validationMessage.json"></script>
+    <!-- <script src = "js/appForm/services/appFormCalculationService"></script>
+    <script src = "js/appForm/services/appFormDbService.js"></script>
+    <script src = "js/appForm/services/appFormObjectService.js"></script> -->
+
+
+    <!--App Form -->
+    <script src="js/eApp/monthlyAdvantage/controllers/monthlyAdvantage.js"></script>
+
+    <!--eProtect Files-->
+    <script src="js/productcalculationsengine/eProtect/controllers/eProtectCalculationController.js"></script>
+    <script src="js/productcalculationsengine/eProtect/services/eProtectCalculationService.js"></script>
+    <script src="js/productcalculationsengine/eProtect/services/eProtectCalculationDataService.js"></script>
+    <script src="js/productcalculationsengine/eProtect/services/eProtectValidationService.js"></script>
+
+    <!--EADB Rider-->
+    <script src="js/productcalculationsengine/riders/services/eAdbRiderDataService.js"></script>
+    <script src="js/productcalculationsengine/riders/services/eAdbRiderCalculationService.js"></script>
+
+</head>
+
+<body>
+  <ion-nav-view></ion-nav-view>
+</body>
+
+
+
+</html>

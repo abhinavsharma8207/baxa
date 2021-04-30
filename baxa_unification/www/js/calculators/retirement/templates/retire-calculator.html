@@ -1,0 +1,109 @@
+<ion-view view-title="Retirement Calculator" class="calcRetire">
+  <ion-content>
+    <!-- Retirement 1.2 Start -->
+    <div class="screenContainer padTop10 flipLeftRight">
+      <div class="rightPanel fr" id="chartDiv">
+        <div class="content">
+          <a href="#/app/retirement-home" ng-click="setNowAnimate()">
+            <div class="whiteboxdiv inputdiv inpdivM">
+              <div class="row">
+                <div class="col">Input</div>
+                <div class="col text-right"><span class="icn-fullwid"></span> </div>
+              </div>
+            </div>
+          </a>
+          <div class="whiteboxdiv">
+            <div class="disclosure text-center">
+              <p>When you retire at <span class="large-txt" ng-bind="retirementObj.retirementAgeValue"> yrs.</span><span> yrs.</span>, your expenses would have increased to ₹ <span class="large-txt">{{retExpenses}}</span></p>
+              <p>The Corpus that you need to maintain your standard of living till <span class="large-txt">80 yrs.</span> is ₹<span class="large-txt" ng-bind="corpus"> </span></p>
+              <p>And, to achieve this Corpus, you need to invest ₹ <span class="large-txt" ng-bind="monthlyInvestNeeded"></span>, starting now!! </p>
+            </div>
+            <div class="chartbrd yelback chart2Container">
+              <div class="rotatetxt">Monthly Expenses</div>
+              <div class="rstxt">Rs.</div>
+              <div class="ratetxt">Inflation
+                <div class="circlebox">{{retirementObj.inflation}}%</div>
+              </div>
+              <div>
+              <div class="levelHeight1">{{retirementObj.monthlyExpensesValue | amtunit}} p.m.
+                <div class="levelwid" >
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel" id="currentMonthlyBar"></div>
+                </div>
+              </div>
+              <div class="levelHeight2">
+                <br> {{retExpenses}}
+                <div class="levelwid" >
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel"></div>
+                  <div class="smlbxlevel" id="retMonthlyBar"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+            <div class="row chartAge">
+              <div class="col text-center">{{retirementObj.currentAgeValue}} yrs</div>
+              <div class="col text-center">Age</div>
+              <div class="col text-center">{{retirementObj.retirementAgeValue}} yrs</div>
+            </div>
+          </div>
+          <div class="row responsive-sm">
+            <div class="col pad15 col-50">
+              <div class="corner-group fr">
+                <input type="text" ng-model="corpusReturn.value" ng-change="minmax('corpusReturn',lifeExpectancy.value,0,50,corpusReturn.value,investorretage)" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);" required> <span>%</span></div>
+              <h4>Assumptions:</h4>                 
+                <span class="fs13">Rate of Return on Corpus</span>
+              <span class="errortxt" ng-show="rateOfCorpusVError">Please enter values from 0 to 50</span>
+            </div>
+            <div class="col pad15 col-50">
+              <div class="row p0">
+                <div class="col-67 fs13">Life Expectancy</div>
+                <div class="col-30 fr">
+                  <div class="corner-group fr">
+                    <input type="text" ng-model="lifeExpectancy.value" ng-change="getValidate(lifeExpectancy.value)" ng-blur="minmax('lifeExpectancy',lifeExpectancy.value,70,100,corpusReturn.value,investorretage)" onkeypress="return (event.keyCode >= 48 && event.keyCode <= 57) || (event.charCode >= 48 && event.charCode <= 57);" required> <span>YRS</span></div>
+                </div>
+              </div>
+              <span class="errortxt" ng-show="lifeExpectancyVError">Please enter values from 70 to 100</span>
+            </div>
+            <div class="col" style="margin-bottom:0"></div>
+          </div>
+        </div>
+      </div>
+      <div class="leftPanel fl" id="inputDiv">
+        <div ng-if="tabInclude" ng-include="'js/calculators/retirement/templates/retirement-home.html'"></div>
+      </div>
+    </div>
+    <!-- Retirement 1.2 End -->
+  </ion-content>
+  <ion-fixed class="fixed-div" ng-show="saveResult">
+    <button fab fab-right fab-bottom dark>
+      <ion-icon class="addbox" name="add" ng-click="showCalculatorPopup()"></ion-icon>
+    </button>
+  </ion-fixed>
+  <ion-footer-bar>
+    <button class="button button-clear button-positive button-full" ng-click="addInvestments()" ng-disabled="lifeExpectancy.value < 70 || lifeExpectancy.value > 100 || !validationCheckfortab"> <span class="subtn-arw">Enter Investments</span> </button>
+  </ion-footer-bar>
+  <div class="adic-modal">
+     <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+        <div class="wealth-popup">
+             <ul class="popuplist">
+                 <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+                 <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+             </ul>
+             <a class="popupclose" ng-click="showCalculatorPopup()">&nbsp;</a>
+        </div>
+     </ion-modal-view>
+ </div>
+</ion-view>

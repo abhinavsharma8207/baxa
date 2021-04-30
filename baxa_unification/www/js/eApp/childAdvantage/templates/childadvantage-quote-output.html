@@ -1,0 +1,455 @@
+<ion-view class="secureIncomeSec">
+  <ion-content>
+    <div class="screenContainer">
+			<div class="tabLoader">
+				<div class="leftPanel fl">
+          <div class="content">
+            <div class="rowpadnone">
+              <div class="whiteboxdiv inputdiv">
+                <div class="row" ng-click="goToHomePage()">
+                  <div class="col">Input</div>
+                  <div class="col text-right">
+                    <a href="#" class="icn-fullwid"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="row responsive-sm tpestimatdiv">
+                <div class="col">
+                  <h4>Estimated Rate of Return<span> (%)</span></h4>
+                </div>
+                <div class="col">
+                  <div class="tbar">
+                    <div class="button-bar">
+                      <a class="button button-item1" ng-class="(outputData.precent==8?'active':'')" ng-click="outputData.precent=8">8%</a>
+                      <a class="button button-item2" ng-class="(outputData.precent==4?'active':'')" ng-click="outputData.precent=4">4%</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row rowpadltrtnone">
+                <div class="col" ng-if="outputData.precent==4">
+                  <div class="pinkbox">
+                    <div class="row pinkborder zindex">
+                      <div class="col">
+                        <p>Sum of Guaranteed Annual Benefits (a)</p>
+                        <p><i class="WebRupee">Rs.</i> {{outputData.p4.sumAssuredAtMaturity | number}}</p>
+                      </div>
+                      <div class="col zindex">
+                        <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+                        <p><i class="WebRupee">Rs.</i> {{outputData.p4.nonGuaranteedMaturityBenefit | number}}</p>
+                      </div>
+                    </div>
+                    <p class="pt10">Sum of Benefits (a + b)
+                      <br/><i class="WebRupee">Rs.</i> {{outputData.p4.sumAssuredAtMaturity + outputData.p4.nonGuaranteedMaturityBenefit | number}}</p>
+                      <div ng-if="outputData.maturityOption == 'Money Back'" ng-class="{'icn-inp':showHideChart,'icn-oput':!showHideChart}" ng-click="toggleChart();">&nbsp;</div>
+                  </div>
+                </div>
+
+                <div class="col" ng-if="outputData.precent==8">
+                  <div class="pinkbox">
+                    <div class="row pinkborder zindex">
+                      <div class="col">
+                        <p>Sum of Guaranteed Annual Benefits (a)</p>
+                        <p><i class="WebRupee">Rs.</i> {{outputData.p8.sumAssuredAtMaturity | number}}</p>
+                      </div>
+                      <div class="col zindex">
+                        <p>Non-Guaranteed Bonuses at Maturity (b)</p>
+                        <p><i class="WebRupee">Rs.</i> {{outputData.p8.nonGuaranteedMaturityBenefit | number}}</p>
+                      </div>
+                    </div>
+                    <p class="pt10">Sum of Benefits (a + b)
+                      <br/><i class="WebRupee">Rs.</i> {{outputData.p8.sumAssuredAtMaturity + outputData.p8.nonGuaranteedMaturityBenefit | number}}</p>
+                    <div ng-if="outputData.maturityOption == 'Money Back'" ng-class="{'icn-inp':showHideChart,'icn-oput':!showHideChart}" ng-click="toggleChart();">&nbsp;</div>
+                  </div>
+                </div>
+              </div>
+
+              <!--Chart mobile Toggle-->
+              <div class="whiteboxdiv secure-bar" ng-if="showHideChart">
+                <div class="row">
+                  <div class="col">
+                    <ul>
+                      <li>
+                        <h1></h1>Guaranteed Anual Benefits
+                      </li>
+                      <li>
+                        <h3></h3>Non-Guaranted Bonuses at Maturity
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                	<div class="chartContainer">
+                    <div class="rstxt">(Rs.)</div>
+                <div class="scrollerPane">
+                  <div class="row chartbrd">
+                    <div class="securebar-height">
+                      <!--<div class="listbar" ng-repeat="array in finalArray"><div class="barbg"></div></div>-->
+                      <div class="row">
+                        <div class="col" ng-repeat="array in outputData.finalArray" ng-class="{'lastcol':$index==outputData.finalArray.length-1|| $index==outputData.finalArray.length-2 || $index==outputData.finalArray.length-3}">
+                          <div class="listbar grybg">
+                            <div class="barbg" style="height:{{array.height}}px" ng-class={'secure-green':$index==outputData.finalArray.length-2,'secure-blue':$index==outputData.finalArray.length-1,'secure-grey':array.checked}></div>
+                            <div  ng-class="{'bartitle':$index!=outputData.finalArray.length-3,'bartitlebig':$index==outputData.finalArray.length-3}" ng-if="array.checked">{{outputData.selected}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row chartAge">
+                    <div class="col" ng-repeat="label in outputData.finalArray" ng-click="hightLightBar(label,$index)">
+                      <div class="listbar grybg text-center" ng-class="{'circlebig':(label.checked && $index==outputData.finalArray.length-3),'circle':(label.checked && $index!=outputData.finalArray.length-3),'square':($index==outputData.finalArray.length-3 && !label.checked) }">
+                        {{label.key}}
+
+                        <span ng-show="$index!=outputData.finalArray.length-2 && $index!=outputData.finalArray.length-1">th</span>
+                        <span ng-show="$index==outputData.finalArray.length-3">  maturity</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div>
+                  <p class="text-center">Payout at the end of the year</p>
+                </div>
+                <p class="text-left">Note: The Graph is for illustrative purpose only.</p>
+              </div>
+              <!--Chart mobile Toggle-->
+
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <div class="text-center">
+                      <h4 class="riderclick uppercase" ng-click="toggleRiders=(toggleRiders == true)?(false):(true)" ng-model="outputData.riders" ng-class="toggleRiders==true?'neg':''">Add Riders</h4>
+                    </div>
+                    <ang-accordion ng-show="toggleRiders" class="parentaccordian" icon-position="center" close-icon-class="fa fa-check-circle greyColor" open-icon-class="fa fa-check-circle greenColor">
+                      <div class="cell" ng-if="!outputData.NSAPForLA">
+                        <div ng-class="riders.isADBActive==true?'acArrowOn':'acArrowOff'" target="#riderADBContainer" toggle-accordion="riders.isADBActive" ng-click="riders.resetADB(calcData)"></div>
+                        <collapsible-item target="{{riders.isADBActive}}" id="riderADBContainer" class="icon-riderone" ng-click="riders.ADB(calcData)" item-title="Accidental Death Benefit Rider">
+                          <div class="row">
+                            <div class="col">
+                              <label>Term</label><span ng-init="calcData.pt=outputData.pt" class="corner-group fr">{{calcData.pt}} <span>YRS</span></span>
+                            </div>
+                            <div class="col">
+                              <label>Cover</label>
+                            </div>
+                            <div class="corner-group fr">
+                              <input style="width: 80px;" ng-value="calcData.sumAssuredForADBRiders=(outputData.percent==4)?(outputData.p4.sumAssuredAtMaturity):(outputData.p8.sumAssuredAtMaturity)" ng-model="calcData.sumAssuredForADBRiders" name="sumAssuredForADBRiders" type="number"
+                                  placeholder="SumAssured For ADB Rider" class="form-control">
+                              <span>YRS</span>
+                            </div>
+                          </div>
+                          <div style="color: red;" ng-if="riders.dbErrorPWR.length > 0" ng-show="showDbErrors" ng-repeat="error in riders.dbErrorADB">{{error.ErrorMessage}}</div>
+                        </collapsible-item>
+                      </div>
+                      <div class="cell" ng-if="!outputData.NSAPForLA">
+                        <div ng-class="riders.isHCActive==true?'acArrowOn':'acArrowOff'" target="#riderHCContainer" toggle-accordion="riders.isHCActive" ng-click="riders.resetHC(calcData)"></div>
+                        <collapsible-item class="icon-ridertwo" id="riderHCContainer" item-title="Hospi Cash Benefit Rider">
+                          <div class="row">
+                            <div class="col">
+                              <h4>Term<span>(Yrs.)</span></h4>
+                              <div class="list agelist">
+                                <ul>
+                                  <li ng-repeat="item in formDataOut.RTERM" ng-if="getHCRTerm(outputData.ppt,item.name)">
+                                    <label class="item item-radio">
+                                      <input name="hospiCashTerm" ng-click="riders.HC(calcData)" type="radio" ng-model="calcData.hospiCashTerm" ng-value="{{item.name}}">
+                                      <div class="radio-content">
+                                        <div class="item-content">{{item.name}}</div>
+                                        <i class="radio-icon ion-checkmark"></i>
+                                      </div>
+                                    </label>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <h4>DHCB<span>(Rs.)</span></h4>
+                              <div class="list agelist">
+                                <ul>
+                                  <li ng-repeat="item in formDataOut.DHCB">
+                                    <label class="item item-radio">
+                                      <input name="hospiCashDHCB" ng-click="riders.HC(calcData)" type="radio" ng-model="calcData.hospiCashDHCB" ng-value="{{item.name}}">
+                                      <div class="radio-content">
+                                        <div class="item-content">{{item.name}}</div>
+                                        <i class="radio-icon ion-checkmark"></i>
+                                      </div>
+                                    </label>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div style="color: red;" ng-if="riders.dbErrorPWR.length > 0" ng-show="showDbErrors" ng-repeat="error in riders.dbErrorHC">{{error.ErrorMessage}}</div>
+                        </collapsible-item>
+                      </div>
+                    </ang-accordion>
+                  </div>
+                </div>
+              </div>
+              <div class="whiteboxdiv wedline mb20">
+                <h4>Modal Premium</h4>
+                <div class="row greyborder">
+                  <div class="col text-center">
+                    <label><strong>BASE POLICY</strong></label>
+                    <p><i class="WebRupee">Rs.</i> <span ng-bind="calcData.basePremium=outputData.premium.totalModalPremium">{{outputData.premium.totalModalPremium | number}}</span></p>
+                  </div>
+                  <div class="col text-center">
+                    <label><strong>PW RIDER</strong></label>
+                    <p>NA</p>
+                  </div>
+                  <div class="col text-center">
+                    <label><strong>ADB RIDER</strong></label>
+                    <p ng-if="calcData.modalAdbRiderPremium"><i class="WebRupee">Rs.</i> {{calcData.modalAdbRiderPremium | number}}</p>
+                    <p ng-if="!calcData.modalAdbRiderPremium && !outputData.NSAPForLA">-</p>
+                    <p ng-if="outputData.NSAPForLA">NA</p>
+                  </div>
+                  <div class="col text-center">
+                    <label><strong>DHCB RIDER</strong></label>
+                    <p ng-if="calcData.modalHospiCashPremium"><i class="WebRupee">Rs.</i> {{calcData.modalHospiCashPremium | number}}</p>
+                    <p ng-if="!calcData.modalHospiCashPremium && !outputData.NSAPForLA">-</p>
+                    <p ng-if="outputData.NSAPForLA">NA</p>
+                  </div>
+                </div>
+                <div class="text-center pt10"><strong>PREMIUM PAYABLE</strong> <span class="fweight700"><i class="WebRupee">Rs.</i> {{outputData.premium.totalModalPremium + calcData.modalAdbRiderPremium + calcData.modalHospiCashPremium + calcData.modalPWRIRiderPremium + calcData.modalPWRIIRiderPremium | number}}</span>
+                </div>
+              </div>
+              <div ng-click="showPopupPremiumWithTaxes()" class="text-center martpbtm"><a class="lasttaxlink">Premium with Taxes</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="rightPanel fr">
+          <!--Chart mobile Toggle-->
+          <div class="whiteboxdiv secure-bar">
+            <div class="row">
+              <div class="col">
+                <ul>
+                  <li>
+                    <h1></h1>Guaranteed Anual Benefits
+                  </li>
+                  <li>
+                    <h3></h3>Non-Guaranted Bonuses at Maturity
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="chartContainer">
+              <div class="rstxt">(Rs.)</div>
+            <div class="scrollerPane">
+              <div class="row chartbrd">
+
+                <div class="securebar-height">
+                  <!--<div class="listbar" ng-repeat="array in finalArray"><div class="barbg"></div></div>-->
+                  <div class="row">
+                    <div class="col" ng-repeat="array in outputData.finalArray" ng-class="{'lastcol':$index==outputData.finalArray.length-1|| $index==outputData.finalArray.length-2 || $index==outputData.finalArray.length-3}">
+                      <div class="listbar grybg">
+                        <div class="barbg" style="height:{{array.height}}px" ng-class={'secure-green':$index==outputData.finalArray.length-2,'secure-blue':$index==outputData.finalArray.length-1,'secure-grey':array.checked}></div>
+                        <div  ng-class="{'bartitle':$index!=outputData.finalArray.length-3,'bartitlebig':$index==outputData.finalArray.length-3}" ng-if="array.checked">{{outputData.selected}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row chartAge">
+                <div class="col" ng-repeat="label in outputData.finalArray" ng-click="hightLightBar(label,$index)">
+                  <div class="listbar grybg text-center" ng-class="{'circlebig':(label.checked && $index==outputData.finalArray.length-3),'circle':(label.checked && $index!=outputData.finalArray.length-3),'square':($index==outputData.finalArray.length-3 && !label.checked) }">
+                    {{label.key}}
+
+                    <span ng-show="$index!=outputData.finalArray.length-2 && $index!=outputData.finalArray.length-1">th</span>
+                    <span ng-show="$index==outputData.finalArray.length-3">  maturity</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div>
+              <p class="text-center">Payout at the end of the year</p>
+            </div>
+            <p class="text-left">Note: The Graph is for illustrative purpose only.</p>
+          </div>
+          <!--Chart mobile Toggle-->
+        </div>
+      </div>
+    </div>
+
+    <!--proposer Detail Change Alert Popup-->
+    <div ng-show="proposerAlert" class="popbg"></div>
+    <center>
+      <div ng-show="proposerAlert">
+        <div class="popupdiv">
+          <br/>
+          <br/>
+          <p>Proposer details cant be edited on this page</p>
+          <br/>
+          <div class="popup-buttons">
+            <button class="button button-block button-positive subtn" ng-click="closeChangeProposerDetailAlert()">Cancel</button>
+          </div>
+        </div>
+    </center>
+    <!--PWR Alert Popup-->
+  </ion-content>
+  <ion-fixed class="fixed-div">
+    <button fab fab-right fab-bottom dark>
+      <ion-icon class="addbox" name="add" ng-click="showPlusPopup=true"></ion-icon>
+    </button>
+  </ion-fixed>
+  <ion-footer-bar class="btnlastbkbg">
+    <button class="button button-clear button-positive col-50" ng-click="saveQuote(false)">Save</button>
+    <button class="button button-clear button-positive col-50" ng-click="proceedToFormFilling()">AGREE & PROCEED TO FORM FILLING</button>
+  </ion-footer-bar>
+  <div ng-show="pwrSelectAlert" class="popbg"></div>
+  <div ng-show="riderSelectAlert" class="popbg"></div>
+  <!--PWR Alert Popup-->
+  <center>
+    <div ng-show="pwrSelectAlert">
+      <div class="popupdiv">
+        <br/>
+        <br/>
+        <p>No other Rider can be taken along with PWR. Are you sure you want to select another Rider?</p>
+        <br/>
+        <div class="popup-buttons">
+          <button class="button button-block button-positive subtn" ng-click="riders.alertPWR();pwrSelectAlert=false">OK</button>
+          <button class="button button-block button-positive subtn" ng-click="pwrSelectAlert=false;riders.resetHC();riders.resetADB();">Cancel</button>
+        </div>
+      </div>
+  </center>
+  <!--PWR Alert Popup-->
+  <!--PWR Alert Popup-->
+  <center>
+    <div ng-show="riderSelectAlert">
+      <div class="popupdiv">
+        <br/>
+        <br/>
+        <p>PWR rider cannot be taken along with other riders. Are you sure you want to select another Rider?</p>
+        <br/>
+        <div class="popup-buttons">
+          <button class="button button-block button-positive subtn" ng-click="riders.alertADBHS();pwrSelectAlert=false">OK</button>
+          <button class="button button-block button-positive subtn" ng-click="riderSelectAlert=false;riders.resetPWR()">Cancel</button>
+        </div>
+      </div>
+  </center>
+  <!--PWR Alert Popup-->
+</ion-view>
+<div class="adic-modal" ng-show="premiumWithTaxes">
+  <ion-modal-view class="adic-popup">
+    <div class="modanntble">
+      <a href="#" ng-click="closePopupPremiumWithTaxes()" class="close">&nbsp;</a>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th align="center">Modal Premium</th>
+            <th align="center">Annual Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Base Policy Premium (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{outputData.premium.totalModalPremium | number}}</td>
+            <td align="right">{{outputData.premium.totalAnnualPremium | number}}</td>
+          </tr>
+          <tr>
+            <td>Rider Premium (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{calcData.modalPWRIRiderPremium + calcData.modalPWRIIRiderPremium + calcData.modalAdbRiderPremium + calcData.modalHospiCashPremium | number}}</td>
+            <td align="right">{{calcData.annualPWRIRiderPremium + calcData.annualPWRIIRiderPremium + calcData.annualAdbRiderPremium + calcData.annualHospiCashPremium | number}}</td>
+          </tr>
+          <tr>
+            <td>Total Taxes (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{outputData.premium.serviceForFirstYearTax + calcData.serviceTaxPWRIIForModalFirstYear + calcData.serviceTaxPWRIForModalFirstYear + calcData.serviceTaxAdbForModalFirstYear + calcData.serviceTaxHospiCashForModalFirstYear | number}}</td>
+            <td align="right">{{outputData.premium.serviceForAnnualFirstYearTax + calcData.serviceTaxPWRIForAnnualFirstYear + calcData.serviceTaxAdbForAnnualFirstYear + calcData.serviceTaxPWRIIForAnnualFirstYear + calcData.serviceTaxHospiCashForAnnualFirstYear | number}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Premium Payable (<i class="WebRupee">Rs.</i>)</td>
+            <td align="right">{{outputData.premium.totalModalPremiumWithTaxForFirstYear + calcData.totalModalPremiumPWRIWithTaxForFirstYear + calcData.totalModalPremiumPWRIIWithTaxForFirstYear + calcData.totalModalPremiumAdbWithTaxForFirstYear + calcData.totalModalPremiumHospiCashWithTaxForFirstYear | number }}</td>
+            <td align="right">{{outputData.premium.totalAnnualPremiumWithTaxForFirstYear + calcData.totalAnnualPremiumPWRIWithTaxForFirstYear + calcData.totalAnnualPremiumPWRIIWithTaxForFirstYear + calcData.totalAnnualPremiumAdbWithTaxForFirstYear + calcData.totalAnnualPremiumHospiCashWithTaxForFirstYear | number}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ion-modal-view>
+</div>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showPlusPopup">
+    <div class="wealth-popup">
+      <ul class="popuplist">
+        <li ng-show="saveResult"><a class="capture" href="#" ng-click="cameraFun()">Capture <span>&nbsp;</span></a></li>
+        <li ng-show="saveResult"><a class="add-notes" href="#" ng-click="addNotes()">Add Notes <span>&nbsp;</span></a></li>
+        <li><a class="email" href="#" ng-click="email()">Email BI Quote<span>&nbsp;</span></a></li>
+      </ul>
+      <a class="popupclose" ng-click="showPlusPopup=false">&nbsp;</a>
+    </div>
+  </ion-modal-view>
+</div>
+
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>
+<div class="adic-modal">
+  <ion-modal-view class="adic-popup" ng-show="showSendEmailPopup">
+    <div>
+      <div class="popupdiv">
+        <form name="myForm" novalidate="">
+
+          <div ng-click="hidesendEmailPopup()" class="close"></div>
+          <h3>E-mail</h3>
+          <div class="row">
+            <div class="col">
+              <span style="color:red" ng-if="isValidateEmailTo">Please enter the correct email details</span>
+              <input type="text" name="emailTo" style="width:100%" placeholder="To" ng-model="email_To"    ng-minlength="4" ng-maxlength="50" required="">
+              <span style="color:red" ng-if="isValidateEmailCc">Please enter the correct email details</span>
+              <input type="text" name="emailCc" style="width:100%" placeholder="CC" ng-model="email_Cc" ng-minlength="4" ng-maxlength="50">
+            </div>
+          </div>
+
+          <ul class="emailchoice">
+            <li class="item item-checkbox">
+              <label class="checkbox checkbox-assertive">
+                  <input type="checkbox" ng-model="isIllustrationsSelected" ng-disabled="true">
+              </label>
+              BI Quote
+            </li>
+            <li class="item item-checkbox" ng-if="false">
+              <label class="checkbox checkbox-balanced">
+                <input type="checkbox" ng-model="isBrochureSelected">
+              </label> Brochure
+            </li>
+          </ul>
+          <button class="button button-block button-positive subtn" ng-disabled="myForm.$invalid"  ng-click="sendEmailPopupOnOk()">Send</button>
+        </form>
+      </div>
+    </div>
+  </ion-modal-view>
+</div>
